@@ -20,7 +20,6 @@ public class WaveManager : MonoBehaviour
     private int _totalZombies;
     private bool _waveInProgress;
 
-
     private void Awake()
     {
         if (instance == null) instance = this;
@@ -33,7 +32,7 @@ public class WaveManager : MonoBehaviour
 
     private void StartNextWave()
     {
-        if (_currentWave <= _totalWaves)
+        if (_currentWave <= _totalWaves )
         {
             _currentWave++;
             _waveInProgress = true;
@@ -54,8 +53,7 @@ public class WaveManager : MonoBehaviour
         {
             Transform rnd_spawnPoint = _spawnPoints[Random.Range(0, _spawnPoints.Length)];
             GameObject rnd_zombie = _zombiePrefabs[Random.Range(0, _zombiePrefabs.Length)];
-            Instantiate(rnd_zombie, rnd_spawnPoint.position, rnd_spawnPoint.rotation);
-
+            Instantiate(rnd_zombie, rnd_spawnPoint.position, rnd_spawnPoint.rotation);            
             yield return new WaitForSeconds(_spawnInterval);
         }
     }
@@ -63,7 +61,6 @@ public class WaveManager : MonoBehaviour
     public void ZombieDefeated()
     {
         _totalZombies--;
-
         if (_totalZombies <= 0 && _waveInProgress)
         {
             _waveInProgress = false;

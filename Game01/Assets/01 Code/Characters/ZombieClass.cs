@@ -16,7 +16,7 @@ public class ZombieClass : MonoBehaviour
         Moderate = 15,
         Strong = 25
     }
-    
+
 
 
 
@@ -35,10 +35,8 @@ public class ZombieClass : MonoBehaviour
 
 
 
-
     private void Start()
     {
-
         if (instance == null) instance = this;
 
         // Subscribes to the event to let all zombies move if the wall gets destroyed
@@ -80,7 +78,6 @@ public class ZombieClass : MonoBehaviour
     public void AttackWall()
     {
         HealthManager.instance.WallDamage(_currentAttackForce);
-        print("Zombie is attacking!");
     }
 
 
@@ -99,6 +96,7 @@ public class ZombieClass : MonoBehaviour
         // Checks if zombie died
         if (_currentHP <= 0)
             Die();
+
     }
     public void UpdateHealthText(int hp, TextMeshProUGUI txt)
     {
@@ -111,7 +109,7 @@ public class ZombieClass : MonoBehaviour
     public float GetAttackForce()
     {
         return _currentAttackForce;
-    }    
+    }
     public void SetAttackForce(int force)
     {
         if (force >= 0) // Zombies can't have negative force xD

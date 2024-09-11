@@ -7,6 +7,8 @@ TagManager:
   - Enemy
   - Wall
   - Bullet
+  - Assault
+  - Sniper
   layers:
   - Default
   - TransparentFX
