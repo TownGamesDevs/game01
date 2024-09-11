@@ -15,7 +15,6 @@ public class PoolManager : MonoBehaviour
             obj.SetActive(false);
             pool.Add(obj);
         }
-
         return pool;
     }
 
@@ -29,10 +28,11 @@ public class PoolManager : MonoBehaviour
         GameObject obj = null;
 
         for (int i = 0; i < list.Count; i++)
-            if (!list[i].activeSelf)
+            if (!list[i].activeInHierarchy)
             {
-                list[i].SetActive(true);
-                return list[i];
+                obj = list[i];
+                obj.SetActive(true);
+                return obj;
             }
 
         if (grow)

@@ -7,7 +7,7 @@ public class BulletPoolSniper : PoolManager
 
     [SerializeField] private GameObject _sniperBullet;
     [SerializeField] private int _maxBullets;
-    [SerializeField] private bool _canGrow;
+    [SerializeField] private bool canGrow;
 
     private List<GameObject> pool;
 
@@ -19,14 +19,15 @@ public class BulletPoolSniper : PoolManager
     }
     private void Start()
     {
-        SetCanGrow(_canGrow);
+        SetCanGrow(canGrow);
         SetMaxSize(_maxBullets);
         pool = InitializePool(_sniperBullet);
     }
 
     public GameObject GetSniperBullet()
     {
-        return PullObject(pool, _sniperBullet, _canGrow);
+        return PullObject(pool, _sniperBullet, canGrow);
     }
+
 
 }

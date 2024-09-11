@@ -12,9 +12,9 @@ public class WeaponsClass : MonoBehaviour
 
 	public enum ReloadTime
 	{
-		Slow = 4,
-		Medium = 3,
-		Fast = 2,
+		Slow = 40,
+		Medium = 26,
+		Fast = 20,
 	}
 
 	public enum MagSize
@@ -30,7 +30,7 @@ public class WeaponsClass : MonoBehaviour
 	{
 		// time it takes to fire each round (in milliseconds)
 		pistol = 90,
-		rifle = 22,
+		rifle = 15,
 		machine_gun = 10,
 		shotgun = 60,
 		sniper_rifle = 150
@@ -78,7 +78,7 @@ public class WeaponsClass : MonoBehaviour
 
 	public virtual int GetReloadTime()
 	{
-		return (int)Reload_time;
+		return (int)Reload_time/10;
     }
 
 	public GameObject GetBullet()

@@ -1,10 +1,10 @@
+using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
 
 public class AutoShoot : MonoBehaviour
 {
-
     // Variables
     private float _timer;
     private float _fireRateTime;
@@ -31,6 +31,7 @@ public class AutoShoot : MonoBehaviour
 
     private void StopAutoShoot()
     {
+        // Listens to action...
         _canAutoShoot = false;
     }
 
@@ -71,7 +72,6 @@ public class AutoShoot : MonoBehaviour
             {
                 Shoot();
 
-
                 // Resets variables after shot
                 _canReload = true;
                 _timer = 0;
@@ -82,27 +82,21 @@ public class AutoShoot : MonoBehaviour
 
     private void Shoot()
     {
-        // Instantiate a bullet
-        //GameObject bullet = weapon.GetBullet();
-        //Instantiate(bullet, _bulletSpawnPoint); // Make a pool instead
+        GameObject bullet = null;
 
-
-        GameObject bullet = null ;
-
+        // Instantiate a bullet according to soldier type
         if (gameObject.name == "Assault")
             bullet = BulletPoolAssault.instance.GetAssaultBullet();
-            
-        
+
         else if (gameObject.name == "Sniper")
             bullet = BulletPoolSniper.instance.GetSniperBullet();
-        
 
+
+        // Set bullet position and update ammo
         if (bullet != null)
         {
             // Set bullet position
             bullet.transform.position = new Vector2(_bulletSpawnPoint.position.x, _bulletSpawnPoint.position.y);
-
-
 
             // Update ammo
             _currentAmmo--;
@@ -110,7 +104,6 @@ public class AutoShoot : MonoBehaviour
             // Update ammo text on screen
             UpdateAmmoText(_ammoTxt, _currentAmmo.ToString());
         }
-
     }
 
 

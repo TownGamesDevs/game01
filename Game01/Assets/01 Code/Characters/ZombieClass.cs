@@ -162,9 +162,6 @@ public class ZombieClass : MonoBehaviour
         if (bullet.TryGetComponent<Bullet>(out Bullet currentBullet))
             return _currentHP - currentBullet.GetHP();
 
-        else
-            print("Couldn't get component Bullet (ZombieClass.cs -> CalculateDamage");
-
         return -1;
     }
 }

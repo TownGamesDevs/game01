@@ -3,11 +3,12 @@ using UnityEngine;
 
 
 public class BulletPoolAssault : PoolManager
-{ public static BulletPoolAssault instance;
+{
+    public static BulletPoolAssault instance;
 
     [SerializeField] private GameObject _assaultBullet;
     [SerializeField] private int _maxBullets;
-    [SerializeField] private bool _canGrow;
+    [SerializeField] private bool canGrow;
 
     private List<GameObject> pool;
 
@@ -19,14 +20,14 @@ public class BulletPoolAssault : PoolManager
     }
     private void Start()
     {
-        SetCanGrow(_canGrow);
+        SetCanGrow(canGrow);
         SetMaxSize(_maxBullets);
         pool = InitializePool(_assaultBullet);
     }
 
     public GameObject GetAssaultBullet()
     {
-        return PullObject(pool, _assaultBullet, _canGrow);
+        return PullObject(pool, _assaultBullet, canGrow);
     }
 
 }
