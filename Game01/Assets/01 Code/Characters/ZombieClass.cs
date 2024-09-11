@@ -66,7 +66,6 @@ public class ZombieClass : MonoBehaviour
     {
         // Kills the zombie
         WaveManager.instance.ZombieDefeated();
-        gameObject.SetActive(false);
         Destroy(gameObject);
     }
 
@@ -155,6 +154,18 @@ public class ZombieClass : MonoBehaviour
     private void AllZombiesCanMove()
     {
         SetCanMove(true);
+    }
+
+    public int CalculateBulletDamage(GameObject bullet)
+    {
+        // Get enemy HP
+        if (bullet.TryGetComponent<Bullet>(out Bullet currentBullet))
+            return _currentHP - currentBullet.GetHP();
+
+        else
+            print("Couldn't get component Bullet (ZombieClass.cs -> CalculateDamage");
+
+        return -1;
     }
 }
 

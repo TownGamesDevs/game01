@@ -83,12 +83,34 @@ public class AutoShoot : MonoBehaviour
     private void Shoot()
     {
         // Instantiate a bullet
-        GameObject bullet = weapon.GetBullet();
-        Instantiate(bullet, _bulletSpawnPoint); // Make a pool instead
-        _currentAmmo--;
+        //GameObject bullet = weapon.GetBullet();
+        //Instantiate(bullet, _bulletSpawnPoint); // Make a pool instead
 
-        // Update ammo text on screen
-        UpdateAmmoText(_ammoTxt, _currentAmmo.ToString());
+
+        GameObject bullet = null ;
+
+        if (gameObject.name == "Assault")
+            bullet = BulletPoolAssault.instance.GetAssaultBullet();
+            
+        
+        else if (gameObject.name == "Sniper")
+            bullet = BulletPoolSniper.instance.GetSniperBullet();
+        
+
+        if (bullet != null)
+        {
+            // Set bullet position
+            bullet.transform.position = new Vector2(_bulletSpawnPoint.position.x, _bulletSpawnPoint.position.y);
+
+
+
+            // Update ammo
+            _currentAmmo--;
+
+            // Update ammo text on screen
+            UpdateAmmoText(_ammoTxt, _currentAmmo.ToString());
+        }
+
     }
 
 

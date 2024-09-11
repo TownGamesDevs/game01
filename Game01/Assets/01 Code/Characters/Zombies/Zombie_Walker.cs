@@ -26,7 +26,6 @@ public class Zombie_Walker : ZombieClass
         // Update the HP text on screen to match current HP
         UpdateHealthText((int)Zombie_Hp, _healthTxt);
     }
-
     private void Update()
     {
         // Constantly moves the zombie
@@ -47,11 +46,12 @@ public class Zombie_Walker : ZombieClass
         // Check if zombie has been hit by a bullet
         else if (collision.gameObject.tag == "Bullet")
         {
+            SetHP(CalculateBulletDamage(collision.gameObject));
+
             // Updates the zombie health txt on screen
             UpdateHealthText(GetHP(), _healthTxt);
         }
     }
-
     public void Attack()
     {
         if (GetCanAttack() & !Wall.instance.GetIsDestroyed())
@@ -65,4 +65,5 @@ public class Zombie_Walker : ZombieClass
         }
 
     }
+
 }

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CanvasManager : MonoBehaviour
 {
@@ -35,6 +36,7 @@ public class CanvasManager : MonoBehaviour
 
     public void NextWave()
     {
+        SceneManager.LoadScene("SampleScene");
         print("Next wave...");
     }
 

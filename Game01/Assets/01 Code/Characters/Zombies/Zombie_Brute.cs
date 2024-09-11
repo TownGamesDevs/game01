@@ -47,6 +47,8 @@ public class Zombie_Brute : ZombieClass
         // Check if zombie has been hit by a bullet
         else if (collision.gameObject.tag == "Bullet")
         {
+            SetHP(CalculateBulletDamage(collision.gameObject));
+
             // Updates the zombie health txt on screen
             UpdateHealthText(GetHP(), _healthTxt);
         }
