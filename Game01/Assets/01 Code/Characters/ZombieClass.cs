@@ -63,7 +63,6 @@ public class ZombieClass : MonoBehaviour
     public void Die()
     {
         // Kills the zombie
-        WaveManager.instance.ZombieDefeated();
         Destroy(gameObject);
     }
 
@@ -93,9 +92,12 @@ public class ZombieClass : MonoBehaviour
         else
             _currentHP--;
 
-        // Checks if zombie died
+        // Zombie died
         if (_currentHP <= 0)
+        {
             Die();
+            WaveManager.instance.ZombieDefeated();
+        }
 
     }
     public void UpdateHealthText(int hp, TextMeshProUGUI txt)
@@ -158,7 +160,7 @@ public class ZombieClass : MonoBehaviour
     {
         // Get enemy HP
         if (bullet.TryGetComponent<Bullet>(out Bullet currentBullet))
-            return _currentHP - currentBullet.GetHP();
+            return _currentHP - currentBullet.GetBulletDamage();
 
         return -1;
     }

@@ -86,10 +86,10 @@ public class AutoShoot : MonoBehaviour
 
         // Instantiate a bullet according to soldier type
         if (gameObject.CompareTag("Assault"))
-            bullet = BulletPoolAssault.instance.GetAssaultBullet();
+            bullet = PoolManager.instance.PoolAssaultBullet();
 
         else if (gameObject.CompareTag("Sniper"))
-            bullet = BulletPoolSniper.instance.GetSniperBullet();
+            bullet = PoolManager.instance.PoolSniperBullet();
 
 
         // Set bullet position and update ammo

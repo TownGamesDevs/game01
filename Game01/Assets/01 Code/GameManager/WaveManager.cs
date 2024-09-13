@@ -63,6 +63,7 @@ public class WaveManager : MonoBehaviour
         _totalZombies--;
         if (_totalZombies <= 0 && _waveInProgress)
         {
+            Time.timeScale = 0;
             _waveInProgress = false;
             OnWaveCompleted?.Invoke();
             print("WAVE COMPLETED!");

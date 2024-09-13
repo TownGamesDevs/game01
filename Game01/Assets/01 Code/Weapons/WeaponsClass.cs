@@ -56,7 +56,6 @@ public class WeaponsClass : MonoBehaviour
 	const float SELL_PERCENTAGE = 0.85f;
 
 	// Variables
-	public GameObject Bullet;
     public float WeaponPrice { get; protected set; }
 	public ReloadTime Reload_time { get; protected set; }
 	public MagSize Mag_size { get; protected set; }
@@ -80,18 +79,6 @@ public class WeaponsClass : MonoBehaviour
 	{
 		return (int)Reload_time/10;
     }
-
-	public GameObject GetBullet()
-	{
-		if (Bullet != null)
-			return Bullet;
-		return null;
-	}
-
-	public int GetBulletDamage()
-	{
-		return (int)Bullet_damage;
-	}
 
 	public int GetMagSize()
 	{

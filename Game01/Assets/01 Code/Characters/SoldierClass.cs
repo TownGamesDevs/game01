@@ -27,13 +27,6 @@ public class SoldierClass : MonoBehaviour
 		Fastest,
 	}
 
-
-	// Constants
-	const int DEFAULT_HP = 100;
-	const int MAX_HP = 200;
-
-	// Variables
-	private int _current_hp;
 	public BaseHP _baseHP { get; protected set; }
 	public Range _range { get; protected set; }
 	public Target _enemyTarget { get; protected set; }
