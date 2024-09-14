@@ -5,16 +5,16 @@ public class Bullet : MonoBehaviour
     public static Bullet instance;
     [SerializeField] private int _speed;
     [SerializeField] private float _destroyTime;
-    [SerializeField] private int _bulletDamage;
+    [SerializeField] private float _bulletDamage;
     private float _yPos;
     private float _timeCounter;
-    private int _tempDamage;
+    private float _initialDamage;
 
     private void Awake()
     {
-        if (instance == null) { instance = this; }
-        
+        if (instance == null) { instance = this; } 
     }
+
     private void Start()
     {
         // Y axis is stored to prevent bullet of moving with soldier
@@ -24,7 +24,7 @@ public class Bullet : MonoBehaviour
         _timeCounter = 0;
 
         // Stores original hp
-        _tempDamage = _bulletDamage;
+        _initialDamage = _bulletDamage;
     }
     private void Update()
     {
@@ -58,12 +58,12 @@ public class Bullet : MonoBehaviour
         }
     }
 
-    public int GetBulletDamage()
+    public float GetBulletDamage()
     {
         return _bulletDamage;
     }
 
-    public void SetBulletDamage(int hp)
+    public void SetBulletDamage(float hp)
     {
         // Set bullet HP
         if (hp < _bulletDamage)
@@ -80,13 +80,13 @@ public class Bullet : MonoBehaviour
     {
         // Restart variables
         _timeCounter = 0;
-        _bulletDamage = _tempDamage;
+        _bulletDamage = _initialDamage;
 
         // Disable gameobject so it can be recalled again from pool manager
         gameObject.SetActive(false);
     }
 
-    private int CalculateZombieDamage(GameObject enemy)
+    private float CalculateZombieDamage(GameObject enemy)
     {
         // Get enemy HP
         if (enemy.TryGetComponent<ZombieClass>(out ZombieClass currentEnemy))

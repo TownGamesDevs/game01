@@ -3,8 +3,7 @@ using TMPro;
 using UnityEngine;
 
 public class Wall : MonoBehaviour
-{
-    public static Wall instance;
+{ public static Wall instance;
 
     // Sets an event to allow all zombies to move if the wall gets destroyed
     public static event Action OnWallDestroyed;
@@ -16,8 +15,7 @@ public class Wall : MonoBehaviour
 
     private void Awake()
     {
-        if (instance == null)
-            instance = this;
+        if (instance == null) instance = this;
     }
 
     void Start()

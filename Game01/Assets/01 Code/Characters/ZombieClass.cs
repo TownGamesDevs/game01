@@ -2,8 +2,7 @@ using TMPro;
 using UnityEngine;
 
 public class ZombieClass : MonoBehaviour
-{
-    public static ZombieClass instance;
+{ public static ZombieClass instance;
     public enum Speed
     {
         Slow = 2,
@@ -19,9 +18,6 @@ public class ZombieClass : MonoBehaviour
 
 
 
-
-
-
     // Variables
     public EnemyHP Zombie_Hp { get; protected set; }
     public Speed Zombie_speed { get; protected set; }
@@ -29,7 +25,7 @@ public class ZombieClass : MonoBehaviour
     public float AttackTime { get; protected set; }
     private bool _isMoving;
     private bool _canAttackWall;
-    private int _currentHP;
+    private float _currentHP;
     private float _currentAttackForce;
     private float _currentSpeed;
 
@@ -62,10 +58,13 @@ public class ZombieClass : MonoBehaviour
 
     public void Die()
     {
-        // Kills the zombie
-        Destroy(gameObject);
-    }
+        // Reset values
+        _currentHP = (int)Zombie_Hp;
+        _currentSpeed = (float)Zombie_speed;
+        _currentAttackForce = AttackForce;
 
+        gameObject.SetActive(false);
+    }
     public void ZombieMove()
     {
         // Zombie can move while it has NOT reached the wall
@@ -73,18 +72,17 @@ public class ZombieClass : MonoBehaviour
             gameObject.transform.position =
                 new Vector2(transform.position.x - _currentSpeed * Time.deltaTime, transform.position.y);
     }
-
     public void AttackWall()
     {
-        HealthManager.instance.WallDamage(_currentAttackForce);
+        Wall.instance.SetHP(Wall.instance.GetHP() - _currentAttackForce);
     }
 
 
-    public int GetHP()
+    public float GetHP()
     {
         return _currentHP;
     }
-    public void SetHP(int hp)
+    public void SetHP(float hp)
     {
         // Updates the actual HP variable
         if (hp < _currentHP)    // fixes bug where health increases if bullet hits two enemies that are in the same place
@@ -98,46 +96,17 @@ public class ZombieClass : MonoBehaviour
             Die();
             WaveManager.instance.ZombieDefeated();
         }
-
     }
-    public void UpdateHealthText(int hp, TextMeshProUGUI txt)
+    public void UpdateHealthText(float hp, TextMeshProUGUI txt)
     {
         // Updates the HP text of the zombie
         txt.text = hp.ToString();
-    }
-
-
-
-    public float GetAttackForce()
-    {
-        return _currentAttackForce;
-    }
-    public void SetAttackForce(int force)
-    {
-        if (force >= 0) // Zombies can't have negative force xD
-            _currentAttackForce = force;
-    }
-
-
-    public float GetAttackTime()
-    {
-        return AttackTime;
-    }
-
-    public void SetAttackTime(int time)
-    {
-        AttackTime = time;
     }
 
     public void SetCanMove(bool state)
     {
         if (state != _isMoving)
             _isMoving = state;
-    }
-
-    public bool GetCanMove()
-    {
-        return _isMoving;
     }
 
     public void SetCanAttackWall(bool state)
@@ -156,7 +125,7 @@ public class ZombieClass : MonoBehaviour
         SetCanMove(true);
     }
 
-    public int CalculateBulletDamage(GameObject bullet)
+    public float CalculateBulletDamage(GameObject bullet)
     {
         // Get enemy HP
         if (bullet.TryGetComponent<Bullet>(out Bullet currentBullet))

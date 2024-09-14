@@ -56,16 +56,17 @@ public class Zombie_Brute : ZombieClass
 
     public void Attack()
     {
+        // Zombie has reached wall and wall is not destroyed yet
         if (GetCanAttack() & !Wall.instance.GetIsDestroyed())
         {
+            // Attack after some time
             _timer = _timer + Time.deltaTime;
             if (_timer >= _attackTime)
             {
                 AttackWall();
-                _timer = 0;
+                _timer = 0;     // Restar timer
             }
         }
-
     }
 
 }

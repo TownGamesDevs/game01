@@ -36,7 +36,6 @@ public class CanvasManager : MonoBehaviour
 
     public void NextWave()
     {
-        Time.timeScale = 1.0f;
         SceneManager.LoadScene("SampleScene");
         print("Next wave...");
     }

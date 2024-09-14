@@ -12,7 +12,7 @@ public class WeaponsClass : MonoBehaviour
 
 	public enum ReloadTime
 	{
-		Slow = 40,
+		Slow = 35,
 		Medium = 26,
 		Fast = 20,
 	}
