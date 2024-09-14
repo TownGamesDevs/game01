@@ -172,5 +172,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 35
-  _destroyTime: 0.5
+  _destroyTime: 1
   _bulletDamage: 3

@@ -6,7 +6,6 @@ public class Bullet : MonoBehaviour
     [SerializeField] private int _speed;
     [SerializeField] private float _destroyTime;
     [SerializeField] private float _bulletDamage;
-    private float _yPos;
     private float _timeCounter;
     private float _initialDamage;
 
@@ -17,9 +16,6 @@ public class Bullet : MonoBehaviour
 
     private void Start()
     {
-        // Y axis is stored to prevent bullet of moving with soldier
-        _yPos = transform.position.y;
-
         // Counter
         _timeCounter = 0;
 
@@ -32,15 +28,15 @@ public class Bullet : MonoBehaviour
         Move();
 
         // Check if bullet should be dead
-        DestroyBullet();
+        AutoDestroyBullet();
     }
 
     private void Move()
     {
         // Bullet moves in fixed Y axis so it doesn't move with player
-        transform.position = new Vector2(transform.position.x + _speed * Time.deltaTime, _yPos);
+        transform.position = new Vector2(transform.position.x + _speed * Time.deltaTime, transform.position.y);
     }
-    private void DestroyBullet()
+    private void AutoDestroyBullet()
     {
         _timeCounter += Time.deltaTime;
         if (_timeCounter >= _destroyTime)
@@ -92,6 +88,6 @@ public class Bullet : MonoBehaviour
         if (enemy.TryGetComponent<ZombieClass>(out ZombieClass currentEnemy))
             return _bulletDamage - currentEnemy.GetHP();
 
-        return -1;
+        return -999;
     }
 }
