@@ -46,7 +46,7 @@ public class Bullet : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         // Checks if bullet has collided with an enemy
-        if (collision.gameObject.CompareTag("Enemy"))
+        if (collision.gameObject.CompareTag("WalkerZombie") || collision.gameObject.CompareTag("BruteZombie"))
         {
             // Subtract enemy hp from bullet hp
             if (collision.gameObject.TryGetComponent<ZombieClass>(out ZombieClass current_zombie))

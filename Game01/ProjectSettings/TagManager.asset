@@ -9,6 +9,8 @@ TagManager:
   - Bullet
   - Assault
   - Sniper
+  - WalkerZombie
+  - BruteZombie
   layers:
   - Default
   - TransparentFX

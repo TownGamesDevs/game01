@@ -1,26 +1,32 @@
+using System;
 using TMPro;
 using UnityEngine;
 
 public class ZombieClass : MonoBehaviour
 { public static ZombieClass instance;
-    public enum Speed
-    {
-        Slow = 2,
-        Moderate = 6,
-        Fast = 12
-    }
-    public enum EnemyHP
-    {
-        Weak = 5,
-        Moderate = 15,
-        Strong = 25
-    }
+
+    public static event Action OnZombieDie;
+    //public enum Speed
+    //{
+    //    Slow = 2,
+    //    Moderate = 6,
+    //    Fast = 12
+    //}
+    //public enum EnemyHP
+    //{
+    //    Weak = 5,
+    //    Moderate = 15,
+    //    Strong = 25
+    //}
 
 
 
     // Variables
-    public EnemyHP Zombie_Hp { get; protected set; }
-    public Speed Zombie_speed { get; protected set; }
+    //public EnemyHP Zombie_Hp { get; protected set; }
+    //public Speed Zombie_speed { get; protected set; }
+
+    [SerializeField] private float _hp;
+    [SerializeField] private float _speed;
     public float AttackForce { get; protected set; }
     public float AttackTime { get; protected set; }
     private bool _isMoving;
@@ -30,19 +36,21 @@ public class ZombieClass : MonoBehaviour
     private float _currentSpeed;
 
 
+    private void Awake()
+    {
+        if (instance == null) instance = this;
+    }
 
     private void Start()
     {
-        if (instance == null) instance = this;
-
         // Subscribes to the event to let all zombies move if the wall gets destroyed
         Wall.OnWallDestroyed += AllZombiesCanMove;
 
         // Sets the actual variable for HP
-        _currentHP = (int)Zombie_Hp;
+        _currentHP = _hp;    //_currentHP = (int)Zombie_Hp;  // original line
 
         // Sets zombie speed
-        _currentSpeed = (float)Zombie_speed;
+        _currentSpeed = _speed; // original line - (float)Zombie_speed;
 
         // Sets attack force
         _currentAttackForce = AttackForce;
@@ -59,11 +67,18 @@ public class ZombieClass : MonoBehaviour
     public void Die()
     {
         // Reset values
-        _currentHP = (int)Zombie_Hp;
-        _currentSpeed = (float)Zombie_speed;
-        _currentAttackForce = AttackForce;
+        //_currentHP = (int)Zombie_Hp; // original line
 
+        _currentHP = _hp;
+        _currentSpeed = _speed; // original line - (float)Zombie_speed;
+        _currentAttackForce = AttackForce;
+        SetCanMove(true);
+        SetCanAttackWall(false);
         gameObject.SetActive(false);
+
+        // Pops two walker zombies if brute zombie died
+        if (gameObject.CompareTag("BruteZombie"))
+            Pop.instance.PopZombie(transform.position);
     }
     public void ZombieMove()
     {
@@ -103,28 +118,29 @@ public class ZombieClass : MonoBehaviour
         txt.text = hp.ToString();
     }
 
+
     public void SetCanMove(bool state)
     {
         if (state != _isMoving)
             _isMoving = state;
     }
-
     public void SetCanAttackWall(bool state)
     {
         if (state != _canAttackWall)
             _canAttackWall = state;
     }
 
+    public void SetSpeed(float speed)
+    { _currentSpeed = speed;}
+
     public bool GetCanAttack()
     {
         return _canAttackWall;
     }
-
     private void AllZombiesCanMove()
     {
         SetCanMove(true);
     }
-
     public float CalculateBulletDamage(GameObject bullet)
     {
         // Get enemy HP

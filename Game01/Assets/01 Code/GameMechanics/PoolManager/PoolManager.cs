@@ -40,10 +40,13 @@ public class PoolManager : MonoBehaviour
     {
         if (MAX_ASSAULT > 0)
             InitializePool(_assaultPool, _assaultBullet, MAX_ASSAULT);
+
         if (MAX_SNIPER > 0)
             InitializePool(_sniperPool, _sniperBullet, MAX_SNIPER);
+
         if (MAX_WALKER > 0)
             InitializePool(_walkerPool, _zombieWalker, MAX_WALKER);
+
         if (MAX_BRUTE > 0)
             InitializePool(_brutePool, _zombieBrute, MAX_BRUTE);
     }

@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class Zombie_Walker : ZombieClass
 {
-    [SerializeField] private Speed _speed;
-    [SerializeField] private EnemyHP _hp;
+    //[SerializeField] private Speed _speed;
+    //[SerializeField] private float _zombieHP;
     [SerializeField] private float _attackForce;
     [SerializeField] private float _attackTime;
     [SerializeField] TextMeshProUGUI _healthTxt;
@@ -18,19 +18,19 @@ public class Zombie_Walker : ZombieClass
         _timer = 0;
         SetCanAttackWall(false);
         SetCanMove(true);
-        Zombie_Hp = _hp;
-        Zombie_speed = _speed;
+        SetHP(GetHP());
+        //Zombie_speed = _speed;
         AttackForce = _attackForce;
         AttackTime = _attackTime;
 
         // Update the HP text on screen to match current HP
-        UpdateHealthText((int)Zombie_Hp, _healthTxt);
+        UpdateHealthText(GetHP(), _healthTxt);
     }
     private void Update()
     {
         // Constantly moves the zombie
         ZombieMove();
-        Attack();
+        AttackWall();
     }
 
 
@@ -52,7 +52,7 @@ public class Zombie_Walker : ZombieClass
             UpdateHealthText(GetHP(), _healthTxt);
         }
     }
-    public void Attack()
+    public void AttackWall()
     {
         // Zombie has reached wall and wall is not destroyed yet
         if (GetCanAttack() & !Wall.instance.GetIsDestroyed())
@@ -61,7 +61,7 @@ public class Zombie_Walker : ZombieClass
             _timer = _timer + Time.deltaTime;
             if (_timer >= _attackTime)
             {
-                AttackWall();
+                base.AttackWall();
                 _timer = 0;     // Restar timer
             }
         }

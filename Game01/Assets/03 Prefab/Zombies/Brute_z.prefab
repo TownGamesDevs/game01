@@ -246,11 +246,12 @@ GameObject:
   m_Component:
   - component: {fileID: 6308899942192579196}
   - component: {fileID: 6308899942192579197}
-  - component: {fileID: 6308899942192579198}
   - component: {fileID: 5336933244504110668}
+  - component: {fileID: 3514471640331023118}
+  - component: {fileID: 6308899942192579198}
   m_Layer: 6
   m_Name: Brute_z
-  m_TagString: Enemy
+  m_TagString: BruteZombie
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -264,7 +265,7 @@ Transform:
   m_GameObject: {fileID: 6308899942192579199}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.93, y: -2.48, z: 0}
+  m_LocalPosition: {x: 6.23, y: -2.48, z: 0}
   m_LocalScale: {x: 2.47, y: 2.47, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -323,23 +324,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &6308899942192579198
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6308899942192579199}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5621ff928a5cc9b46a44737e936bf209, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _speed: 2
-  _hp: 15
-  _attackForce: 8
-  _attackTime: 1
-  _healthTxt: {fileID: 5286171483457110295}
 --- !u!61 &5336933244504110668
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -385,3 +369,33 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &3514471640331023118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6308899942192579199}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a1191e50df8c034aa193bbddfc36f36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Prefab: {fileID: 3286127090442207626, guid: 930b0f0ec6c588144b2ce2134bd1996f, type: 3}
+--- !u!114 &6308899942192579198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6308899942192579199}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5621ff928a5cc9b46a44737e936bf209, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _hp: 20
+  _speed: 2
+  _attackForce: 8
+  _attackTime: 1
+  _healthTxt: {fileID: 5286171483457110295}
