@@ -3,13 +3,27 @@ using UnityEngine.SceneManagement;
 
 public class CanvasManager : MonoBehaviour
 {
-    [SerializeField] private GameObject _MainMenu;
-    [SerializeField] private GameObject _waveCompleted;
+    [SerializeField] private bool _showMainMenu;
+    [SerializeField] private GameObject mainMenu;
+    [SerializeField] private GameObject waveCompleted;
+
 
     private void Awake()
     {
         // Subscribes to activate waveCompleted screen when all zombies are eliminated
         WaveManager.OnWaveCompleted += WaveCompleted;
+    }
+
+    private void Start()
+    { 
+        if (_showMainMenu)
+            InitializeMainMenu();
+    }
+
+    public void InitializeMainMenu()
+    {
+        TimeManager.instance.SetTime0();
+        mainMenu.SetActive(true);
     }
 
     private void OnDestroy()
@@ -25,8 +39,8 @@ public class CanvasManager : MonoBehaviour
 
     private void SetWaveCompleted(bool state)
     {
-        if (_waveCompleted.activeSelf != state)
-            _waveCompleted.SetActive(state);
+        if (waveCompleted.activeSelf != state)
+            waveCompleted.SetActive(state);
     }
 
     public void UpgradeBTN()

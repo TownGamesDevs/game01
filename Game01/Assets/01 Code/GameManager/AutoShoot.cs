@@ -95,7 +95,7 @@ public class AutoShoot : MonoBehaviour
 		if (bullet != null)
 		{
 			// Set bullet position
-			bullet.transform.position = new Vector2(_bulletSpawnPoint.position.x, _bulletSpawnPoint.position.y);
+			bullet.transform.position = _bulletSpawnPoint.position;
 
 			// Update ammo
 			_currentAmmo--;
@@ -119,8 +119,7 @@ public class AutoShoot : MonoBehaviour
 	}
 	IEnumerator ReloadWeapon(float time)
 	{
-		// Wait time before weapon is reloaded
-
+		// Wait some time before weapon is reloaded
 		yield return new WaitForSeconds(time);
 		Reload();
 	}
@@ -131,9 +130,7 @@ public class AutoShoot : MonoBehaviour
 	}
 
 	private void UpdateAmmoText(TextMeshProUGUI txt, string ammo)
-	{
-		txt.text = ammo.ToString();
-	}
+	{ txt.text = ammo.ToString(); }
 
 
 }

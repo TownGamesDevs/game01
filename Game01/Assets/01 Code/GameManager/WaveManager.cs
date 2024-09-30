@@ -21,13 +21,13 @@ public class WaveManager : MonoBehaviour
 	{ if (instance == null) instance = this; }
 	private void Start()
 	{
-		_currentWave = 0;
+        _currentWave = 0;
 		StartNextWave();
 	}
 
     private void Update()
     {
-		print("total: " + _totalZombies);
+		//print("total: " + _totalZombies);
     }
     private void StartNextWave()
 	{
@@ -61,11 +61,7 @@ public class WaveManager : MonoBehaviour
 
 			// Pool a zombie
 			if (rnd_zombie == 0)
-			{
 				zombie = PoolManager.instance.PoolBruteZombie();
-				_totalZombies++;
-            }
-
 			else
 				zombie = PoolManager.instance.PoolWalkerZombie();
 
@@ -87,12 +83,17 @@ public class WaveManager : MonoBehaviour
 		{
 			_waveInProgress = false;
 			OnWaveCompleted?.Invoke();
-			print("WAVE COMPLETED!");
 		}
 	}
 
-	public void AddTotalZombies(int num)
+	public void AddTotalZombies()
+	{ _totalZombies++; }
+
+	public int GetTotalZombies()
 	{
-		if (num >0) _totalZombies += num;
+		if (_initialZombieCount > 0)
+			return _initialZombieCount;
+
+		return -1;
 	}
 }

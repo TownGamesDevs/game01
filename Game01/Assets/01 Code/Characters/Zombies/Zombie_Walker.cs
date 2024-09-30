@@ -3,34 +3,32 @@ using UnityEngine;
 
 public class Zombie_Walker : ZombieClass
 {
-    //[SerializeField] private Speed _speed;
-    //[SerializeField] private float _zombieHP;
     [SerializeField] private float _attackForce;
     [SerializeField] private float _attackTime;
-    [SerializeField] TextMeshProUGUI _healthTxt;
+    [SerializeField] private TextMeshProUGUI _healthTxt;
     private float _timer;
 
 
 
-    private void Awake()
+    private void Start()
     {
         // Initialize variables
         _timer = 0;
         SetCanAttackWall(false);
         SetCanMove(true);
-        SetHP(GetHP());
-        //Zombie_speed = _speed;
+        _currentHP = _hp;
         AttackForce = _attackForce;
         AttackTime = _attackTime;
 
-        // Update the HP text on screen to match current HP
+        // Update text on screen
         UpdateHealthText(GetHP(), _healthTxt);
     }
+
     private void Update()
     {
         // Constantly moves the zombie
         ZombieMove();
-        AttackWall();
+        CheckCanAttackWall();
     }
 
 
@@ -44,7 +42,7 @@ public class Zombie_Walker : ZombieClass
         }
 
         // Check if zombie has been hit by a bullet
-        else if (collision.gameObject.tag == "Bullet")
+        else if (collision.gameObject.CompareTag("Bullet"))
         {
             SetHP(CalculateBulletDamage(collision.gameObject));
 
@@ -52,7 +50,7 @@ public class Zombie_Walker : ZombieClass
             UpdateHealthText(GetHP(), _healthTxt);
         }
     }
-    public void AttackWall()
+    public void CheckCanAttackWall()
     {
         // Zombie has reached wall and wall is not destroyed yet
         if (GetCanAttack() & !Wall.instance.GetIsDestroyed())
@@ -61,7 +59,7 @@ public class Zombie_Walker : ZombieClass
             _timer = _timer + Time.deltaTime;
             if (_timer >= _attackTime)
             {
-                base.AttackWall();
+                AttackWall();
                 _timer = 0;     // Restar timer
             }
         }

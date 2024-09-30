@@ -50,7 +50,7 @@ public class Wall : MonoBehaviour
         if (!_isDestroyed)
         {
             gameObject.SetActive(false);
-            print("Wall destroyed!!!");
+            //ErrorManager.instance.PrintWarning("Wall was destroyed!!!");
 
             // Enable event to allow all zombies to move
             OnWallDestroyed?.Invoke();

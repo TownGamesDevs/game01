@@ -3,26 +3,16 @@ using UnityEngine;
 
 
 public class PoolManager : MonoBehaviour
-{
-    public static PoolManager instance;
+{ public static PoolManager instance;
 
     // prefabs to spawn
-    [SerializeField] private GameObject _assaultBullet;
-    [SerializeField] private GameObject _sniperBullet;
-    [SerializeField] private GameObject _zombieWalker;
-    [SerializeField] private GameObject _zombieBrute;
+    [SerializeField] private GameObject _assaultBullet, _sniperBullet, _zombieWalker, _zombieBrute;
 
     // max spawns
-    [SerializeField] private int MAX_ASSAULT;
-    [SerializeField] private int MAX_SNIPER;
-    [SerializeField] private int MAX_WALKER;
-    [SerializeField] private int MAX_BRUTE;
+    [SerializeField] private int _maxAssaultBullets, _maxSniperBullets, _maxWalker, _maxBrute;
 
     // can grow?
-    [SerializeField] private bool _canGrowAssault;
-    [SerializeField] private bool _canGrowSniper;
-    [SerializeField] private bool _canGrowWalker;
-    [SerializeField] private bool _canGrowBrute;
+    [SerializeField] private bool _canGrowAssault, _canGrowSniper, _canGrowWalker, _canGrowBrute;
 
     // private lists where objects are stored
     private List<GameObject> _assaultPool = new();
@@ -31,24 +21,21 @@ public class PoolManager : MonoBehaviour
     private List<GameObject> _brutePool = new();
 
 
-
     private void Awake()
-    {
-        if (instance == null) instance = this;
-    }
+    { if (instance == null) instance = this; }
     private void Start()
     {
-        if (MAX_ASSAULT > 0)
-            InitializePool(_assaultPool, _assaultBullet, MAX_ASSAULT);
+        if (_maxAssaultBullets > 0)
+            InitializePool(_assaultPool, _assaultBullet, _maxAssaultBullets);
 
-        if (MAX_SNIPER > 0)
-            InitializePool(_sniperPool, _sniperBullet, MAX_SNIPER);
+        if (_maxSniperBullets > 0)
+            InitializePool(_sniperPool, _sniperBullet, _maxSniperBullets);
 
-        if (MAX_WALKER > 0)
-            InitializePool(_walkerPool, _zombieWalker, MAX_WALKER);
+        if (_maxWalker > 0)
+            InitializePool(_walkerPool, _zombieWalker, _maxWalker);
 
-        if (MAX_BRUTE > 0)
-            InitializePool(_brutePool, _zombieBrute, MAX_BRUTE);
+        if (_maxBrute > 0)
+            InitializePool(_brutePool, _zombieBrute, _maxBrute);
     }
 
     private void InitializePool(List<GameObject> list, GameObject pref, int maxSize)
@@ -81,8 +68,7 @@ public class PoolManager : MonoBehaviour
     }
 
 
-
-
+    // Used in other scripts to pool different objects
     public GameObject PoolAssaultBullet()
     {
         return PoolObject(_assaultPool, _assaultBullet, _canGrowAssault);
@@ -99,6 +85,4 @@ public class PoolManager : MonoBehaviour
     {
         return PoolObject(_walkerPool, _zombieWalker, _canGrowWalker);
     }
-
-
 }

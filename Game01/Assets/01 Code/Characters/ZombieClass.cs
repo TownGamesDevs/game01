@@ -6,59 +6,45 @@ public class ZombieClass : MonoBehaviour
 { public static ZombieClass instance;
 
     public static event Action OnZombieDie;
-    //public enum Speed
-    //{
-    //    Slow = 2,
-    //    Moderate = 6,
-    //    Fast = 12
-    //}
-    //public enum EnemyHP
-    //{
-    //    Weak = 5,
-    //    Moderate = 15,
-    //    Strong = 25
-    //}
 
-
-
-    // Variables
-    //public EnemyHP Zombie_Hp { get; protected set; }
-    //public Speed Zombie_speed { get; protected set; }
-
-    [SerializeField] private float _hp;
+    [SerializeField] protected float _hp;
     [SerializeField] private float _speed;
+    [SerializeField] private float _currentSpeed;
     public float AttackForce { get; protected set; }
     public float AttackTime { get; protected set; }
     private bool _isMoving;
     private bool _canAttackWall;
-    private float _currentHP;
+    protected float _currentHP;
     private float _currentAttackForce;
-    private float _currentSpeed;
 
 
     private void Awake()
-    {
-        if (instance == null) instance = this;
-    }
-
+    { if (instance == null) instance = this; }
     private void Start()
     {
         // Subscribes to the event to let all zombies move if the wall gets destroyed
         Wall.OnWallDestroyed += AllZombiesCanMove;
 
         // Sets the actual variable for HP
-        _currentHP = _hp;    //_currentHP = (int)Zombie_Hp;  // original line
+        SetHP(_hp);
 
         // Sets zombie speed
-        _currentSpeed = _speed; // original line - (float)Zombie_speed;
+        _currentSpeed = _speed;
 
         // Sets attack force
         _currentAttackForce = AttackForce;
-
     }
     private void OnDestroy()
+    { Wall.OnWallDestroyed -= AllZombiesCanMove; }
+
+
+
+
+    public void ZombieMove()
     {
-        Wall.OnWallDestroyed -= AllZombiesCanMove;
+        // Zombie can move while it has NOT reached the wall
+        if (_isMoving)
+            gameObject.transform.position = new Vector2(transform.position.x - _currentSpeed * Time.deltaTime, transform.position.y);
     }
 
 
@@ -67,10 +53,8 @@ public class ZombieClass : MonoBehaviour
     public void Die()
     {
         // Reset values
-        //_currentHP = (int)Zombie_Hp; // original line
-
         _currentHP = _hp;
-        _currentSpeed = _speed; // original line - (float)Zombie_speed;
+        _currentSpeed = _speed;
         _currentAttackForce = AttackForce;
         SetCanMove(true);
         SetCanAttackWall(false);
@@ -78,29 +62,20 @@ public class ZombieClass : MonoBehaviour
 
         // Pops two walker zombies if brute zombie died
         if (gameObject.CompareTag("BruteZombie"))
-            Pop.instance.PopZombie(transform.position);
-    }
-    public void ZombieMove()
-    {
-        // Zombie can move while it has NOT reached the wall
-        if (_isMoving)
-            gameObject.transform.position =
-                new Vector2(transform.position.x - _currentSpeed * Time.deltaTime, transform.position.y);
+            ZombiePop.instance.PopZombie(transform.position);
     }
     public void AttackWall()
     {
         Wall.instance.SetHP(Wall.instance.GetHP() - _currentAttackForce);
+
+        //ErrorManager.instance.PrintWarning("Wall is being attacked");
     }
-
-
     public float GetHP()
-    {
-        return _currentHP;
-    }
+    { return _currentHP; }
     public void SetHP(float hp)
     {
         // Updates the actual HP variable
-        if (hp < _currentHP)    // fixes bug where health increases if bullet hits two enemies that are in the same place
+        if (_currentHP > hp)    // fixes bug where health increases if bullet hits two enemies that are in the same place
             _currentHP = hp;
         else
             _currentHP--;
@@ -110,6 +85,7 @@ public class ZombieClass : MonoBehaviour
         {
             Die();
             WaveManager.instance.ZombieDefeated();
+            UIZombiesLeft.instance.UpdateTotalZombies();
         }
     }
     public void UpdateHealthText(float hp, TextMeshProUGUI txt)
@@ -117,8 +93,6 @@ public class ZombieClass : MonoBehaviour
         // Updates the HP text of the zombie
         txt.text = hp.ToString();
     }
-
-
     public void SetCanMove(bool state)
     {
         if (state != _isMoving)
@@ -129,10 +103,6 @@ public class ZombieClass : MonoBehaviour
         if (state != _canAttackWall)
             _canAttackWall = state;
     }
-
-    public void SetSpeed(float speed)
-    { _currentSpeed = speed;}
-
     public bool GetCanAttack()
     {
         return _canAttackWall;

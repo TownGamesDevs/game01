@@ -247,6 +247,7 @@ GameObject:
   - component: {fileID: 3166304728210567128}
   - component: {fileID: 3166304728210567129}
   - component: {fileID: 3166304726664307033}
+  - component: {fileID: 7973350499328651519}
   m_Layer: 3
   m_Name: Sniper
   m_TagString: Sniper
@@ -263,12 +264,11 @@ Transform:
   m_GameObject: {fileID: 3166304728210567131}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.08, y: -2.15, z: 0}
+  m_LocalPosition: {x: -7, y: 4.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7488146096365120084}
-  - {fileID: 8808537622437590205}
   - {fileID: 1082842247}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -313,8 +313,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -9095717837082945937, guid: 207ee8102dd4143d288186ef0be518ee, type: 3}
-  m_Color: {r: 0.18491796, g: 0.7830189, b: 0, a: 1}
+  m_Sprite: {fileID: 301577464, guid: fdd721eb0ed67f2458320c5d94ab3ca8, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -338,6 +338,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _bulletSpawnPoint: {fileID: 8808537622437590205}
   _ammoTxt: {fileID: 2062798753}
+--- !u!114 &7973350499328651519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3166304728210567131}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9141af155cb398246a1fd91f582884f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sprite: {fileID: 3166304728210567129}
+  _spriteArray:
+  - {fileID: 301577464, guid: fdd721eb0ed67f2458320c5d94ab3ca8, type: 3}
+  - {fileID: -1785008643, guid: fdd721eb0ed67f2458320c5d94ab3ca8, type: 3}
+  - {fileID: 306821274, guid: fdd721eb0ed67f2458320c5d94ab3ca8, type: 3}
+  - {fileID: 217035764, guid: fdd721eb0ed67f2458320c5d94ab3ca8, type: 3}
+  - {fileID: 2052380652, guid: fdd721eb0ed67f2458320c5d94ab3ca8, type: 3}
+  _speed: 0.15
+  _canPlayAnim: 1
 --- !u!1 &7488146096365120083
 GameObject:
   m_ObjectHideFlags: 0
@@ -365,10 +386,11 @@ Transform:
   m_GameObject: {fileID: 7488146096365120083}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.52, y: 0, z: 0}
+  m_LocalPosition: {x: 0.444, y: 0.116, z: 0}
   m_LocalScale: {x: 1.8, y: 0.26, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 8808537622437590205}
   m_Father: {fileID: 3166304728210567128}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7488146096365120085
@@ -378,7 +400,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7488146096365120083}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -465,10 +487,10 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8808537622437590146}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.54, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.321, y: -0.19, z: 0}
+  m_LocalScale: {x: 0.5555556, y: 3.8461537, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 3166304728210567128}
+  m_Father: {fileID: 7488146096365120084}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

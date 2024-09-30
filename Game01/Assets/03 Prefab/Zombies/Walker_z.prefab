@@ -337,6 +337,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _hp: 5
   _speed: 5
+  _currentSpeed: 5
   _attackForce: 2
   _attackTime: 0.5
   _healthTxt: {fileID: 1053089032400477479}
