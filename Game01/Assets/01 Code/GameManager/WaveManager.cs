@@ -52,10 +52,8 @@ public class WaveManager : MonoBehaviour
 		{
 			GameObject zombie;
 
-			// Get random spawn point
+			// Random
 			Transform rnd_spawnPoint = _spawnPoints[Random.Range(0, _spawnPoints.Length)];
-
-			// Get random zombie
 			int rnd_zombie = Random.Range(0, 2);
 
 
@@ -68,7 +66,7 @@ public class WaveManager : MonoBehaviour
 
 			// Set zombie to spawn position
 			if (zombie != null)
-				zombie.transform.position = new Vector2(rnd_spawnPoint.position.x, rnd_spawnPoint.position.y);
+				zombie.transform.position = rnd_spawnPoint.position;
 
 
 			yield return new WaitForSeconds(_spawnInterval);

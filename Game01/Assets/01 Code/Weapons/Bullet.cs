@@ -24,10 +24,7 @@ public class Bullet : MonoBehaviour
     }
     private void Update()
     {
-        // Constantly moves bullet
         Move();
-
-        // Check if bullet should be dead
         AutoDestroyBullet();
     }
 
@@ -46,7 +43,7 @@ public class Bullet : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         // Checks if bullet has collided with an enemy
-        if (collision.gameObject.CompareTag("WalkerZombie") || collision.gameObject.CompareTag("BruteZombie"))
+        if (collision.gameObject.CompareTag("Enemy"))
         {
             // Subtract enemy hp from bullet hp
             if (collision.gameObject.TryGetComponent<ZombieClass>(out ZombieClass current_zombie))

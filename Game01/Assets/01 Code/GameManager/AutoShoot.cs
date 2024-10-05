@@ -37,19 +37,18 @@ public class AutoShoot : MonoBehaviour
 
 	private void Start()
 	{
-
 		// Allows autoshoot
 		_canAutoShoot = true;
-
 
 		// Gets the parent class
 		weapon = GetComponentInChildren<WeaponsClass>();
 
 		if (weapon != null)
 		{
-			// Allows player to shoot first round before fire rate time has been reached
-			_timer = _fireRateTime = weapon.GetFireRate();
-			_maxAmmo = _currentAmmo = weapon.GetMagSize();
+			
+			_fireRateTime = weapon.GetFireRate();
+			_timer = Random.Range(0f, 0.4f);	// Allows player to shoot with slight delay from each other
+            _maxAmmo = _currentAmmo = weapon.GetMagSize();
 			_reloadTime = weapon.GetReloadTime();
 			UpdateAmmoText(_ammoTxt, _currentAmmo.ToString());
 			_canReload = false;
@@ -75,7 +74,7 @@ public class AutoShoot : MonoBehaviour
 				_canReload = true;
 				_timer = 0;
 			}
-			CheckAmmo();
+			CheckReload();
 		}
 	}
 
@@ -102,19 +101,28 @@ public class AutoShoot : MonoBehaviour
 
 			// Update ammo text on screen
 			UpdateAmmoText(_ammoTxt, _currentAmmo.ToString());
-		}
+
+			if (gameObject.CompareTag("Assault"))
+				AudioManager.instance.PlayRandomSound(AudioManager.Category.Weapons, "Rifle");
+
+			else if (gameObject.CompareTag("Sniper"))
+                AudioManager.instance.PlayRandomSound(AudioManager.Category.Weapons, "Sniper Rifle");
+
+
+        }
 	}
 
 
 
 
-	public void CheckAmmo()
+	public void CheckReload()
 	{
 		if (_currentAmmo <= 0 & _canReload)
 		{
 			_canReload = false; // Set to false so it reloads only once and not every frame
 			UpdateAmmoText(_ammoTxt, "Reloading...");
-			StartCoroutine(ReloadWeapon(_reloadTime));
+            AudioManager.instance.Play(AudioManager.Category.Weapons, "Reload", "FullReload");
+            StartCoroutine(ReloadWeapon(_reloadTime));
 		}
 	}
 	IEnumerator ReloadWeapon(float time)

@@ -5,7 +5,7 @@ using UnityEngine;
 public class Wall : MonoBehaviour
 { public static Wall instance;
 
-    // Sets an event to allow all zombies to move if the wall gets destroyed
+    // Sets an event to allow ALL zombies to move if the wall gets destroyed
     public static event Action OnWallDestroyed;
 
     [SerializeField] private int _wallHP;
@@ -50,9 +50,8 @@ public class Wall : MonoBehaviour
         if (!_isDestroyed)
         {
             gameObject.SetActive(false);
-            //ErrorManager.instance.PrintWarning("Wall was destroyed!!!");
 
-            // Enable event to allow all zombies to move
+            // Event allows ALL zombies to move
             OnWallDestroyed?.Invoke();
 
             _isDestroyed = true;
