@@ -162,8 +162,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3286127090442207626}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.35, y: -1.1, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 9.82, y: -5.22, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -254,7 +254,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.011184096, y: 0.010020256}
+  m_Offset: {x: -0.011184096, y: 1.0243509}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0}
@@ -265,7 +265,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.6868465, y: 2.0960379}
+  m_Size: {x: 0.6868465, y: 2.0653005}
   m_EdgeRadius: 0
 --- !u!114 &3286127090442207625
 MonoBehaviour:
@@ -279,9 +279,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b674db7b799943c45975b8c47340aba9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hp: 4
-  _currentSpeed: 4
-  _speed: 2
+  _hp: 5
+  _currentSpeed: 3
+  _speed: 1
   _attackForce: 2
   _attackTime: 0.5
   _healthTxt: {fileID: 1053089032400477479}

@@ -5,13 +5,17 @@ public class Bullet : MonoBehaviour
     public static Bullet instance;
     [SerializeField] private int _speed;
     [SerializeField] private float _destroyTime;
-    [SerializeField] private float _bulletDamage;
+
+    // Bullet damage limits
+    [SerializeField] private int minBulletDamage = 5; // Minimum damage value
+    [SerializeField] private int maxBulletDamage = 15; // Maximum damage value
+    private int _bulletDamage; // Current bullet damage
+
     private float _timeCounter;
-    private float _initialDamage;
 
     private void Awake()
     {
-        if (instance == null) { instance = this; } 
+        if (instance == null) { instance = this; }
     }
 
     private void Start()
@@ -19,9 +23,10 @@ public class Bullet : MonoBehaviour
         // Counter
         _timeCounter = 0;
 
-        // Stores original hp
-        _initialDamage = _bulletDamage;
+        // Initialize bullet damage with a random value within the range
+        _bulletDamage = Random.Range(minBulletDamage, maxBulletDamage);
     }
+
     private void Update()
     {
         Move();
@@ -33,6 +38,7 @@ public class Bullet : MonoBehaviour
         // Bullet moves in fixed Y axis so it doesn't move with player
         transform.position = new Vector2(transform.position.x + _speed * Time.deltaTime, transform.position.y);
     }
+
     private void AutoDestroyBullet()
     {
         _timeCounter += Time.deltaTime;
@@ -51,12 +57,12 @@ public class Bullet : MonoBehaviour
         }
     }
 
-    public float GetBulletDamage()
+    public int GetBulletDamage()
     {
         return _bulletDamage;
     }
 
-    public void SetBulletDamage(float hp)
+    public void SetBulletDamage(int hp)
     {
         // Set bullet HP
         if (hp < _bulletDamage)
@@ -73,17 +79,19 @@ public class Bullet : MonoBehaviour
     {
         // Restart variables
         _timeCounter = 0;
-        _bulletDamage = _initialDamage;
+
+        // Reset bullet damage with a new random value
+        _bulletDamage = Random.Range(minBulletDamage, maxBulletDamage);
 
         // Disable gameobject so it can be recalled again from pool manager
         gameObject.SetActive(false);
     }
 
-    private float CalculateZombieDamage(GameObject enemy)
+    private int CalculateZombieDamage(GameObject enemy)
     {
         // Get enemy HP
         if (enemy.TryGetComponent<ZombieClass>(out ZombieClass currentEnemy))
-            return _bulletDamage - currentEnemy.GetHP();
+            return (int)(_bulletDamage - currentEnemy.GetHP());
 
         return -999;
     }

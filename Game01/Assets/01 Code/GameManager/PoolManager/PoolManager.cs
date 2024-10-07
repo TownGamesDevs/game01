@@ -3,22 +3,24 @@ using UnityEngine;
 
 
 public class PoolManager : MonoBehaviour
-{ public static PoolManager instance;
+{
+    public static PoolManager instance;
 
     // prefabs to spawn
-    [SerializeField] private GameObject _assaultBullet, _sniperBullet, _zombieWalker, _zombieBrute;
+    [SerializeField] private GameObject _assaultBullet, _sniperBullet, _zombieWalker, _zombieBrute, _damagePoints;
 
     // max spawns
-    [SerializeField] private int _maxAssaultBullets, _maxSniperBullets, _maxWalker, _maxBrute;
+    [SerializeField] private int _maxAssaultBullets, _maxSniperBullets, _maxWalker, _maxBrute, _maxDamagePoints;
 
     // can grow?
-    [SerializeField] private bool _canGrowAssault, _canGrowSniper, _canGrowWalker, _canGrowBrute;
+    [SerializeField] private bool _canGrowAssault, _canGrowSniper, _canGrowWalker, _canGrowBrute, _canGrowDamagePoints;
 
     // private lists where objects are stored
     private List<GameObject> _assaultPool = new();
     private List<GameObject> _sniperPool = new();
     private List<GameObject> _walkerPool = new();
     private List<GameObject> _brutePool = new();
+    private List<GameObject> _damagePointsPool = new();
 
 
     private void Awake()
@@ -36,6 +38,9 @@ public class PoolManager : MonoBehaviour
 
         if (_maxBrute > 0)
             InitializePool(_brutePool, _zombieBrute, _maxBrute);
+
+        if (_maxDamagePoints > 0)
+            InitializePool(_damagePointsPool, _damagePoints, _maxDamagePoints);
     }
 
     private void InitializePool(List<GameObject> list, GameObject pref, int maxSize)
@@ -84,5 +89,46 @@ public class PoolManager : MonoBehaviour
     public GameObject PoolWalkerZombie()
     {
         return PoolObject(_walkerPool, _zombieWalker, _canGrowWalker);
+    }
+    public GameObject PoolDamagePoint()
+    {
+        return PoolObject(_damagePointsPool, _damagePoints, _canGrowDamagePoints);
+    }
+
+
+    public List<GameObject> InitializeCustomPool(GameObject obj, int total)
+    {
+        if (obj == null) return null;
+        List<GameObject> list = new();
+
+        for (int i = 0; i < total; i++)
+        {
+            GameObject tmp = Instantiate(obj);
+            tmp.SetActive(false);
+            list.Add(tmp);
+        }
+
+        return list;
+    }
+
+    public GameObject PoolCustomGameObject(List<GameObject> list, GameObject pref, bool canGrow)
+    {
+        if (list.Count == 0) return null;
+
+        for (int i = 0; i < list.Count; i++)
+            if (!list[i].activeInHierarchy && !list[i].activeSelf)
+            {
+                list[i].SetActive(true);
+                return list[i];
+            }
+
+        if (canGrow)
+        {
+            GameObject obj = Instantiate(pref);
+            list.Add(obj);
+            return obj;
+        }
+
+        return null;
     }
 }

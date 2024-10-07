@@ -172,9 +172,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a854d550bbf70004c88dbd69f8fe5d76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 45
+  _speed: 55
   _destroyTime: 1
-  _bulletDamage: 24
+  minBulletDamage: 11
+  maxBulletDamage: 25
 --- !u!114 &6260496162998926103
 MonoBehaviour:
   m_ObjectHideFlags: 0
