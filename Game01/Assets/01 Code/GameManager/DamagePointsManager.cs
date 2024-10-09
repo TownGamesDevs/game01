@@ -3,18 +3,20 @@ using UnityEngine;
 public class DamagePointsManager : MonoBehaviour
 { public static DamagePointsManager instance;
 
+    [SerializeField] private float _offset = 2.5f;
 
     [SerializeField] private GameObject damagePointPrefab;  // Assign this in the Inspector
 
     private void Awake() => instance ??= this;
     
-    public void ShowDamage(int damage, Vector3 position)
+    public void ShowDamage(int bulletDamage, int zombieHP, Vector3 position)
     {
         GameObject obj = PoolManager.instance.PoolDamagePoint();
         if (obj == null) return;
 
         DamagePoint dp = obj.GetComponent<DamagePoint>();
-        obj.transform.position = new Vector2(position.x, position.y + 2.5f);
+        obj.transform.position = new Vector2(position.x, position.y + _offset);
+        int damage = Mathf.Min(zombieHP, bulletDamage);
         dp.Initialize(damage);
     }
 }

@@ -51,7 +51,7 @@ public class Zombie : ZombieClass
 			bulletDamage = currentBullet.GetBulletDamage();
 
             // Display points
-            DamagePointsManager.instance.ShowDamage((int)bulletDamage, transform.position);
+            DamagePointsManager.instance.ShowDamage((int)bulletDamage, (int)GetHP(), transform.position);
 
             // Update HP
             SetHP(_currentHP - bulletDamage);

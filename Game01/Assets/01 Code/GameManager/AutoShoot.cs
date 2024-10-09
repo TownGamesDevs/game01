@@ -4,141 +4,135 @@ using UnityEngine;
 
 public class AutoShoot : MonoBehaviour
 {
-	// Variables
-	[SerializeField] private Transform _bulletSpawnPoint;
-	[SerializeField] private TextMeshProUGUI _ammoTxt;
-	private float _timer;
-	private float _fireRateTime;
-	private WeaponsClass weapon;
-	private int _maxAmmo;
-	private int _currentAmmo;
-	private float _reloadTime;
-	private bool _canReload;
-	private bool _canAutoShoot;
+    // Variables
+    [SerializeField] private Transform _bulletSpawnPoint;
+    [SerializeField] private TextMeshProUGUI _ammoTxt;
+    private float _timer;
+    private float _fireRateTime;
+    private WeaponsClass weapon;
+    private int _maxAmmo;
+    private int _ammo;
+    private float _reloadTime;
+    private bool _canAutoShoot;
 
-	private void Awake()
-	{
-		// No autoshoot if wave was completed
-		WaveManager.OnWaveCompleted += StopAutoShoot;
-	}
+    private void Awake()
+    {
+        // No autoshoot if wave was completed
+        WaveManager.OnWaveCompleted += StopAutoShoot;
+    }
 
-	private void OnDestroy()
-	{
-		// Unsub from action
-		WaveManager.OnWaveCompleted -= StopAutoShoot;
-	}
+    private void OnDestroy()
+    {
+        // Unsub from action
+        WaveManager.OnWaveCompleted -= StopAutoShoot;
+    }
 
-	private void StopAutoShoot()
-	{
-		// Listens to action...
-		_canAutoShoot = false;
-	}
-
-
-	private void Start()
-	{
-		// Allows autoshoot
-		_canAutoShoot = true;
-
-		// Gets the parent class
-		weapon = GetComponentInChildren<WeaponsClass>();
-
-		if (weapon != null)
-		{
-			
-			_fireRateTime = weapon.GetFireRate();
-			_timer = Random.Range(0f, 0.4f);	// Allows player to shoot with slight delay from each other
-            _maxAmmo = _currentAmmo = weapon.GetMagSize();
-			_reloadTime = weapon.GetReloadTime();
-			UpdateAmmoText(_ammoTxt, _currentAmmo.ToString());
-			_canReload = false;
-		}
-		else Debug.LogError("No weapon found in Soldier!");
-	}
+    private void StopAutoShoot()
+    {
+        // Listens to action...
+        _canAutoShoot = false;
+    }
 
 
+    private void Start()
+    {
+        // Allows autoshoot
+        _canAutoShoot = true;
 
-	void Update()
-	{
-		if (weapon != null & _canAutoShoot)
-		{
-			// Update timer
-			_timer += Time.deltaTime;
+        // Gets the parent class
+        weapon = GetComponentInChildren<WeaponsClass>();
 
-			// Can only shoot if enemy is in range and fire rate time has been reached
-			if (_timer >= _fireRateTime & _currentAmmo > 0)
-			{
-				Shoot();
+        if (weapon != null)
+        {
 
-				// Resets variables after shot
-				_canReload = true;
-				_timer = 0;
-			}
-			CheckReload();
-		}
-	}
-
-	private void Shoot()
-	{
-		GameObject bullet = null;
-
-		// Instantiate a bullet according to soldier type
-		if (gameObject.CompareTag("Assault"))
-			bullet = PoolManager.instance.PoolAssaultBullet();
-
-		else if (gameObject.CompareTag("Sniper"))
-			bullet = PoolManager.instance.PoolSniperBullet();
+            _fireRateTime = weapon.GetFireRate();
+            _timer = Random.Range(0f, 0.4f);    // Allows player to shoot with slight delay from each other
+            _maxAmmo = _ammo = weapon.GetMagSize();
+            _reloadTime = weapon.GetReloadTime();
+            UpdateAmmoText(_ammoTxt, _ammo.ToString());
+            //_canReload = false;
+        }
+        else Debug.LogError("No weapon found in Soldier!");
+    }
 
 
-		// Set bullet position and update ammo
-		if (bullet != null)
-		{
-			// Set bullet position
-			bullet.transform.position = _bulletSpawnPoint.position;
 
-			// Update ammo
-			_currentAmmo--;
+    void Update()
+    {
+        if (weapon != null & _canAutoShoot)
+        {
+            // Update timer
+            _timer += Time.deltaTime;
 
-			// Update ammo text on screen
-			UpdateAmmoText(_ammoTxt, _currentAmmo.ToString());
+            // Can only shoot if enemy is in range and fire rate time has been reached
+            if (_timer >= _fireRateTime & _ammo > 0)
+            {
+                Shoot();
+                _timer = 0;
 
-			if (gameObject.CompareTag("Assault"))
-				AudioManager.instance.PlayRandomSound(AudioManager.Category.Weapons, "Rifle");
+                CanReload();
+            }
+        }
+    }
 
-			else if (gameObject.CompareTag("Sniper"))
+    private void Shoot()
+    {
+        GameObject bullet = null;
+
+        // Instantiate a bullet according to soldier type
+        if (gameObject.CompareTag("Assault"))
+            bullet = PoolManager.instance.PoolAssaultBullet();
+
+        else if (gameObject.CompareTag("Sniper"))
+            bullet = PoolManager.instance.PoolSniperBullet();
+
+
+        // Set bullet position and update ammo
+        if (bullet != null)
+        {
+            // Set bullet position
+            bullet.transform.position = _bulletSpawnPoint.position;
+
+            // Update ammo
+            _ammo--;
+
+            // Update ammo text on screen
+            UpdateAmmoText(_ammoTxt, _ammo.ToString());
+
+            if (gameObject.CompareTag("Assault"))
+                AudioManager.instance.PlayRandomSound(AudioManager.Category.Weapons, "Rifle");
+
+            else if (gameObject.CompareTag("Sniper"))
                 AudioManager.instance.PlayRandomSound(AudioManager.Category.Weapons, "Sniper Rifle");
 
 
         }
-	}
+    }
 
 
 
 
-	public void CheckReload()
-	{
-		if (_currentAmmo <= 0 & _canReload)
-		{
-			_canReload = false; // Set to false so it reloads only once and not every frame
-			UpdateAmmoText(_ammoTxt, "Reloading...");
-            AudioManager.instance.Play(AudioManager.Category.Weapons, "Reload", "FullReload");
+    public void CanReload()
+    {
+        if (_ammo <= 0)
             StartCoroutine(ReloadWeapon(_reloadTime));
-		}
-	}
-	IEnumerator ReloadWeapon(float time)
-	{
-		// Wait some time before weapon is reloaded
-		yield return new WaitForSeconds(time);
-		Reload();
-	}
-	private void Reload()
-	{
-		_currentAmmo = _maxAmmo;
-		UpdateAmmoText(_ammoTxt, _currentAmmo.ToString());
-	}
+    }
 
-	private void UpdateAmmoText(TextMeshProUGUI txt, string ammo)
-	{ txt.text = ammo.ToString(); }
+    IEnumerator ReloadWeapon(float time)
+    {
+        UpdateAmmoText(_ammoTxt, "Reloading...");
+        AudioManager.instance.Play(AudioManager.Category.Weapons, "Reload", "FullReload");
+
+        yield return new WaitForSeconds(time);  // Wait some time before weapon is reloaded
+        Reload();
+    }
+    private void Reload()
+    {
+        _ammo = _maxAmmo;
+        UpdateAmmoText(_ammoTxt, _ammo.ToString());
+    }
+
+    private void UpdateAmmoText(TextMeshProUGUI txt, string ammo) => txt.text = ammo.ToString();
 
 
 }

@@ -22,7 +22,7 @@ public class CanvasManager : MonoBehaviour
 
     public void InitializeMainMenu()
     {
-        TimeManager.instance.SetTime0();
+        //TimeManager.instance.SetTime0();
         mainMenu.SetActive(true);
     }
 

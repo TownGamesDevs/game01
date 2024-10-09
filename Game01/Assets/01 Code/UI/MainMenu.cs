@@ -11,8 +11,7 @@ public class MainMenu : MonoBehaviour
 
     public void StartGame()
     {
-        TimeManager.instance.SetTime1();
-        HideMainMenu();
+        // Load game scene
     }
     public void ShowMainMenu()
     {

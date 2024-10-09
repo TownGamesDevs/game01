@@ -13,11 +13,15 @@ public class DamagePoint : MonoBehaviour
     [SerializeField] private float maxSpeed = 5f; // Base time it takes to fade out
     [SerializeField] private float minSpeed = 0.5f; // Base time it takes to fade out
 
+    [Space(10)] // Add space before duration settings
+
     // duration
     [SerializeField] private float duration = 1f;  // Time to display the damage before fading
     [SerializeField] private float baseDuration = 1f; // Base time to display the damage before fading
 
-    // fadeout
+    [Space(10)] // Add space before duration settings
+
+    // fade out
     [SerializeField] private float baseFadeOutTime = 0.5f; // Base time it takes to fade out
     [SerializeField] private float fadeOutTime = 0.5f;  // Time it takes to fade out
     [SerializeField] private float minFadeOutTime = 0.2f; // Minimum fade-out time
@@ -32,11 +36,6 @@ public class DamagePoint : MonoBehaviour
         damageText = GetComponentInChildren<TextMeshProUGUI>();
     }
 
-    private void Start()
-    {
-        // Start the coroutine to handle fade and destroy
-        StartCoroutine(FadeAndDestroy());
-    }
 
     private void Update()
     {
@@ -46,8 +45,10 @@ public class DamagePoint : MonoBehaviour
     
     public void Initialize(int damage)
     {
+        if (damage <= 0) return;
+
         // Set the damage value as text
-        damageText.text = damage.ToString();
+        damageText.text = "+" + damage.ToString();
         StartCoroutine(FadeAndDestroy());
 
         // Calculate speed and fade out time based on damage
