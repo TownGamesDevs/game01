@@ -4,7 +4,7 @@ public class MainMenu : MonoBehaviour
 {
     [SerializeField] private GameObject mainMenu;
     [SerializeField] private GameObject options;
-    [SerializeField] private GameObject waveUI;
+   //[SerializeField] private GameObject waveUI;
 
     private void Start()
     { ShowMainMenu(); }
@@ -17,19 +17,19 @@ public class MainMenu : MonoBehaviour
     {
         mainMenu.SetActive(true);
         options.SetActive(false);
-        waveUI.SetActive(false);
+        //waveUI.SetActive(false);
     }
     public void HideMainMenu()
     {
         mainMenu.SetActive(false);
         options.SetActive(false);
-        waveUI.SetActive(true);
+        //waveUI.SetActive(true);
     }
     public void ShowOptions()
     {
         mainMenu.SetActive(false);
         options.SetActive(true);
-        waveUI.SetActive(false);
+        //waveUI.SetActive(false);
     }
     public void BackToMainMenu()
     {
