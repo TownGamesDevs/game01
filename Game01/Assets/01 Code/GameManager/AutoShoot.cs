@@ -121,7 +121,7 @@ public class AutoShoot : MonoBehaviour
     IEnumerator ReloadWeapon(float time)
     {
         UpdateAmmoText(_ammoTxt, "Reloading...");
-        AudioManager.instance.Play(AudioManager.Category.Weapons, "Reload", "FullReload");
+        AudioManager.instance.PlaySpecificSound(AudioManager.Category.Weapons, "Reload", "FullReload");
 
         yield return new WaitForSeconds(time);  // Wait some time before weapon is reloaded
         Reload();
