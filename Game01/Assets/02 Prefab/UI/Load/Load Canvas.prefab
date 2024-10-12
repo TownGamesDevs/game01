@@ -1302,6 +1302,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcc39a7bb7381be4983a7749257c02ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _loadScreen: {fileID: 6161598991015621668}
   _bullets:
   - {fileID: 3628799687508697312}
   - {fileID: 4949549497460662280}

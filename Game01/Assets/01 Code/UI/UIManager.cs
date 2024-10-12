@@ -23,19 +23,17 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        ShowMainMenu();
-    }
+    private void Start() => ShowMainMenu();
+    
     private void ShowScreen(MainScreens.Screens selectedScreen)
     {
         // Makes sure there is only one MAIN screen activated at a time
         for (int i = 0; i < _mainScreens.Length; i++)
         {
-            if (_mainScreens[i].name != selectedScreen)
-                _mainScreens[i]._gameObject.SetActive(false);
-            else
+            if (_mainScreens[i].name == selectedScreen)
                 _mainScreens[i]._gameObject.SetActive(true);
+            else
+                _mainScreens[i]._gameObject.SetActive(false);
         }
 
         // Play sound effect for each screen activity
@@ -43,11 +41,9 @@ public class UIManager : MonoBehaviour
     }
     public void ShowMainMenu() => ShowScreen(MainScreens.Screens.MainMenu);
     public void ShowLevels() => ShowScreen(MainScreens.Screens.LevelSelector);
-    public void ShowLoadScreen() => ShowScreen(MainScreens.Screens.LoadScreen);
+    public void ShowLoadingScreen() => ShowScreen(MainScreens.Screens.LoadScreen);
     public void ShowOptions() => ShowScreen(MainScreens.Screens.Options);
-
-
-
+    public void QuitGame() => Application.Quit();
     public void SetSound()
     {
 
@@ -57,9 +53,16 @@ public class UIManager : MonoBehaviour
         _displaySound = !_displaySound;
         AudioManager.instance.CanPlaySound = _displaySound;
     }
+    public void HideLoadingScreen()
+    {
+        for (int i =0; i < _mainScreens.Length; i++)
+        {
+            if (_mainScreens[i].name == MainScreens.Screens.LoadScreen)
+                _mainScreens[i]._gameObject.SetActive(false);
+        }
+    }
 
 
-    public void QuitGame() => Application.Quit();
 
 
 

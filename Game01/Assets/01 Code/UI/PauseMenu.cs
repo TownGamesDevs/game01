@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
-    [SerializeField] private GameObject pauseMenu;  // Assign the pause menu GameObject in the Inspector
+    [SerializeField] private GameObject pauseMenu;
     private bool isPaused = false;
 
     private void Start() => ResumeGame();
