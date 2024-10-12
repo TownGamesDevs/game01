@@ -18,5 +18,6 @@ public class DamagePointsManager : MonoBehaviour
         obj.transform.position = new Vector2(position.x, position.y + _offset);
         int damage = Mathf.Min(zombieHP, bulletDamage);
         dp.Initialize(damage);
+        ScoreManager.instance.UpdateScore(damage);
     }
 }

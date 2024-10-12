@@ -258,5 +258,11 @@ MonoBehaviour:
       volume: 0.5
       pitch: 1
       loop: 0
+    - source: {fileID: 0}
+      name: Score
+      clip: {fileID: 8300000, guid: b9661df68e550b945a8b94bcb02bea66, type: 3}
+      volume: 1
+      pitch: 1
+      loop: 0
   - category: Wall
     sounds: []

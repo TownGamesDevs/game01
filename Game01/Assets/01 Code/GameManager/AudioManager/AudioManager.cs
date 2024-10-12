@@ -196,6 +196,34 @@ public class AudioManager : MonoBehaviour
     }
 
 
+    public void StopSpecificSound(Category category, string subCategory, string soundName)
+    {
+        // Get the sound array for the given category
+        Sound[] soundArray = GetSoundArray(category);
+
+        // Find the subcategory in the sound array
+        Sound subCategorySounds = System.Array.Find(soundArray, s => s.category == subCategory);
+
+        if (subCategorySounds == null || subCategorySounds.sounds.Length == 0)
+        {
+            print("No sounds found for subcategory: " + subCategory);
+            return;
+        }
+
+        // Find the specific sound by name within the subcategory
+        MainSoundClass specificSound = System.Array.Find(subCategorySounds.sounds, s => s.name == soundName);
+
+        if (specificSound == null)
+        {
+            print("Sound " + soundName + " not found in subcategory: " + subCategory);
+            return;
+        }
+
+        // Stop the specific sound
+        specificSound.source.Stop();
+
+    }
+
     // Unique sounds
     public void MouseHover()
     {

@@ -15,7 +15,7 @@ public class CanvasManager : MonoBehaviour
     }
 
     private void Start()
-    { 
+    {
         if (_showMainMenu)
             InitializeMainMenu();
     }
@@ -40,7 +40,10 @@ public class CanvasManager : MonoBehaviour
     private void SetWaveCompleted(bool state)
     {
         if (waveCompleted.activeSelf != state)
+        {
             waveCompleted.SetActive(state);
+            LevelCompletedScore.instance.ShowScore();
+        }
     }
 
     public void UpgradeBTN()
