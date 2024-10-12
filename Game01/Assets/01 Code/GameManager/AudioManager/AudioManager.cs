@@ -80,31 +80,7 @@ public class AudioManager : MonoBehaviour
     }
 
 
-
-
-
-    // Methods of playing sounds
-    public void Play(Category category, string soundName)
-    {
-        if (CanPlaySound)
-        {
-            Sound[] soundArray = GetSoundArray(category);
-            if (soundArray == null) return;
-
-            foreach (Sound soundCategory in soundArray)
-            {
-                MainSoundClass mainSound = Array.Find(soundCategory.sounds, s => s.name == soundName);
-                if (mainSound == null)
-                {
-                    print("Sound " + soundName + " not found in category " + category.ToString());
-                    return;
-                }
-
-                mainSound.source.Play();
-            }
-        }
-    }
-    public void PlaySpecificSound(Category category, string subCategory, string soundName)
+    public void Play(Category category, string subCategory, string soundName)
     {
         if (CanPlaySound)
         {
@@ -133,22 +109,32 @@ public class AudioManager : MonoBehaviour
             specificSound.source.Play();
         }
     }
-    public void Stop(Category category, string soundName)
+    public void Stop(Category category, string subCategory, string soundName)
     {
+        // Get the sound array for the given category
         Sound[] soundArray = GetSoundArray(category);
-        if (soundArray == null) return;
 
-        foreach (Sound soundCategory in soundArray)
+        // Find the subcategory in the sound array
+        Sound subCategorySounds = System.Array.Find(soundArray, s => s.category == subCategory);
+
+        if (subCategorySounds == null || subCategorySounds.sounds.Length == 0)
         {
-            MainSoundClass mainSound = Array.Find(soundCategory.sounds, s => s.name == soundName);
-            if (mainSound == null)
-            {
-                ErrorManager.instance.PrintError("Sound " + soundName + " not found in category " + category);
-                return;
-            }
-
-            mainSound.source.Stop();
+            print("No sounds found for subcategory: " + subCategory);
+            return;
         }
+
+        // Find the specific sound by name within the subcategory
+        MainSoundClass specificSound = System.Array.Find(subCategorySounds.sounds, s => s.name == soundName);
+
+        if (specificSound == null)
+        {
+            print("Sound " + soundName + " not found in subcategory: " + subCategory);
+            return;
+        }
+
+        // Stop the specific sound
+        specificSound.source.Stop();
+
     }
     public void PlayOneShot(Category category, string soundName)
     {
@@ -194,39 +180,69 @@ public class AudioManager : MonoBehaviour
             randomSound.source.Play();
         }
     }
-
-
-    public void StopSpecificSound(Category category, string subCategory, string soundName)
+    public void StopAll()
     {
-        // Get the sound array for the given category
-        Sound[] soundArray = GetSoundArray(category);
-
-        // Find the subcategory in the sound array
-        Sound subCategorySounds = System.Array.Find(soundArray, s => s.category == subCategory);
-
-        if (subCategorySounds == null || subCategorySounds.sounds.Length == 0)
-        {
-            print("No sounds found for subcategory: " + subCategory);
-            return;
-        }
-
-        // Find the specific sound by name within the subcategory
-        MainSoundClass specificSound = System.Array.Find(subCategorySounds.sounds, s => s.name == soundName);
-
-        if (specificSound == null)
-        {
-            print("Sound " + soundName + " not found in subcategory: " + subCategory);
-            return;
-        }
-
-        // Stop the specific sound
-        specificSound.source.Stop();
-
+        StopSound(_zombie);
+        StopSound(_weapons);
+        StopSound(_music);
+        StopSound(_other);
     }
+    public void StopSound(Sound[] soundCategories)
+    {
+        foreach (Sound soundCategory in soundCategories)
+            foreach (MainSoundClass mainSound in soundCategory.sounds)
+                mainSound.source.Stop();
+    }
+
+    // Methods of playing sounds
+    //public void Play1(Category category, string soundName)
+    //{
+    //    if (CanPlaySound)
+    //    {
+    //        Sound[] soundArray = GetSoundArray(category);
+    //        if (soundArray == null) return;
+
+    //        foreach (Sound soundCategory in soundArray)
+    //        {
+    //            MainSoundClass mainSound = Array.Find(soundCategory.sounds, s => s.name == soundName);
+    //            if (mainSound == null)
+    //            {
+    //                print("Sound " + soundName + " not found in category " + category.ToString());
+    //                return;
+    //            }
+
+    //            mainSound.source.Play();
+    //        }
+    //    }
+    //}
+
+
+    //public void Stop1(Category category, string soundName)
+    //{
+    //    Sound[] soundArray = GetSoundArray(category);
+    //    if (soundArray == null) return;
+
+    //    foreach (Sound soundCategory in soundArray)
+    //    {
+    //        MainSoundClass mainSound = Array.Find(soundCategory.sounds, s => s.name == soundName);
+    //        if (mainSound == null)
+    //        {
+    //            ErrorManager.instance.PrintError("Sound " + soundName + " not found in category " + category);
+    //            return;
+    //        }
+
+    //        mainSound.source.Stop();
+    //    }
+    //}
+
+
+
+
+
 
     // Unique sounds
     public void MouseHover()
     {
-        PlaySpecificSound(Category.Other, "UI", "MouseHover");
+        Play(Category.Other, "UI", "MouseHover");
     }
 }

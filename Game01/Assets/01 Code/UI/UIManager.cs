@@ -23,7 +23,10 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    private void Start() => ShowMainMenu();
+    private void Start()
+    {
+        ShowMainMenu();
+    }
     
     private void ShowScreen(MainScreens.Screens selectedScreen)
     {
@@ -37,11 +40,14 @@ public class UIManager : MonoBehaviour
         }
 
         // Play sound effect for each screen activity
-        AudioManager.instance.PlaySpecificSound(AudioManager.Category.Other, "UI", "Selection");
+        AudioManager.instance.Play(AudioManager.Category.Other, "UI", "Selection");
     }
     public void ShowMainMenu() => ShowScreen(MainScreens.Screens.MainMenu);
     public void ShowLevels() => ShowScreen(MainScreens.Screens.LevelSelector);
-    public void ShowLoadingScreen() => ShowScreen(MainScreens.Screens.LoadScreen);
+    public void ShowLoadingScreen()
+    {
+        ShowScreen(MainScreens.Screens.LoadScreen);
+    }
     public void ShowOptions() => ShowScreen(MainScreens.Screens.Options);
     public void QuitGame() => Application.Quit();
     public void SetSound()

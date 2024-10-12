@@ -16,6 +16,10 @@ public class SoundUI : MonoBehaviour
 
         _displaySound = !_displaySound;
         AudioManager.instance.CanPlaySound = _displaySound;
+
+        if (!_displaySound)
+            AudioManager.instance.StopAll();
+
     }
 
 

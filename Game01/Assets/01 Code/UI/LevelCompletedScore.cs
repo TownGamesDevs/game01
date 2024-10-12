@@ -21,7 +21,8 @@ public class LevelCompletedScore : MonoBehaviour
     }
     private void Start()
     {
-        //ShowScore();
+        StarManager.instance.DisplayStars();
+        AudioManager.instance.Stop(AudioManager.Category.Music, "Background Track", "WaveMusic");
     }
 
     public void ShowScore()
@@ -35,7 +36,7 @@ public class LevelCompletedScore : MonoBehaviour
         float currentTime = 0f;
         int currentScore = 0;
 
-        AudioManager.instance.PlaySpecificSound(AudioManager.Category.Other, "UI", "Score");
+        AudioManager.instance.Play(AudioManager.Category.Other, "UI", "Score");
         while (currentTime < duration)
         {
             // Calculate how much of the duration has passed
@@ -57,6 +58,6 @@ public class LevelCompletedScore : MonoBehaviour
         _shadowTxt.text = FORMAT + finalScore.ToString();
         _shadowTxt1.text = FORMAT + finalScore.ToString();
 
-        AudioManager.instance.StopSpecificSound(AudioManager.Category.Other, "UI", "Score");
+        AudioManager.instance.Stop(AudioManager.Category.Other, "UI", "Score");
     }
 }

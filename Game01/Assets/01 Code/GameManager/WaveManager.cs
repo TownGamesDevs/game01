@@ -25,10 +25,6 @@ public class WaveManager : MonoBehaviour
 		StartNextWave();
 	}
 
-    private void Update()
-    {
-		//print("total: " + _totalZombies);
-    }
     private void StartNextWave()
 	{
 		if (_currentWave <= _totalWaves)

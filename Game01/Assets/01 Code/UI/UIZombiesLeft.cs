@@ -31,4 +31,13 @@ public class UIZombiesLeft : MonoBehaviour
         _currentKilled++;
         _textToDisplay.text = _currentKilled + txtFormat;
     }
+
+    public int GetTotalZombies()
+    {
+        return _totalZombies;
+    }
+    public int GetAllKilled()
+    {
+        return _currentKilled;
+    }
 }
