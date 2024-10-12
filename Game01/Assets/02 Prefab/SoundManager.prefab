@@ -1,0 +1,262 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8145886708900442451
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 469926784888933373}
+  - component: {fileID: 6531468710981000833}
+  m_Layer: 0
+  m_Name: SoundManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &469926784888933373
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8145886708900442451}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6531468710981000833
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8145886708900442451}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5ceddace5411a44dbe2abecbfac76b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _zombie:
+  - category: Attack
+    sounds:
+    - source: {fileID: 0}
+      name: z_attack1
+      clip: {fileID: 8300000, guid: dd1338b991c73447a983adbc8effe3d5, type: 3}
+      volume: 1
+      pitch: 1
+      loop: 0
+    - source: {fileID: 0}
+      name: z_attack2
+      clip: {fileID: 8300000, guid: 62fe1ae146558475b8a6c0deffb83970, type: 3}
+      volume: 1
+      pitch: 1
+      loop: 0
+    - source: {fileID: 0}
+      name: z_attack3
+      clip: {fileID: 8300000, guid: 42d8fc3cbacf24ddfbeabbcc89fc2772, type: 3}
+      volume: 1
+      pitch: 1
+      loop: 0
+    - source: {fileID: 0}
+      name: z_attack4
+      clip: {fileID: 8300000, guid: 81727d970aeee438b912e8619fbe8fa3, type: 3}
+      volume: 1
+      pitch: 1
+      loop: 0
+    - source: {fileID: 0}
+      name: z_attack5
+      clip: {fileID: 8300000, guid: d308a80ed23b44c359b18edb48fbb38c, type: 3}
+      volume: 1
+      pitch: 1
+      loop: 0
+    - source: {fileID: 0}
+      name: z_attack6
+      clip: {fileID: 8300000, guid: 2918ee8c1f21e4341bf3aaec7c9694ed, type: 3}
+      volume: 1
+      pitch: 1
+      loop: 0
+  - category: BulletHit
+    sounds:
+    - source: {fileID: 0}
+      name: hit1
+      clip: {fileID: 8300000, guid: 1b26a1515f8bc4a91ae64359187cd8c2, type: 3}
+      volume: 1
+      pitch: 1
+      loop: 0
+    - source: {fileID: 0}
+      name: hit2
+      clip: {fileID: 8300000, guid: 85caf8c060b95471c9e8d85a8495525c, type: 3}
+      volume: 1
+      pitch: 1
+      loop: 0
+    - source: {fileID: 0}
+      name: hit3
+      clip: {fileID: 8300000, guid: d66c8ca1e18c849429d47013b393202b, type: 3}
+      volume: 1
+      pitch: 1
+      loop: 0
+  - category: Die
+    sounds:
+    - source: {fileID: 0}
+      name: z_die1
+      clip: {fileID: 8300000, guid: 2343e713ce48a483fbf154b7747e2654, type: 3}
+      volume: 1
+      pitch: 1
+      loop: 0
+    - source: {fileID: 0}
+      name: z_die2
+      clip: {fileID: 8300000, guid: 353a5651661094790a1388fa41702955, type: 3}
+      volume: 1
+      pitch: 1
+      loop: 0
+    - source: {fileID: 0}
+      name: z_die3
+      clip: {fileID: 8300000, guid: ee1b35e00bb2c4dbaa04a0727e757c62, type: 3}
+      volume: 1
+      pitch: 1
+      loop: 0
+  - category: Hurt
+    sounds:
+    - source: {fileID: 0}
+      name: Hurt1
+      clip: {fileID: 8300000, guid: 5d09dd86efd604b0e9048fd674a6fa27, type: 3}
+      volume: 1
+      pitch: 1
+      loop: 0
+    - source: {fileID: 0}
+      name: Hurt2
+      clip: {fileID: 8300000, guid: c920eba22a44b4f1b8d9aa13573104cb, type: 3}
+      volume: 1
+      pitch: 1
+      loop: 0
+    - source: {fileID: 0}
+      name: Hurt3
+      clip: {fileID: 8300000, guid: ce130644b119842688ff9c4d27a00507, type: 3}
+      volume: 1
+      pitch: 1
+      loop: 0
+    - source: {fileID: 0}
+      name: Hurt4
+      clip: {fileID: 8300000, guid: 65945979d3a5648f9bd5cb5bc9c639df, type: 3}
+      volume: 1
+      pitch: 1
+      loop: 0
+    - source: {fileID: 0}
+      name: Hurt5
+      clip: {fileID: 8300000, guid: ecd98dd11c2144910a2886d0a43e898f, type: 3}
+      volume: 1
+      pitch: 1
+      loop: 0
+    - source: {fileID: 0}
+      name: Hurt6
+      clip: {fileID: 8300000, guid: f76353e99f5fc476ba4c14afdf7b8bda, type: 3}
+      volume: 1
+      pitch: 1
+      loop: 0
+  _weapons:
+  - category: Rifle
+    sounds:
+    - source: {fileID: 0}
+      name: rifle1
+      clip: {fileID: 8300000, guid: 34356896518ed584bb88b755d23bd7fa, type: 3}
+      volume: 0.2
+      pitch: 1
+      loop: 0
+    - source: {fileID: 0}
+      name: rifle2
+      clip: {fileID: 8300000, guid: 8f153ae73e0cfc74ca3407a8ca1ebf38, type: 3}
+      volume: 0.2
+      pitch: 1
+      loop: 0
+    - source: {fileID: 0}
+      name: rifle3
+      clip: {fileID: 8300000, guid: 744da7dbf2b5cd64f9ba83d80597ec52, type: 3}
+      volume: 0.2
+      pitch: 1
+      loop: 0
+    - source: {fileID: 0}
+      name: rifle4
+      clip: {fileID: 8300000, guid: d8cb02fc6f413444cb0189d73d57aa4a, type: 3}
+      volume: 0.2
+      pitch: 1
+      loop: 0
+    - source: {fileID: 0}
+      name: rifle5
+      clip: {fileID: 8300000, guid: ba523e686a9e1c34491e5f1af0880178, type: 3}
+      volume: 0.2
+      pitch: 1
+      loop: 0
+  - category: Sniper Rifle
+    sounds:
+    - source: {fileID: 0}
+      name: s_rifle1
+      clip: {fileID: 8300000, guid: fc679616492d77246bd619d5cb573365, type: 3}
+      volume: 1
+      pitch: 1
+      loop: 0
+    - source: {fileID: 0}
+      name: s_rifle2
+      clip: {fileID: 8300000, guid: 61a0195b706b8734ab2367a54d920a33, type: 3}
+      volume: 1
+      pitch: 1
+      loop: 0
+  - category: Reload
+    sounds:
+    - source: {fileID: 0}
+      name: Reload1
+      clip: {fileID: 8300000, guid: 234f406665f2a674ea1f99631c93d557, type: 3}
+      volume: 1
+      pitch: 1
+      loop: 0
+    - source: {fileID: 0}
+      name: Reload2
+      clip: {fileID: 8300000, guid: b16ac02f8e903374c94f1632743641c4, type: 3}
+      volume: 1
+      pitch: 1
+      loop: 0
+    - source: {fileID: 0}
+      name: Reload3
+      clip: {fileID: 8300000, guid: c7427148cce01ea4981dc5fc2a0fb0be, type: 3}
+      volume: 1
+      pitch: 1
+      loop: 0
+    - source: {fileID: 0}
+      name: FullReload
+      clip: {fileID: 8300000, guid: f5c35e4c4f448c74cbc8bee71adbd72b, type: 3}
+      volume: 0.5
+      pitch: 1
+      loop: 0
+  _music:
+  - category: Background Track
+    sounds:
+    - source: {fileID: 0}
+      name: Music
+      clip: {fileID: 8300000, guid: 08cef23904981594c809db705bca1d59, type: 3}
+      volume: 0.5
+      pitch: 1
+      loop: 1
+  _other:
+  - category: UI
+    sounds:
+    - source: {fileID: 0}
+      name: MouseHover
+      clip: {fileID: 8300000, guid: 5f8875398ac7af24b8b74b3c10e1aa8b, type: 3}
+      volume: 0.5
+      pitch: 1
+      loop: 0
+    - source: {fileID: 0}
+      name: Selection
+      clip: {fileID: 8300000, guid: e12a9f1d90eb3ea489b478c68ec09c65, type: 3}
+      volume: 0.5
+      pitch: 1
+      loop: 0
+  - category: Wall
+    sounds: []
