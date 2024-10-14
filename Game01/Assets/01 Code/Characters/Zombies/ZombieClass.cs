@@ -3,122 +3,74 @@ using TMPro;
 using UnityEngine;
 
 public class ZombieClass : MonoBehaviour
-{ public static ZombieClass instance;
-
-    //public static event Action OnZombieDie;
+{
+    public static ZombieClass instance;
 
     [SerializeField] protected float _hp;
-    [SerializeField] private float _currentSpeed;
-    [SerializeField] private float _speed;
+    [SerializeField] protected float _speed;
     public float AttackForce { get; protected set; }
     public float AttackTime { get; protected set; }
-    private bool _isMoving;
-    private bool _canAttackWall;
+
     protected float _currentHP;
-    private float _currentAttackForce;
+    protected bool _canMove;
+    protected bool _canAttackWall;
+    protected float _currentSpeed;
 
+    private void Awake() => instance ??= this;
 
-    private void Awake()
-    { if (instance == null) instance = this; }
-    private void Start()
+    protected void Start()
     {
-        // Subscribes to the event to let all zombies move if the wall gets destroyed
-        Wall.OnWallDestroyed += AllZombiesCanMove;
+        Wall.OnWallDestroyed += MoveAllZombies;
 
-        // Sets the actual variable for HP
-        SetHP(_hp);
-
-        // Sets zombie speed
+        _currentHP = _hp;
         _currentSpeed = _speed;
-
-        // Sets attack force
-        _currentAttackForce = AttackForce;
+        _canMove = true;
+        _canAttackWall = false;
     }
-    private void OnDestroy()
-    { Wall.OnWallDestroyed -= AllZombiesCanMove; }
 
-
-
+    private void OnDestroy() => Wall.OnWallDestroyed -= MoveAllZombies;
 
     public void ZombieMove()
     {
-        // Zombie can move while it has NOT reached the wall
-        if (_isMoving)
-            gameObject.transform.position = new Vector2(transform.position.x - _currentSpeed * Time.deltaTime, transform.position.y);
+        if (_canMove)
+        {
+            transform.position += Vector3.left * _currentSpeed * Time.deltaTime;
+        }
     }
 
-
-
-
-    public void Die()
+    public virtual void Die()
     {
-        // Reset values
         _currentHP = _hp;
         _currentSpeed = _speed;
-        _currentAttackForce = AttackForce;
-        SetCanMove(true);
-        SetCanAttackWall(false);
+        _canMove = true;
+        _canAttackWall = false;
         gameObject.SetActive(false);
-
         AudioManager.instance.PlayRandomSound(AudioManager.Category.Zombie, "Hurt");
     }
+
     public void AttackWall()
     {
-        Wall.instance.SetHP(Wall.instance.GetHP() - _currentAttackForce);
+        Wall.instance.SetHP(Wall.instance.GetHP() - AttackForce);
         ZombieAnimator.instance.SetAttackAnim();
-
-        //ErrorManager.instance.PrintWarning("Wall is being attacked");
     }
-    public float GetHP()
-    { return _currentHP; }
+
+    public float GetHP() => _currentHP;
+
     public void SetHP(float hp)
     {
-        // Updates the actual HP variable
-        if (_currentHP > hp)    // fixes bug where health increases if bullet hits two enemies that are in the same place
-            _currentHP = hp;
-        else
-            _currentHP--;
+        if (_currentHP > hp) _currentHP = hp;
+        else _currentHP--;
 
-        // Zombie died
         if (_currentHP <= 0)
         {
             Die();
-            WaveManager.instance.ZombieDefeated();
-            UIZombiesLeft.instance.UpdateTotalZombies();
+            WaveManager.instance.ZombieKilled();
+            //UIZombiesLeft.instance.UpdateTotalZombies();
         }
     }
-    public void UpdateHealthText(float hp, TextMeshProUGUI txt)
-    {
-        // Updates the HP text of the zombie
-        txt.text = hp.ToString();
-    }
-    public void SetCanMove(bool state)
-    {
-        if (state != _isMoving)
-            _isMoving = state;
-    }
-    public void SetCanAttackWall(bool state)
-    {
-        if (state != _canAttackWall)
-            _canAttackWall = state;
-    }
-    public bool GetCanAttack()
-    {
-        return _canAttackWall;
-    }
-    private void AllZombiesCanMove()
-    {
-        SetCanMove(true);
-    }
-    public float CalculateBulletDamage(GameObject bullet)
-    {
-        // Get enemy HP
-        if (bullet.TryGetComponent<Bullet>(out Bullet currentBullet))
-            return _currentHP - currentBullet.GetBulletDamage();
 
-        return -1;
-    }
+    public void SetCanMove(bool state) => _canMove = state;
+    public void SetCanAttackWall(bool state) => _canAttackWall = state;
+    public bool GetCanAttack() => _canAttackWall;
+    private void MoveAllZombies() => SetCanMove(true);
 }
-
-
-

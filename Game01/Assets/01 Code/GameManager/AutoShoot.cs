@@ -15,23 +15,14 @@ public class AutoShoot : MonoBehaviour
     private float _reloadTime;
     private bool _canAutoShoot;
 
-    private void Awake()
-    {
-        // No autoshoot if wave was completed
-        WaveManager.OnWaveCompleted += StopAutoShoot;
-    }
+    private void Awake() => WaveManager.OnWaveCompleted += StopAutoShoot;
+    
 
-    private void OnDestroy()
-    {
-        // Unsub from action
-        WaveManager.OnWaveCompleted -= StopAutoShoot;
-    }
+    private void OnDestroy() => WaveManager.OnWaveCompleted -= StopAutoShoot;
+    
 
-    private void StopAutoShoot()
-    {
-        // Listens to action...
-        _canAutoShoot = false;
-    }
+    private void StopAutoShoot() => _canAutoShoot = false;
+    
 
 
     private void Start()
@@ -44,13 +35,11 @@ public class AutoShoot : MonoBehaviour
 
         if (weapon != null)
         {
-
             _fireRateTime = weapon.GetFireRate();
             _timer = Random.Range(0f, 0.4f);    // Allows player to shoot with slight delay from each other
             _maxAmmo = _ammo = weapon.GetMagSize();
             _reloadTime = weapon.GetReloadTime();
             UpdateAmmoText(_ammoTxt, _ammo.ToString());
-            //_canReload = false;
         }
         else Debug.LogError("No weapon found in Soldier!");
     }
@@ -81,10 +70,10 @@ public class AutoShoot : MonoBehaviour
 
         // Instantiate a bullet according to soldier type
         if (gameObject.CompareTag("Assault"))
-            bullet = PoolManager.instance.PoolAssaultBullet();
+            bullet = PoolManager.instance.Pool(PoolData.Type.AssaultBullet);
 
         else if (gameObject.CompareTag("Sniper"))
-            bullet = PoolManager.instance.PoolSniperBullet();
+            bullet = PoolManager.instance.Pool(PoolData.Type.SniperBullet);
 
 
         // Set bullet position and update ammo

@@ -240,7 +240,7 @@ MonoBehaviour:
     - source: {fileID: 0}
       name: WaveMusic
       clip: {fileID: 8300000, guid: 08cef23904981594c809db705bca1d59, type: 3}
-      volume: 0.5
+      volume: 0.3
       pitch: 1
       loop: 1
     - source: {fileID: 0}
@@ -267,8 +267,26 @@ MonoBehaviour:
     - source: {fileID: 0}
       name: Score
       clip: {fileID: 8300000, guid: 1a5ab5cc1da0cd7468f5ab34bebc51b7, type: 3}
-      volume: 0.6
-      pitch: 1.5
+      volume: 0.3
+      pitch: 2
       loop: 1
   - category: Wall
-    sounds: []
+    sounds:
+    - source: {fileID: 0}
+      name: Wall1
+      clip: {fileID: 8300000, guid: a5759a929020b41cab58b6c41974862a, type: 3}
+      volume: 0.9
+      pitch: 1
+      loop: 0
+    - source: {fileID: 0}
+      name: Wall2
+      clip: {fileID: 8300000, guid: 812fc44a5cc5f483c97d99114cac682c, type: 3}
+      volume: 0.9
+      pitch: 1
+      loop: 0
+    - source: {fileID: 0}
+      name: Wall3
+      clip: {fileID: 8300000, guid: bc7949420fadd45d990faa80abb3948f, type: 3}
+      volume: 0.9
+      pitch: 1
+      loop: 0

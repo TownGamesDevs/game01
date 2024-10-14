@@ -6,30 +6,25 @@ public class StarManager : MonoBehaviour
     public static StarManager instance;
 
     [SerializeField] private GameObject[] _stars;
-    [SerializeField] private float animationDuration = 0.5f;
+    [SerializeField] private float _animationDuration = 0.5f;
+    [SerializeField] private float _frameDelay = 0f;
 
-    private int totalEnemies;  // Total enemies in the round
-    private int killedEnemies;  // Number of enemies killed
-    const float DELAY = 0f;
-
-    private Vector3[] originalScales;  // To store the original scales of the stars
+    private int _totalSpawned;  // Total enemies in the round
+    private int _killed;  // Number of enemies killed
+    private Vector3[] _originalScales;  // To store the original scales of the stars
 
     private void Awake() => instance ??= this;
 
     public void Initialize()
     {
         // Initialize the original scales array and store the original scales of the stars
-        originalScales = new Vector3[_stars.Length];
+        _originalScales = new Vector3[_stars.Length];
         for (int i = 0; i < _stars.Length; i++)
         {
             if (_stars[i] != null)
             {
-                originalScales[i] = _stars[i].transform.localScale;  // Store the original scale
+                _originalScales[i] = _stars[i].transform.localScale;  // Store the original scale
                 _stars[i].SetActive(false);  // Optionally hide the stars at the start
-            }
-            else
-            {
-                Debug.LogError($"Star GameObject at index {i} is not assigned! Please assign a GameObject in the Inspector.");
             }
         }
     }
@@ -39,8 +34,8 @@ public class StarManager : MonoBehaviour
     {
         Initialize();
 
-        killedEnemies = UIZombiesLeft.instance.GetAllKilled();
-        totalEnemies = UIZombiesLeft.instance.GetTotalZombies();
+        _killed = WaveManager.instance.GetTotalKilled();
+        _totalSpawned = WaveManager.instance.GetTotalZombies();
 
         // Calculate how many stars to display based on enemies killed
         int starCount = CalculateStars();
@@ -52,11 +47,11 @@ public class StarManager : MonoBehaviour
     // Calculate the number of stars based on killed enemies
     private int CalculateStars()
     {
-        if (killedEnemies == totalEnemies)
+        if (_killed == _totalSpawned)
             return 3;  // If all enemies are killed, show 3 stars
-        else if (killedEnemies >= totalEnemies * 0.75f)
+        else if (_killed >= _totalSpawned * 0.75f)
             return 2;  // Show 2 stars for 75% or more
-        else if (killedEnemies >= totalEnemies * 0.5f)
+        else if (_killed >= _totalSpawned * 0.5f)
             return 1;  // Show 1 star for 50% or more
         else
             return 0;  // Show no stars if less than 50%
@@ -67,7 +62,7 @@ public class StarManager : MonoBehaviour
     {
         for (int i = 0; i < starCount; i++)
         {
-            if (_stars[i] != null && originalScales[i] != null)  // Safeguard: Check if star and scale are not null
+            if (_stars[i] != null && _originalScales[i] != null)  // Safeguard: Check if star and scale are not null
             {
                 // Make the star visible
                 _stars[i].SetActive(true);
@@ -77,26 +72,22 @@ public class StarManager : MonoBehaviour
 
                 // Animate the star scaling from zero to its original scale
                 float currentTime = 0f;
-                while (currentTime < animationDuration)
+                while (currentTime < _animationDuration)
                 {
                     currentTime += Time.deltaTime;
-                    float progress = currentTime / animationDuration;
+                    float progress = currentTime / _animationDuration;
 
                     // Interpolate from zero scale to the original scale
-                    _stars[i].transform.localScale = Vector3.Lerp(Vector3.zero, originalScales[i], progress);
+                    _stars[i].transform.localScale = Vector3.Lerp(Vector3.zero, _originalScales[i], progress);
 
                     yield return null;
                 }
 
                 // Ensure the final scale is the original scale
-                _stars[i].transform.localScale = originalScales[i];
+                _stars[i].transform.localScale = _originalScales[i];
 
                 // Optional: Add a slight delay between each star animation
-                yield return new WaitForSeconds(DELAY);  // Delay between stars (adjust as needed)
-            }
-            else
-            {
-                Debug.LogError($"Error: Star GameObject or original scale at index {i} is null.");
+                yield return new WaitForSeconds(_frameDelay);  // Delay between stars (adjust as needed)
             }
         }
     }

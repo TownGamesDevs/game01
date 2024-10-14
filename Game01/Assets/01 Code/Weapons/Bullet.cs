@@ -7,8 +7,8 @@ public class Bullet : MonoBehaviour
 	[SerializeField] private float _destroyTime;
 
 	// Bullet damage limits
-	[SerializeField] private int minBulletDamage = 5; // Minimum damage value
-	[SerializeField] private int maxBulletDamage = 15; // Maximum damage value
+	[SerializeField] private int minDamage = 5; // Minimum damage value
+	[SerializeField] private int maxDamage = 15; // Maximum damage value
 
 	private int _bulletDamage;      // Current bullet damage
 	private float _timeCounter;
@@ -20,16 +20,16 @@ public class Bullet : MonoBehaviour
 		// Counter
 		_timeCounter = 0;
 
-		maxBulletDamage++;	// Adds one more so max can be reached in Random.Range below
+		maxDamage++;	// Adds one more so max can be reached in Random.Range below
 
         // Initialize bullet damage with a random value within the range
-        _bulletDamage = Random.Range(minBulletDamage, maxBulletDamage);
+        _bulletDamage = Random.Range(minDamage, maxDamage);
 	}
 
 	private void Update()
 	{
 		Move();
-		AutoDestroyBullet();
+		AutoDestroy();
 	}
 
 	private void Move()
@@ -38,7 +38,7 @@ public class Bullet : MonoBehaviour
 		transform.position = new Vector2(transform.position.x + _speed * Time.deltaTime, transform.position.y);
 	}
 
-	private void AutoDestroyBullet()
+	private void AutoDestroy()
 	{
 		_timeCounter += Time.deltaTime;
 		if (_timeCounter >= _destroyTime)
@@ -56,10 +56,8 @@ public class Bullet : MonoBehaviour
 		}
 	}
 
-	public int GetBulletDamage()
-	{
-		return _bulletDamage;
-	}
+	public int GetBulletDamage() => _bulletDamage;
+	
 
 	public void SetBulletDamage(int hp)
 	{
@@ -80,7 +78,7 @@ public class Bullet : MonoBehaviour
 		_timeCounter = 0;
 
 		// Reset bullet damage with a new random value
-		_bulletDamage = Random.Range(minBulletDamage, maxBulletDamage);
+		_bulletDamage = Random.Range(minDamage, maxDamage);
 
 		// Disable gameobject so it can be recalled again from pool manager
 		gameObject.SetActive(false);

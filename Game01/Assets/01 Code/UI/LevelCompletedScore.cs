@@ -6,23 +6,20 @@ public class LevelCompletedScore : MonoBehaviour
 {
     public static LevelCompletedScore instance;
 
-    [SerializeField] private TextMeshProUGUI _shadowTxt1;
-    [SerializeField] private TextMeshProUGUI _shadowTxt;
-    [SerializeField] private TextMeshProUGUI _scoreTxt;
+    [SerializeField] private TextMeshProUGUI[] _txt;
+    [SerializeField] private bool _stopMusic;
+    [SerializeField] private float duration = 1f;
 
-    [SerializeField] private float duration = 1f;  // Time to reach the final score
-
-    private int finalScore;  // The score to display after completing the level
+    private int finalScore;
     const string FORMAT = "Score • ";
 
-    private void Awake()
-    {
-        if (instance == null) instance = this;
-    }
+    private void Awake() => instance ??= this;
     private void Start()
     {
         StarManager.instance.DisplayStars();
-        AudioManager.instance.Stop(AudioManager.Category.Music, "Background Track", "WaveMusic");
+
+        if (_stopMusic)
+            AudioManager.instance.Stop(AudioManager.Category.Music, "Background Track", "WaveMusic");
     }
 
     public void ShowScore()
@@ -30,13 +27,14 @@ public class LevelCompletedScore : MonoBehaviour
         finalScore = ScoreManager.instance.GetScore();  // Set the final score
         StartCoroutine(IncrementScore());  // Start the coroutine to increment the score
     }
-
     IEnumerator IncrementScore()
     {
         float currentTime = 0f;
         int currentScore = 0;
 
+        // Start sound effect
         AudioManager.instance.Play(AudioManager.Category.Other, "UI", "Score");
+
         while (currentTime < duration)
         {
             // Calculate how much of the duration has passed
@@ -46,18 +44,19 @@ public class LevelCompletedScore : MonoBehaviour
             currentScore = (int)Mathf.Lerp(0, finalScore, currentTime / duration);  // Linear interpolation
 
             // Update the score text in the UI
-            _scoreTxt.text = FORMAT + currentScore.ToString();
-            _shadowTxt.text = FORMAT + currentScore.ToString();
-            _shadowTxt1.text = FORMAT + currentScore.ToString();
+
+            for (int i = 0; i < _txt.Length; i++)
+                _txt[i].text = FORMAT + currentScore.ToString();
+
 
             yield return null;  // Wait for the next frame
         }
 
         // Ensure the final score is shown after the loop
-        _scoreTxt.text = FORMAT + finalScore.ToString();
-        _shadowTxt.text = FORMAT + finalScore.ToString();
-        _shadowTxt1.text = FORMAT + finalScore.ToString();
+        for (int i = 0; i < _txt.Length; i++)
+            _txt[i].text = FORMAT + finalScore.ToString();
 
+        // Stop sound effect
         AudioManager.instance.Stop(AudioManager.Category.Other, "UI", "Score");
     }
 }

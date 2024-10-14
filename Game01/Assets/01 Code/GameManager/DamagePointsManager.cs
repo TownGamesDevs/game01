@@ -11,7 +11,7 @@ public class DamagePointsManager : MonoBehaviour
     
     public void ShowDamage(int bulletDamage, int zombieHP, Vector3 position)
     {
-        GameObject obj = PoolManager.instance.PoolDamagePoint();
+        GameObject obj = PoolManager.instance.Pool(PoolData.Type.DamagePoints);
         if (obj == null) return;
 
         DamagePoint dp = obj.GetComponent<DamagePoint>();

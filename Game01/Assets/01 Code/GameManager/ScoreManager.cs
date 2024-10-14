@@ -5,14 +5,18 @@ public class ScoreManager : MonoBehaviour
 {
     public static ScoreManager instance;
 
-    [SerializeField] private TextMeshProUGUI _shadowTxt;
-    [SerializeField] private TextMeshProUGUI _scoreTxt;
+    [SerializeField] private TextMeshProUGUI[] _txt;
     private int _score;
+    const string SCORE = "Score: ";
 
     private void Awake() => instance ??= this;
-    private void Start() => _score = 0;
+    private void Start()
+    {
+        _score = 0;
+        UpdateScore(_score);
+    }
 
-
+    public int GetScore() => _score;
     public void UpdateScore(int score)
     {
         if (score <= 0) return;
@@ -20,15 +24,8 @@ public class ScoreManager : MonoBehaviour
         if ((score + _score) > _score)
         {
             _score += score;
-            PrintScore("Score: ");
+            for (int i = 0; i < _txt.Length; i++)
+                _txt[i].text = SCORE + _score.ToString();
         }
     }
-
-    public int GetScore() => _score;
-    private void PrintScore(string txt)
-    {
-        _scoreTxt.text = txt + _score.ToString();
-        _shadowTxt.text = txt + _score.ToString();
-    }
-
 }

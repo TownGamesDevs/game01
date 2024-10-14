@@ -13,10 +13,7 @@ public class Wall : MonoBehaviour
     private float _currentHP;
     private bool _isDestroyed;
 
-    private void Awake()
-    {
-        if (instance == null) instance = this;
-    }
+    private void Awake() => instance ??= this;
 
     void Start()
     {
@@ -25,13 +22,11 @@ public class Wall : MonoBehaviour
         UpdateHealthText(txt, _currentHP);
     }
 
-    public float GetHP()
-    {
-        return _currentHP;
-    }
+    public float GetHP() => _currentHP;
 
     public void SetHP(float hp)
     {
+        AudioManager.instance.PlayRandomSound(AudioManager.Category.Other, "Wall");
         if (hp < _currentHP)
             _currentHP = hp;
         else
@@ -49,23 +44,15 @@ public class Wall : MonoBehaviour
     {
         if (!_isDestroyed)
         {
-            gameObject.SetActive(false);
-
             // Event allows ALL zombies to move
             OnWallDestroyed?.Invoke();
 
             _isDestroyed = true;
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
 
-    public bool GetIsDestroyed()
-    {
-        return _isDestroyed;
-    }
-
-    private void UpdateHealthText(TextMeshProUGUI txt, float hp)
-    {
-        txt.text = hp.ToString();
-    }
+    public bool GetIsDestroyed() => _isDestroyed;
+    private void UpdateHealthText(TextMeshProUGUI txt, float hp) => txt.text = hp.ToString();
+    
 }
