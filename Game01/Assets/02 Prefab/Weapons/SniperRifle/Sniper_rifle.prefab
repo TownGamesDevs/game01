@@ -101,9 +101,7 @@ MonoBehaviour:
   _price: 1500
   _reloadTime: 35
   _magSize: 10
-  _fireRate: 150
-  _accuracy: 2
-  _bulletDamage: 10
+  _fireRate: 180
 --- !u!1 &6853650752119311289
 GameObject:
   m_ObjectHideFlags: 0

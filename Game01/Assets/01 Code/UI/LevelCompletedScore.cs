@@ -10,10 +10,15 @@ public class LevelCompletedScore : MonoBehaviour
     [SerializeField] private bool _stopMusic;
     [SerializeField] private float duration = 1f;
 
+
     private int finalScore;
     const string FORMAT = "Score • ";
 
-    private void Awake() => instance ??= this;
+    private void Awake()
+    {
+        if (instance == null) instance = this;
+    }
+
     private void Start()
     {
         StarManager.instance.DisplayStars();
@@ -21,7 +26,7 @@ public class LevelCompletedScore : MonoBehaviour
         if (_stopMusic)
             AudioManager.instance.Stop(AudioManager.Category.Music, "Background Track", "WaveMusic");
     }
-
+  
     public void ShowScore()
     {
         finalScore = ScoreManager.instance.GetScore();  // Set the final score
@@ -59,4 +64,5 @@ public class LevelCompletedScore : MonoBehaviour
         // Stop sound effect
         AudioManager.instance.Stop(AudioManager.Category.Other, "UI", "Score");
     }
+
 }

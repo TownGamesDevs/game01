@@ -173,9 +173,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 50
-  _destroyTime: 1
-  minBulletDamage: 3
-  maxBulletDamage: 5
+  _maxDistance: 15
+  minDamage: 5
+  maxDamage: 15
 --- !u!114 &4462409533399245961
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -25,7 +25,7 @@ public class WeaponsClass : MonoBehaviour
         rifle_15 = 15,
         machine_gun_10 = 10,
         shotgun_60 = 60,
-        sniper_rifle_150 = 150
+        sniper_rifle_180 = 180
     }
 
     public enum Accuracy
@@ -51,7 +51,7 @@ public class WeaponsClass : MonoBehaviour
     public float WeaponPrice { get; protected set; }
     public ReloadTime Reload_time { get; protected set; }
     public MagSize Mag_size { get; protected set; }
-    public FireRate Fire_rate { get; protected set; }
+    public int Fire_rate { get; protected set; }
     //public Accuracy Weapon_accuracy { get; protected set; }
     //public BulletDamage Bullet_damage { get; protected set; }
 

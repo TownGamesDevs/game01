@@ -5,7 +5,7 @@ public class Pistol : WeaponsClass
     [SerializeField] private float _price;
     [SerializeField] private ReloadTime _reloadTime;
     [SerializeField] private MagSize _magSize;
-    [SerializeField] private FireRate _fireRate;
+    [SerializeField] private int _fireRate;
     //[SerializeField] private Accuracy _accuracy;
     //[SerializeField] private BulletDamage _bulletDamage;
 

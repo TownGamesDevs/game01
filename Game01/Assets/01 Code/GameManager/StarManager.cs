@@ -57,9 +57,10 @@ public class StarManager : MonoBehaviour
             return 0;  // Show no stars if less than 50%
     }
 
-    // Coroutine to animate the stars appearing one by one
+    
     IEnumerator AnimateStars(int starCount)
     {
+        // Coroutine to animate the stars appearing one by one
         for (int i = 0; i < starCount; i++)
         {
             if (_stars[i] != null && _originalScales[i] != null)  // Safeguard: Check if star and scale are not null

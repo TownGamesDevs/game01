@@ -65,7 +65,6 @@ public class ZombieClass : MonoBehaviour
         {
             Die();
             WaveManager.instance.ZombieKilled();
-            //UIZombiesLeft.instance.UpdateTotalZombies();
         }
     }
 

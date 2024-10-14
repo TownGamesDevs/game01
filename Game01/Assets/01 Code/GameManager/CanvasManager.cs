@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -6,18 +7,12 @@ public class CanvasManager : MonoBehaviour
     [SerializeField] private bool _showMainMenu;
     [SerializeField] private GameObject mainMenu;
     [SerializeField] private GameObject waveCompleted;
-
+    [SerializeField] private float _waitTimeWaveCompleted;
 
     private void Awake()
     {
         // Subscribes to activate waveCompleted screen when all zombies are eliminated
         WaveManager.OnWaveCompleted += WaveCompleted;
-    }
-
-    private void Start()
-    {
-        if (_showMainMenu)
-            InitializeMainMenu();
     }
 
     public void InitializeMainMenu()
@@ -39,11 +34,15 @@ public class CanvasManager : MonoBehaviour
 
     private void SetWaveCompleted(bool state)
     {
-        if (waveCompleted.activeSelf != state)
-        {
-            waveCompleted.SetActive(state);
-            LevelCompletedScore.instance.ShowScore();
-        }
+        StartCoroutine(ShowWaveCompletedUI());
+    }
+
+
+    IEnumerator ShowWaveCompletedUI()
+    {
+        yield return new WaitForSeconds(_waitTimeWaveCompleted);
+        waveCompleted.SetActive(true);
+        LevelCompletedScore.instance.ShowScore();
     }
 
     public void UpgradeBTN()

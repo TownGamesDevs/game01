@@ -141,8 +141,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _spawnPoints:
   - {fileID: 7526691755870085357}
-  _totalZombies: 5
   _spawnInterval: 0.3
+  waves:
+  - enemyGroups:
+    - enemyType: 0
+      count: 1
+    - enemyType: 1
+      count: 1
+    - enemyType: 0
+      count: 2
+    waveDelay: 5
+  - enemyGroups:
+    - enemyType: 0
+      count: 2
+    waveDelay: 1
 --- !u!114 &5071434137885633612
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -168,7 +180,7 @@ MonoBehaviour:
     _list: []
   - _name: 2
     _prefab: {fileID: 6308899942192579199, guid: 367d4ed9bd03e5d49a21a116fee2af04, type: 3}
-    _total: 5
+    _total: 1
     _canGrow: 1
     _list: []
   - _name: 3
