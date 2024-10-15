@@ -4,12 +4,17 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class LoadingScreen : MonoBehaviour
-{ 
+{ public static LoadingScreen instance;
 
     [SerializeField] private GameObject[] _bullets;
     const float _delay = 0.3f;
 
-
+    private void Awake()
+    {
+        if (instance == null)
+            instance = this;
+        DontDestroyOnLoad(gameObject);
+    }
     private void Start()
     {
         // Don't destroy the loading screen when switching scenes
@@ -21,10 +26,8 @@ public class LoadingScreen : MonoBehaviour
     }
 
 
-    public void LoadLevel(int index)
-    {   // Called with UI button
-        StartCoroutine(StartLoading(index));
-    }
+    public void LoadLevel(int index) => StartCoroutine(StartLoading(index));
+    
 
 
     IEnumerator StartLoading(int index)

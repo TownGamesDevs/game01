@@ -76,6 +76,7 @@ public class LevelCompletedScore : MonoBehaviour
 
     public void NextLevel()
     {
+        // ToFix - show load screen, and animate it... then disable it when scene is ready
 
         int index = SceneManager.GetActiveScene().buildIndex + 1;
         AudioManager.instance.StopAll();

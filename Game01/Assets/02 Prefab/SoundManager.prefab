@@ -269,7 +269,7 @@ MonoBehaviour:
       clip: {fileID: 8300000, guid: 1a5ab5cc1da0cd7468f5ab34bebc51b7, type: 3}
       volume: 0.3
       pitch: 2
-      loop: 1
+      loop: 0
   - category: Wall
     sounds:
     - source: {fileID: 0}

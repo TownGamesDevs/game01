@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class StarManager : MonoBehaviour
 {
@@ -44,6 +45,12 @@ public class StarManager : MonoBehaviour
 
         // Calculate how many stars to display based on enemies killed
         int starCount = CalculateStars();
+
+        // Unlock next level
+        if (starCount > 0)
+        {
+            LevelManager.instance.UnlockLevel(SceneManager.GetActiveScene().buildIndex);
+        }
 
         // Start the coroutine to show the stars with animation
         StartCoroutine(AnimateStars(starCount));

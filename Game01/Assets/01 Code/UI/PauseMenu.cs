@@ -10,6 +10,7 @@ public class PauseMenu : MonoBehaviour
     private void Awake() => WaveManager.OnWaveCompleted += DisablePause;
     private void Start()
     {
+        pauseMenu.SetActive(false);
         _canPause = true;
         ResumeGame();
     }
@@ -53,6 +54,7 @@ public class PauseMenu : MonoBehaviour
 
     public void LoadMainMenu()
     {
+        AudioManager.instance.StopAll();
         SceneManager.LoadScene(0);
         UIManager.instance.ShowMainMenu();
         Time.timeScale = 1f;

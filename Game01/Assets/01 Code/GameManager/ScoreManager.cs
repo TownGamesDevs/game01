@@ -2,8 +2,7 @@ using TMPro;
 using UnityEngine;
 
 public class ScoreManager : MonoBehaviour
-{
-    public static ScoreManager instance;
+{ public static ScoreManager instance;
 
     [SerializeField] private TextMeshProUGUI[] _txt;
     private int _score;

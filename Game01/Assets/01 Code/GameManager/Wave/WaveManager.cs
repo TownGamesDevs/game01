@@ -15,7 +15,8 @@ public class WaveManager : MonoBehaviour
     [Header("General Configuration")]
     [SerializeField] private float _spawnInterval;
     private int _totalZombies;  // Now calculated dynamically
-    private int _totalKilled = 0;
+    private int _totalKilled;
+    private int _tmpKilled;
 
     [Header("Waves Configuration")]
     public List<Wave> waves = new List<Wave>();
@@ -28,14 +29,14 @@ public class WaveManager : MonoBehaviour
 
     private void Start()
     {
+        _totalKilled = 0;
+        _totalZombies = 0;
         // Calculate total zombies across all waves
         CalculateTotalZombies();
 
         // Start with a random function (either spawn wave or random waves)
         if (waves.Count > 0)
             StartCoroutine(RandomSpawn());
-        else
-            Debug.LogError("No waves defined in the Inspector!");
     }
 
     // Method to calculate total zombies
@@ -43,12 +44,8 @@ public class WaveManager : MonoBehaviour
     {
         _totalZombies = 0;  // Reset the count
         foreach (Wave wave in waves)
-        {
             foreach (EnemyGroups group in wave.enemyGroups)
-            {
                 _totalZombies += group.count;  // Add the number of enemies in each group
-            }
-        }
     }
 
     // Function that randomly chooses between spawning a wave or generating a random wave
@@ -62,10 +59,6 @@ public class WaveManager : MonoBehaviour
                 yield return StartCoroutine(SpawnWave(_currentWave));
                 _currentWave++;
             }
-            //else
-            //{
-            //    yield return StartCoroutine(SpawnRandomWave());
-            //}
         }
     }
 
@@ -93,9 +86,8 @@ public class WaveManager : MonoBehaviour
                                                    : PoolData.Type.Brute);
 
                 if (enemy != null)
-                {
                     enemy.transform.position = spawnPoint.position;
-                }
+                
 
                 yield return new WaitForSeconds(wave.spawnInterval);  // Use the specific spawn interval for this wave
             }
@@ -122,9 +114,8 @@ public class WaveManager : MonoBehaviour
             GameObject enemy = PoolManager.instance.Pool(enemyType);
 
             if (enemy != null)
-            {
                 enemy.transform.position = spawnPoint.position;
-            }
+            
 
             // Wait for the configured random spawn interval
             yield return new WaitForSeconds(Random.Range(randomWaveConfig.minSpawnInterval, randomWaveConfig.maxSpawnInterval));
@@ -136,12 +127,20 @@ public class WaveManager : MonoBehaviour
         _totalKilled++;
 
         if (_totalKilled >= _totalZombies)
+        {
             OnWaveCompleted?.Invoke();
+            _tmpKilled = _totalKilled;
+            _totalKilled = 0;
+        }
     }
 
-    public int GetTotalKilled() => _totalKilled;
+    public int GetTotalKilled() => _tmpKilled;
     public int GetTotalZombies() => _totalZombies;
 }
+
+
+
+
 
 [Serializable]
 public class RandomWaveConfig

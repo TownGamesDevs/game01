@@ -23,10 +23,8 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        ShowMainMenu();
-    }
+    private void Start() => ShowMainMenu();
+    
     
     private void ShowScreen(MainScreens.Screens selectedScreen)
     {
@@ -62,7 +60,6 @@ public class UIManager : MonoBehaviour
         for (int i =0; i < _mainScreens.Length; i++)
             if (_mainScreens[i].name == MainScreens.Screens.LoadScreen)
                 _mainScreens[i]._gameObject.SetActive(false);
-        
     }
 
 

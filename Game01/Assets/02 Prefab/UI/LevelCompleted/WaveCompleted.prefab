@@ -445,7 +445,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Wave Completed
+  m_text: Level Completed
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b3c1ff39f5b4c784b86b3edd35e1ef2f, type: 2}
   m_sharedMaterial: {fileID: 8611662776413090375, guid: b3c1ff39f5b4c784b86b3edd35e1ef2f, type: 2}
@@ -2341,7 +2341,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Wave Completed
+  m_text: Level Completed
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b3c1ff39f5b4c784b86b3edd35e1ef2f, type: 2}
   m_sharedMaterial: {fileID: 8611662776413090375, guid: b3c1ff39f5b4c784b86b3edd35e1ef2f, type: 2}
@@ -2702,7 +2702,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Wave Completed
+  m_text: Level Completed
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b3c1ff39f5b4c784b86b3edd35e1ef2f, type: 2}
   m_sharedMaterial: {fileID: 8611662776413090375, guid: b3c1ff39f5b4c784b86b3edd35e1ef2f, type: 2}
