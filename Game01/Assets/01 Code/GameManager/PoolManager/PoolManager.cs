@@ -26,7 +26,12 @@ public class PoolManager : MonoBehaviour
     [SerializeField] private PoolData[] _ObjectsToPool;
 
 
-    private void Awake() => instance ??= this;
+    private void Awake()
+    {
+        if (instance == null)
+            instance = this;
+        DontDestroyOnLoad(gameObject);
+    }
     private void Start()
     {
         for (int i = 0; i < _ObjectsToPool.Length; i++)

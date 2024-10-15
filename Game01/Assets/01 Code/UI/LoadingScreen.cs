@@ -4,10 +4,11 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class LoadingScreen : MonoBehaviour
-{
-    //[SerializeField] private GameObject _loadScreen;
+{ 
+
     [SerializeField] private GameObject[] _bullets;
     const float _delay = 0.3f;
+
 
     private void Start()
     {
@@ -29,7 +30,7 @@ public class LoadingScreen : MonoBehaviour
     IEnumerator StartLoading(int index)
     {
         // Show the loading screen
-        UIManager.instance.ShowLoadingScreen();   // Show loading screen instead of hiding it
+        UIManager.instance.ShowLoadingScreen();
 
         // Begin loading the scene asynchronously
         AsyncOperation operation = SceneManager.LoadSceneAsync(index);

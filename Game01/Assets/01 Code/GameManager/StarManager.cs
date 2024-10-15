@@ -13,7 +13,12 @@ public class StarManager : MonoBehaviour
     private int _killed;  // Number of enemies killed
     private Vector3[] _originalScales;  // To store the original scales of the stars
 
-    private void Awake() => instance ??= this;
+    private void Awake()
+    {
+        if (instance == null)
+            instance = this;
+        DontDestroyOnLoad(gameObject);
+    }
 
     public void Initialize()
     {

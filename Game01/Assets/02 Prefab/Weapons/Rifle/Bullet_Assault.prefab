@@ -173,7 +173,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 50
-  _maxDistance: 15
+  _maxDistance: 30
   minDamage: 5
   maxDamage: 15
 --- !u!114 &4462409533399245961

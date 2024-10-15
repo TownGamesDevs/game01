@@ -108,19 +108,19 @@ MonoBehaviour:
     - source: {fileID: 0}
       name: z_die1
       clip: {fileID: 8300000, guid: 2343e713ce48a483fbf154b7747e2654, type: 3}
-      volume: 1
+      volume: 0.8
       pitch: 1
       loop: 0
     - source: {fileID: 0}
       name: z_die2
       clip: {fileID: 8300000, guid: 353a5651661094790a1388fa41702955, type: 3}
-      volume: 1
+      volume: 0.8
       pitch: 1
       loop: 0
     - source: {fileID: 0}
       name: z_die3
       clip: {fileID: 8300000, guid: ee1b35e00bb2c4dbaa04a0727e757c62, type: 3}
-      volume: 1
+      volume: 0.8
       pitch: 1
       loop: 0
   - category: Hurt
@@ -240,7 +240,7 @@ MonoBehaviour:
     - source: {fileID: 0}
       name: WaveMusic
       clip: {fileID: 8300000, guid: 08cef23904981594c809db705bca1d59, type: 3}
-      volume: 0.3
+      volume: 0.4
       pitch: 1
       loop: 1
     - source: {fileID: 0}

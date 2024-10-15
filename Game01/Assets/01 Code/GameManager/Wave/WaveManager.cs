@@ -30,7 +30,6 @@ public class WaveManager : MonoBehaviour
     {
         // Calculate total zombies across all waves
         CalculateTotalZombies();
-        print("Total: " + _totalZombies);
 
         // Start with a random function (either spawn wave or random waves)
         if (waves.Count > 0)

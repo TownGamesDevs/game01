@@ -9,7 +9,12 @@ public class ScoreManager : MonoBehaviour
     private int _score;
     const string SCORE = "Score: ";
 
-    private void Awake() => instance ??= this;
+    private void Awake()
+    {
+        if (instance == null)
+            instance = this;
+        DontDestroyOnLoad(gameObject);
+    }
     private void Start()
     {
         _score = 0;
