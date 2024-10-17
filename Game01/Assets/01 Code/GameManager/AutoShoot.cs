@@ -75,6 +75,10 @@ public class AutoShoot : MonoBehaviour
                 AudioManager.instance.PlayRandomSound(AudioManager.Category.Weapons, "Rifle");
             else if (gameObject.CompareTag("Sniper"))
                 AudioManager.instance.PlayRandomSound(AudioManager.Category.Weapons, "Sniper Rifle");
+
+
+            PlayerPrefs.SetInt("TotalShots", PlayerPrefs.GetInt("TotalShots") + 1);
+            PlayerPrefs.Save();
         }
     }
 

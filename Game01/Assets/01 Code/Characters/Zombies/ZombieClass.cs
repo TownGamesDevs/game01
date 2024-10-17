@@ -46,6 +46,8 @@ public class ZombieClass : MonoBehaviour
         _canAttackWall = false;
         gameObject.SetActive(false);
         AudioManager.instance.PlayRandomSound(AudioManager.Category.Zombie, "Hurt");
+        PlayerPrefs.SetInt("ZombiesKilled", PlayerPrefs.GetInt("ZombiesKilled") + 1);
+        PlayerPrefs.Save();
     }
 
     public void AttackWall()

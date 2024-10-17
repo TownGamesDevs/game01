@@ -23,28 +23,27 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    private void Start() => ShowMainMenu();
+    private void Start()
+    {
+        ShowMainMenu();
+        AudioManager.instance.Play(AudioManager.Category.Music, "Background Track", "MenuMusic");
+    }
     
     
     private void ShowScreen(MainScreens.Screens selectedScreen)
     {
         // Makes sure there is only one MAIN screen activated at a time
-        for (int i = 0; i < _mainScreens.Length; i++)
-        {
-            if (_mainScreens[i].name == selectedScreen)
-                _mainScreens[i]._gameObject.SetActive(true);
-            else
-                _mainScreens[i]._gameObject.SetActive(false);
-        }
-
+        foreach (var screen in _mainScreens)
+            screen._gameObject.SetActive(screen.name == selectedScreen);
+        
         // Play sound effect for each screen activity
         AudioManager.instance.Play(AudioManager.Category.Other, "UI", "Selection");
     }
     public void ShowMainMenu() => ShowScreen(MainScreens.Screens.MainMenu);
     public void ShowLevels() => ShowScreen(MainScreens.Screens.LevelSelector);
     public void ShowLoadingScreen() => ShowScreen(MainScreens.Screens.LoadScreen);
-    
     public void ShowOptions() => ShowScreen(MainScreens.Screens.Options);
+    public void ShowStats() => ShowScreen(MainScreens.Screens.Stats);
     public void QuitGame() => Application.Quit();
     public void SetSound()
     {
@@ -57,9 +56,9 @@ public class UIManager : MonoBehaviour
     }
     public void HideLoadingScreen()
     {
-        for (int i =0; i < _mainScreens.Length; i++)
-            if (_mainScreens[i].name == MainScreens.Screens.LoadScreen)
-                _mainScreens[i]._gameObject.SetActive(false);
+        foreach (var screen in _mainScreens)
+            if (screen.name == MainScreens.Screens.LoadScreen)
+                screen._gameObject.SetActive(false);
     }
 
 
@@ -76,6 +75,7 @@ public class UIManager : MonoBehaviour
             LevelSelector,
             LoadScreen,
             Options,
+            Stats,
 
             // Add more screens as needed
         }

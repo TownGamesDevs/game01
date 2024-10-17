@@ -20,6 +20,8 @@ public class LoadingScreen : MonoBehaviour
         // Don't destroy the loading screen when switching scenes
         DontDestroyOnLoad(gameObject);
 
+        AudioManager.instance.StopAll();
+
         // Ensure all bullet images are inactive at the start
         foreach (GameObject bullet in _bullets)
             bullet.SetActive(false);

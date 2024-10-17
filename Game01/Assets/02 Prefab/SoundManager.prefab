@@ -246,7 +246,7 @@ MonoBehaviour:
     - source: {fileID: 0}
       name: MenuMusic
       clip: {fileID: 8300000, guid: 04bee57c000c8c142a1c90f5646b3490, type: 3}
-      volume: 1
+      volume: 0.5
       pitch: 1
       loop: 1
   _other:
