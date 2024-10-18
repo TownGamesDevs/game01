@@ -30,6 +30,13 @@ public class ScoreManager : MonoBehaviour
             _score += score;
             for (int i = 0; i < _txt.Length; i++)
                 _txt[i].text = SCORE + _score.ToString();
+
+
+            // Save highscore
+            if (_score > PlayerPrefs.GetInt("Highscore"))
+            {
+                PlayerPrefs.SetInt("Highscore", _score);
+            }
         }
     }
 }

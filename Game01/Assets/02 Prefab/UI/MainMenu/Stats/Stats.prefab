@@ -2658,9 +2658,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90f5f0ce4614b6b40a25f14c552acdfb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _areYouSure: {fileID: 0}
   _totalKilledTxt:
   - {fileID: 0}
-  _areYouSure: {fileID: 0}
+  _totalShotsTxt: []
 --- !u!1 &6130218424791005630
 GameObject:
   m_ObjectHideFlags: 0

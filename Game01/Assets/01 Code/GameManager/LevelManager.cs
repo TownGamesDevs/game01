@@ -45,10 +45,13 @@ public class LevelManager : MonoBehaviour
 
     public void UnlockLevel(int index)
     {
-        Transform levelTransform = _levels[index].transform;
+        if (_levels != null)
+        {
+            Transform levelTransform = _levels[index].transform;
 
-        if (levelTransform.childCount >= 2)
-            levelTransform.GetChild(1).gameObject.SetActive(false);  // Disable the locked child
+            if (levelTransform.childCount >= 2)
+                levelTransform.GetChild(1).gameObject.SetActive(false);  // Disable the locked child
+        }
     }
 
     // Call this method when a level is completed to unlock the next one

@@ -1,14 +1,15 @@
 using UnityEngine;
 
 public class UIManager : MonoBehaviour
-{ public static UIManager instance;
+{
+    public static UIManager instance;
 
     [SerializeField] private MainScreens[] _mainScreens;
     [SerializeField] private GameObject _soundOn;
     [SerializeField] private GameObject _soundOff;
     private bool _displaySound = true;
 
-    
+
     private void Awake()
     {
         if (instance == null)
@@ -28,14 +29,17 @@ public class UIManager : MonoBehaviour
         ShowMainMenu();
         AudioManager.instance.Play(AudioManager.Category.Music, "Background Track", "MenuMusic");
     }
-    
-    
+
+
+    private void OnEnable() => AudioManager.instance.Play(AudioManager.Category.Music, "Background Track", "MenuMusic");
+
+
     private void ShowScreen(MainScreens.Screens selectedScreen)
     {
         // Makes sure there is only one MAIN screen activated at a time
         foreach (var screen in _mainScreens)
             screen._gameObject.SetActive(screen.name == selectedScreen);
-        
+
         // Play sound effect for each screen activity
         AudioManager.instance.Play(AudioManager.Category.Other, "UI", "Selection");
     }

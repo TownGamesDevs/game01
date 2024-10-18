@@ -29,6 +29,7 @@ public class LoadingScreen : MonoBehaviour
 
 
     public void LoadLevel(int index) => StartCoroutine(StartLoading(index));
+    public void LoadLevel(string sceneName) => StartCoroutine(StartLoading(sceneName));
     
 
 
@@ -39,6 +40,48 @@ public class LoadingScreen : MonoBehaviour
 
         // Begin loading the scene asynchronously
         AsyncOperation operation = SceneManager.LoadSceneAsync(index);
+        operation.allowSceneActivation = false;  // Prevent scene activation until fully ready
+
+        while (!operation.isDone)
+        {
+            // The progress goes from 0.0 to 0.9, so we map it to 100% by dividing by 0.9
+            float progress = Mathf.Clamp01(operation.progress / 0.9f);
+            int bulletsToActivate = Mathf.FloorToInt(progress * 10);  // Each 10% activates one bullet
+
+            // Activate bullets based on progress
+            for (int i = 0; i < bulletsToActivate; i++)
+            {
+                _bullets[i].SetActive(true);
+            }
+
+            // When the progress reaches 90% (0.9 in AsyncOperation), allow the scene activation
+            if (operation.progress >= 0.9f)
+            {
+                // Activate all bullets just before scene activation
+                for (int i = 0; i < _bullets.Length; i++)
+                {
+                    _bullets[i].SetActive(true);
+                }
+
+                // Add a slight delay to show the full loading UI, then activate the scene
+                yield return new WaitForSeconds(_delay);  // Optional: Adjust as needed
+                operation.allowSceneActivation = true;
+            }
+
+            yield return null;  // Continue in the next frame
+        }
+
+        // Hide the loading screen after the scene has fully loaded
+        UIManager.instance.HideLoadingScreen();
+    }
+
+    IEnumerator StartLoading(string sceneName)
+    {
+        // Show the loading screen
+        UIManager.instance.ShowLoadingScreen();
+
+        // Begin loading the scene asynchronously using the scene name
+        AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName);
         operation.allowSceneActivation = false;  // Prevent scene activation until fully ready
 
         while (!operation.isDone)

@@ -46,14 +46,12 @@ public class StarManager : MonoBehaviour
         // Calculate how many stars to display based on enemies killed
         int starCount = CalculateStars();
 
-        // Unlock next level
-        if (starCount > 0)
-        {
-            LevelManager.instance.UnlockLevel(SceneManager.GetActiveScene().buildIndex);
-        }
-
         // Start the coroutine to show the stars with animation
         StartCoroutine(AnimateStars(starCount));
+
+        // Unlock next level
+        if (starCount > 0)
+            LevelManager.instance.UnlockLevel(SceneManager.GetActiveScene().buildIndex);
     }
 
     // Calculate the number of stars based on killed enemies

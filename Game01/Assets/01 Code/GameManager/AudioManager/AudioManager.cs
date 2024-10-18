@@ -245,4 +245,8 @@ public class AudioManager : MonoBehaviour
     {
         Play(Category.Other, "UI", "MouseHover");
     }
+    public void MouseSelection()
+    {
+        Play(Category.Other, "UI", "Selection");
+    }
 }
