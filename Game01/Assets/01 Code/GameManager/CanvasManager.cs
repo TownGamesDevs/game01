@@ -6,8 +6,6 @@ public class CanvasManager : MonoBehaviour
 {
     [SerializeField] private GameObject _levelCompletedUI;
     [SerializeField] private GameObject _scoreUI;
-    //[SerializeField] private GameObject _pauseUI;
-
     [SerializeField] private float _waitTimeLevelCompleted;
 
     private void Awake() => WaveManager.OnWaveCompleted += WaveCompleted;
@@ -20,7 +18,6 @@ public class CanvasManager : MonoBehaviour
     {
         _scoreUI.SetActive(true);
         _levelCompletedUI.SetActive(false);
-        //_pauseUI.SetActive(false);
     }
 
     private void OnDestroy() => WaveManager.OnWaveCompleted -= WaveCompleted;

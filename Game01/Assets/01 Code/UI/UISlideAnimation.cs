@@ -3,10 +3,10 @@ using System.Collections;
 
 public class UISlideAnimation : MonoBehaviour
 {
-	public RectTransform screen;         // The UI element (RectTransform) you want to animate
-	public float startYPosition;         // Starting Y position for the slide-down animation
-	public float targetYPosition;        // Final Y position for the slide-down animation
-	public float animationDuration = 1.0f;   // Duration for the slide-down animation
+    [SerializeField] private RectTransform screen;         // The UI element (RectTransform) you want to animate
+    [SerializeField] private float startYPosition;         // Starting Y position for the slide-down animation
+    [SerializeField] private float targetYPosition;        // Final Y position for the slide-down animation
+    [SerializeField] private float animationDuration = 1.0f;   // Duration for the slide-down animation
 
 	private float initialXPosition;      // Track the initial X position
 
@@ -58,13 +58,15 @@ public class UISlideAnimation : MonoBehaviour
 	public void SlideUpAndDisable()
 	{
 		StartCoroutine(SlideUpAnimation());
-	}
+
+    }
 
 	public void SlideDownAndEnable()
 	{
 		gameObject.SetActive(true);
 		StartCoroutine(SlideDownAnimation());
-	}
+
+    }
 
 	private IEnumerator SlideUpAnimation()
 	{

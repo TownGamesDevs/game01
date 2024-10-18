@@ -25,7 +25,7 @@ public class ShowTutorial : MonoBehaviour
 		{
 			// Shows tutorial window only once
 			_tutorialPref.SetActive(true);
-			_canShow = false;
+            _canShow = false;
 		}
 		else
 		{
@@ -37,8 +37,11 @@ public class ShowTutorial : MonoBehaviour
 	
 
 	public void CanShowTutorial(bool state) => _canShow = state;
-	
 
-	public void HideTutorialScreen() => _tutorialPref.SetActive(false);
+
+	public void HideTutorialScreen()
+	{
+		_tutorialPref.SetActive(false);
+    }
 
 }
