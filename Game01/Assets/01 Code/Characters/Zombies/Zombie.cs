@@ -7,14 +7,12 @@ public class Zombie : ZombieClass
     [SerializeField] private float _attackTime;
     [SerializeField] private TextMeshProUGUI _healthTxt;
 
-    private ZombieAnimator _zombieAnimator;
     private bool _canWalk;
     private float _timer;
 
     private void Awake() => Wall.OnWallDestroyed += CanWalk;
     private new void Start()
     {
-        _zombieAnimator = GetComponent<ZombieAnimator>();
         base.Start();
 
         AttackForce = _attackForce;
@@ -22,13 +20,14 @@ public class Zombie : ZombieClass
         _timer = 0;
         PrintZombieHP();
     }
-    private void OnDestroy() => Wall.OnWallDestroyed -= CanWalk;
+    private void OnEnable() =>_isDead = false;
+    private void OnDisable() => Wall.OnWallDestroyed -= CanWalk;
 
     private void Update()
     {
         if (_canMove)
-            ZombieMove();
-        
+            transform.position += Vector3.left * _currentSpeed * Time.deltaTime;
+
         CheckCanAttackWall();
     }
 
@@ -51,6 +50,8 @@ public class Zombie : ZombieClass
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (_isDead) return;  // Prevent processing if already dead
+
         if (collision.CompareTag("Wall"))
         {
             SetCanMove(false);
@@ -65,13 +66,10 @@ public class Zombie : ZombieClass
                 // Play hit sound
                 AudioManager.instance.PlayRandomSound(AudioManager.Category.Zombie, "BulletHit");
 
-                // Play hit animation
-                _zombieAnimator.PlayHitAnimation();
-
                 // Calculate and set damage
                 float bulletDamage = bullet.GetBulletDamage();
                 DamagePointsManager.instance.ShowDamage((int)bulletDamage, (int)GetHP(), transform.position);
-                SetHP(_currentHP - bulletDamage);
+                SetHP(_zombieHP - bulletDamage);
 
                 // Print current HP
                 PrintZombieHP();
@@ -79,6 +77,6 @@ public class Zombie : ZombieClass
         }
     }
 
-    private void PrintZombieHP() => _healthTxt.text = _currentHP.ToString();
+    private void PrintZombieHP() => _healthTxt.text = _zombieHP.ToString();
 
 }

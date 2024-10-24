@@ -11,20 +11,20 @@ public class LevelCompletedScore : MonoBehaviour
     [SerializeField] private bool _stopMusic;
     [SerializeField] private float _scoreAnimationTime = 1f;
 
-
+    private StarManager _starManager;
     private int finalScore;
     const string FORMAT = "Score • ";
 
     private void Awake()
     {
-        if (instance == null)
-            instance = this;
+        if (instance == null) instance = this;
         DontDestroyOnLoad(gameObject);
     }
 
     private void Start()
     {
-        StarManager.instance.DisplayStars();
+        if (TryGetComponent<StarManager>(out _starManager))
+            _starManager.DisplayStars();
 
         if (_stopMusic)
             AudioManager.instance.Stop(AudioManager.Category.Music, "Background Track", "WaveMusic");
@@ -37,7 +37,7 @@ public class LevelCompletedScore : MonoBehaviour
     IEnumerator IncrementScore()
     {
         float currentTime = 0f;
-        int currentScore = 0;
+        int currentScore;
 
         // Start sound effect
         AudioManager.instance.Play(AudioManager.Category.Other, "UI", "Score");
@@ -72,7 +72,7 @@ public class LevelCompletedScore : MonoBehaviour
         AudioManager.instance.StopAll();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
-    
+
 
     public void NextLevel()
     {
@@ -90,6 +90,6 @@ public class LevelCompletedScore : MonoBehaviour
         UIManager.instance.ShowMainMenu();
     }
 
-    
+
 
 }

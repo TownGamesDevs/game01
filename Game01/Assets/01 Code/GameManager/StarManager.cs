@@ -13,6 +13,7 @@ public class StarManager : MonoBehaviour
     private int _totalSpawned;  // Total enemies in the round
     private int _killed;  // Number of enemies killed
     private Vector3[] _originalScales;  // To store the original scales of the stars
+    private LevelManager _levelManager;
 
     private void Awake()
     {
@@ -20,7 +21,10 @@ public class StarManager : MonoBehaviour
             instance = this;
         DontDestroyOnLoad(gameObject);
     }
-
+    private void Start()
+    {
+        _levelManager = GetComponent<LevelManager>();
+    }
     public void Initialize()
     {
         // Initialize the original scales array and store the original scales of the stars
@@ -50,8 +54,8 @@ public class StarManager : MonoBehaviour
         StartCoroutine(AnimateStars(starCount));
 
         // Unlock next level
-        if (starCount > 0)
-            LevelManager.instance.UnlockLevel(SceneManager.GetActiveScene().buildIndex);
+        if (starCount > 0 && _levelManager != null)
+            _levelManager.UnlockLevel(SceneManager.GetActiveScene().buildIndex);
     }
 
     // Calculate the number of stars based on killed enemies
