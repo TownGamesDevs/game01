@@ -108,15 +108,17 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 0
+  m_TextWrappingMode: 0
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
+  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
@@ -147,6 +149,7 @@ GameObject:
   - component: {fileID: 7253395595654079445}
   - component: {fileID: 3286127090442207625}
   - component: {fileID: 3712043888055119848}
+  - component: {fileID: 1159162161455592770}
   m_Layer: 6
   m_Name: Walker_z
   m_TagString: Enemy
@@ -187,6 +190,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -230,6 +236,7 @@ BoxCollider2D:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3286127090442207626}
   m_Enabled: 1
+  serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -253,7 +260,8 @@ BoxCollider2D:
     m_Bits: 4294967295
   m_IsTrigger: 1
   m_UsedByEffector: 0
-  m_UsedByComposite: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
   m_Offset: {x: -0.011184096, y: 1.0243509}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
@@ -264,7 +272,6 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
   m_Size: {x: 0.6868465, y: 2.0653005}
   m_EdgeRadius: 0
 --- !u!114 &3286127090442207625
@@ -279,7 +286,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b674db7b799943c45975b8c47340aba9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hp: 5
+  _hp: 10
   _speed: 2
   _attackForce: 2
   _attackTime: 0.8
@@ -297,40 +304,48 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _spriteRenderer: {fileID: 3286127090442207624}
-  _walkSpeed: 0.15
-  _attackSpeed: 0.15
-  _idleSpeed: 0.1
-  _attackDelay: 0.5
-  _attackFrame:
-  - {fileID: -619168239, guid: 544644251073fd1479291d93225e8dc7, type: 3}
-  - {fileID: 367191686, guid: 544644251073fd1479291d93225e8dc7, type: 3}
-  - {fileID: 152216287, guid: 544644251073fd1479291d93225e8dc7, type: 3}
-  _deadFrame:
-  - {fileID: 373546404, guid: 544644251073fd1479291d93225e8dc7, type: 3}
-  - {fileID: 2056054125, guid: 544644251073fd1479291d93225e8dc7, type: 3}
-  - {fileID: -2143150245, guid: 544644251073fd1479291d93225e8dc7, type: 3}
-  - {fileID: -2077777974, guid: 544644251073fd1479291d93225e8dc7, type: 3}
-  - {fileID: 1633212401, guid: 544644251073fd1479291d93225e8dc7, type: 3}
-  - {fileID: -1040703894, guid: 544644251073fd1479291d93225e8dc7, type: 3}
-  - {fileID: -755118252, guid: 544644251073fd1479291d93225e8dc7, type: 3}
-  - {fileID: 1552167739, guid: 544644251073fd1479291d93225e8dc7, type: 3}
-  - {fileID: 1173447058, guid: 544644251073fd1479291d93225e8dc7, type: 3}
-  _idleFrame:
-  - {fileID: 878319854, guid: 544644251073fd1479291d93225e8dc7, type: 3}
-  - {fileID: 525635249, guid: 544644251073fd1479291d93225e8dc7, type: 3}
-  _walkFrame:
-  - {fileID: 255295965, guid: 544644251073fd1479291d93225e8dc7, type: 3}
-  - {fileID: -1089889293, guid: 544644251073fd1479291d93225e8dc7, type: 3}
-  - {fileID: 1778697874, guid: 544644251073fd1479291d93225e8dc7, type: 3}
-  - {fileID: 977976445, guid: 544644251073fd1479291d93225e8dc7, type: 3}
-  - {fileID: -693180480, guid: 544644251073fd1479291d93225e8dc7, type: 3}
-  - {fileID: 178768115, guid: 544644251073fd1479291d93225e8dc7, type: 3}
-  - {fileID: 1838814396, guid: 544644251073fd1479291d93225e8dc7, type: 3}
-  - {fileID: -1362672038, guid: 544644251073fd1479291d93225e8dc7, type: 3}
-  _canPlayAnim: 1
-  _canWalk: 0
-  _canAttack: 0
-  _isDead: 0
+  _animations:
+  - _name: 0
+    _sprites:
+    - {fileID: -1680429164, guid: 544644251073fd1479291d93225e8dc7, type: 3}
+    _fps: 60
+    _duration: 0.01
+    _resetDelay: 0
+  - _name: 1
+    _sprites:
+    - {fileID: -619168239, guid: 544644251073fd1479291d93225e8dc7, type: 3}
+    - {fileID: 367191686, guid: 544644251073fd1479291d93225e8dc7, type: 3}
+    - {fileID: 152216287, guid: 544644251073fd1479291d93225e8dc7, type: 3}
+    _fps: 5
+    _duration: 0
+    _resetDelay: 0.5
+  - _name: 4
+    _sprites:
+    - {fileID: 255295965, guid: 544644251073fd1479291d93225e8dc7, type: 3}
+    - {fileID: -1089889293, guid: 544644251073fd1479291d93225e8dc7, type: 3}
+    - {fileID: 1778697874, guid: 544644251073fd1479291d93225e8dc7, type: 3}
+    - {fileID: 977976445, guid: 544644251073fd1479291d93225e8dc7, type: 3}
+    - {fileID: -693180480, guid: 544644251073fd1479291d93225e8dc7, type: 3}
+    - {fileID: 178768115, guid: 544644251073fd1479291d93225e8dc7, type: 3}
+    - {fileID: 1838814396, guid: 544644251073fd1479291d93225e8dc7, type: 3}
+    - {fileID: -1362672038, guid: 544644251073fd1479291d93225e8dc7, type: 3}
+    _fps: 10
+    _duration: 0
+    _resetDelay: 0
+  _zombieClassRef: {fileID: 3286127090442207625}
+--- !u!114 &1159162161455592770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3286127090442207626}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 325aa25bb1a42ff45ba6213b4e23520e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadeDuration: 1
 --- !u!1 &4498110810762576856
 GameObject:
   m_ObjectHideFlags: 0

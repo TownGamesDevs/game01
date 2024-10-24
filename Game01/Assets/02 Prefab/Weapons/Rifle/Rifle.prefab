@@ -82,6 +82,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -132,6 +135,4 @@ MonoBehaviour:
   _price: 300
   _reloadTime: 26
   _magSize: 30
-  _fireRate: 15
-  _accuracy: 1
-  _bulletDamage: 4
+  _fireRate: 8

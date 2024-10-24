@@ -14,25 +14,24 @@ public class WaveManager : MonoBehaviour
 
     [Header("General Configuration")]
     [SerializeField] private float _spawnInterval;
-    private int _totalZombies;  // Now calculated dynamically
+    private int _totalZombies;
     private int _totalKilled;
     private int _tmpKilled;
 
     [Header("Waves Configuration")]
-    public List<Wave> waves = new List<Wave>();
+    [SerializeField] private List<Wave> waves = new List<Wave>();
     private int _currentWave = 0;
 
     [Header("Random Wave Configuration")]
-    public RandomWaveConfig randomWaveConfig; // Random wave settings
+    [SerializeField] private RandomWaveConfig randomWaveConfig;
+    [SerializeField] private int _totalGroups;
 
     private void Awake() => instance ??= this;
 
     private void Start()
     {
         _totalKilled = 0;
-        _totalZombies = 0;
-        // Calculate total zombies across all waves
-        CalculateTotalZombies();
+        _totalZombies = CalculateTotalZombies();
 
         // Start with a random function (either spawn wave or random waves)
         if (waves.Count > 0)
@@ -40,12 +39,14 @@ public class WaveManager : MonoBehaviour
     }
 
     // Method to calculate total zombies
-    private void CalculateTotalZombies()
+    private int CalculateTotalZombies()
     {
-        _totalZombies = 0;  // Reset the count
+        int total = 0;
         foreach (Wave wave in waves)
             foreach (EnemyGroups group in wave.enemyGroups)
-                _totalZombies += group.count;  // Add the number of enemies in each group
+                total += group.count;
+
+        return total;
     }
 
     // Function that randomly chooses between spawning a wave or generating a random wave
@@ -87,7 +88,7 @@ public class WaveManager : MonoBehaviour
 
                 if (enemy != null)
                     enemy.transform.position = spawnPoint.position;
-                
+
 
                 yield return new WaitForSeconds(wave.spawnInterval);  // Use the specific spawn interval for this wave
             }
@@ -98,34 +99,46 @@ public class WaveManager : MonoBehaviour
     }
 
     // Function to generate and spawn a random wave based on configuration
-    IEnumerator SpawnRandomWave()
-    {
-        int zombiesToSpawn = Random.Range(randomWaveConfig.minZombies, randomWaveConfig.maxZombies);
+    //IEnumerator SpawnRandomWave()
+    //{
+    //    if (_totalGroups > 0)
+    //    {
+    //        _totalGroups--;
 
-        for (int i = 0; i < zombiesToSpawn; i++)
-        {
-            // Randomly select an enemy type
-            PoolData.Type enemyType = Random.Range(0, 2) == 0 ? PoolData.Type.Walker : PoolData.Type.Brute;
+    //        int zombiesToSpawn = Random.Range(randomWaveConfig.minZombies, randomWaveConfig.maxZombies);
 
-            // Get a random spawn point
-            Transform spawnPoint = _spawnPoints[Random.Range(0, _spawnPoints.Length)];
+    //        for (int i = 0; i < zombiesToSpawn; i++)
+    //        {
+    //            // Randomly select an enemy type
+    //            PoolData.Type enemyType = Random.Range(0, 2) == 0 ? PoolData.Type.Walker : PoolData.Type.Brute;
 
-            // Spawn the enemy from the pool
-            GameObject enemy = PoolManager.instance.Pool(enemyType);
+    //            // Get a random spawn point
+    //            Transform spawnPoint = _spawnPoints[Random.Range(0, _spawnPoints.Length)];
 
-            if (enemy != null)
-                enemy.transform.position = spawnPoint.position;
-            
+    //            // Spawn the enemy from the pool
+    //            GameObject enemy = PoolManager.instance.Pool(enemyType);
 
-            // Wait for the configured random spawn interval
-            yield return new WaitForSeconds(Random.Range(randomWaveConfig.minSpawnInterval, randomWaveConfig.maxSpawnInterval));
-        }
-    }
+    //            if (enemy != null)
+    //            {
+    //                enemy.transform.position = spawnPoint.position;
+    //                _totalZombies++;
+    //            }
+
+
+    //            // Wait for the configured random spawn interval
+    //            yield return new WaitForSeconds(Random.Range(randomWaveConfig.minSpawnInterval, randomWaveConfig.maxSpawnInterval));
+
+    //            SpawnRandomWave();
+    //        }
+    //    }
+    //}
 
     public void ZombieKilled()
     {
         _totalKilled++;
 
+
+        // All killed
         if (_totalKilled >= _totalZombies)
         {
             OnWaveCompleted?.Invoke();

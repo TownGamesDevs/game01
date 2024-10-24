@@ -1,106 +1,144 @@
+using System.Collections;
 using UnityEngine;
+
+[System.Serializable]
+public class FrameManager
+{
+    public enum Names
+    {
+        Hit,
+        Attack,
+        Idle,
+        Dead,
+        Walk,
+        // Insert more as needed
+    }
+
+    [SerializeField] public Names _name;
+    [SerializeField] public Sprite[] _sprites;
+    [SerializeField] public float _fps, _duration, _resetDelay;
+}
 
 public class ZombieAnimator : MonoBehaviour
 {
     public static ZombieAnimator instance;
 
     [SerializeField] private SpriteRenderer _spriteRenderer;
+    [SerializeField] private FrameManager[] _animations;
+    private ZombieClass _zombieClassRef;
 
-    // Set the different animation frames
-    [SerializeField] private float _walkSpeed = .02f;
-    [SerializeField] private float _attackSpeed = .02f;
-    [SerializeField] private float _idleSpeed = .02f;
-    [SerializeField] private float _attackDelay = 0.5f;
-
-
-    [SerializeField] private Sprite[] _attackFrame, _deadFrame, _idleFrame, _walkFrame;
-    [SerializeField] private bool _canPlayAnim, _canWalk, _canAttack, _isDead;
-
-
-    const int NO_DELAY = 0;
-    private float _counter;
+    private FrameManager _currentAnim;
+    private FrameManager _previousAnim;
+    private float _timer, _delay = 0f;
     private int _frame;
-    private float _delay;
-
+    private bool _canLoop;
 
     private void Awake()
-    { if (instance == null) instance = this; }
+    {
+        if (instance == null) instance = this;
+    }
+
     private void Start()
     {
+        _zombieClassRef = GetComponent<ZombieClass>();
+        _canLoop = true;
         Wall.OnWallDestroyed += SetWalkAnim;
-        SetWalkAnim();
+        SelectAnimation(FrameManager.Names.Walk);
     }
+
+    private void OnDestroy() => Wall.OnWallDestroyed -= SetWalkAnim;
+
+    private void OnEnable()
+    {
+        _canLoop = true; // Ensure looping is allowed again
+        _frame = 0; // Reset frame index
+        SetWalkAnim(); // Default animation or last state
+    }
+
     private void Update()
     {
-        if (_canPlayAnim)
-        {
-            if (_canWalk)
-                ZombieAnim(_walkFrame, _walkSpeed, NO_DELAY);
-
-            else if (_canAttack)
-                ZombieAnim(_attackFrame, _attackSpeed, _attackDelay);
-
-            else
-                ZombieAnim(_idleFrame, _idleSpeed, NO_DELAY);
-        }
+        if (_canLoop)
+            LoopAnimation();
     }
 
-
-    private void ZombieAnim(Sprite[] sprite, float speed, float delay)
+    // Loop animation frames
+    public void LoopAnimation()
     {
-        // Error check
-        if (sprite == null || sprite.Length == 0)
-        {
-            ErrorManager.instance.PrintError("Sprite " + sprite + " is null or zero");
-            return;
-        }
+        if (_currentAnim == null) return;
 
-        // Change frames after some time
-        _counter += Time.deltaTime;
-        if (_counter >= speed && _delay <= 0)
-        {
-            _counter = 0;
+        float timePerFrame = 1f / _currentAnim._fps;
+        _timer += Time.deltaTime;
 
-            _spriteRenderer.sprite = sprite[_frame];
+        if (_timer >= timePerFrame && _delay <= 0)
+        {
+            _timer = 0;
+            _spriteRenderer.sprite = _currentAnim._sprites[_frame];
             _frame++;
 
-            if (_frame >= sprite.Length)
+            // Restart frames if we reach the end of the array
+            if (_frame >= _currentAnim._sprites.Length)
             {
                 _frame = 0;
-                _delay = delay;
+                _delay = _currentAnim._resetDelay;
             }
         }
 
-        // Wait some time before playing first frame again
         if (_delay > 0)
             _delay -= Time.deltaTime;
     }
 
-    public void SetWalkAnim()
+    public void PlayHitAnimation()
     {
-        if (!_canWalk)
+        if (!_canLoop) return; // Ensure hit animation doesn't play while looping
+
+        StoreCurrentAnim(); // Store current animation
+        SelectAnimation(FrameManager.Names.Hit); // Select hit animation
+
+        if (!_zombieClassRef.GetIsDead())
         {
-            _canWalk = true;
-            _canAttack = false;
-            ResetValues();
+            StartCoroutine(PlayHitFrame());
         }
     }
 
-    public void SetAttackAnim()
+
+    // Display the hit animation (single frame) for the specified duration
+    private IEnumerator PlayHitFrame()
     {
-        if (!_canAttack)
+        if (_currentAnim == null || _currentAnim._sprites.Length == 0) yield break;
+
+        _spriteRenderer.sprite = _currentAnim._sprites[0]; // Show the hit frame
+        yield return new WaitForSeconds(_currentAnim._duration); // Wait for the duration of the hit animation
+
+        // Ensure to switch back to the previous animation afterward
+        RestorePreviousAnim();
+    }
+
+    // Store the current animation state (before playing hit)
+    private void StoreCurrentAnim() => _previousAnim = _currentAnim;
+    
+
+    // Restore the previously stored animation (e.g., walking)
+    private void RestorePreviousAnim()
+    {
+        SelectAnimation(_previousAnim._name);
+        _canLoop = true;
+    }
+
+    // Select an animation by name
+    public void SelectAnimation(FrameManager.Names animName)
+    {
+        foreach (var anim in _animations)
         {
-            _canWalk = false;
-            _canAttack = true;
-            ResetValues();
+            if (anim._name == animName)
+            {
+                _currentAnim = anim;
+                _frame = 0;
+                return;
+            }
         }
+        _currentAnim = null;
     }
 
-    private void ResetValues()
-    {
-        _frame = 0;
-        _counter = 0;
-        _delay = 0;
-    }
-
+    // Example method to set walk animation
+    public void SetWalkAnim() => SelectAnimation(FrameManager.Names.Walk);
 }
