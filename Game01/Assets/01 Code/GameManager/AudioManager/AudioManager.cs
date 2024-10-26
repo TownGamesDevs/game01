@@ -109,6 +109,39 @@ public class AudioManager : MonoBehaviour
             specificSound.source.Play();
         }
     }
+    public void PlayOneShot(Category category, string subCategory, string soundName)
+    {
+        if (CanPlaySound)
+        {
+            // Get the sound array for the given category
+            Sound[] soundArray = GetSoundArray(category);
+            if (soundArray == null)
+            {
+                Debug.LogWarning("No sounds found for category: " + category);
+                return;
+            }
+
+            // Find the subcategory within the sound array
+            Sound subCategorySounds = System.Array.Find(soundArray, s => s.category == subCategory);
+            if (subCategorySounds == null || subCategorySounds.sounds.Length == 0)
+            {
+                Debug.LogWarning("No sounds found for subcategory: " + subCategory);
+                return;
+            }
+
+            // Find the specific sound by name within the subcategory
+            MainSoundClass specificSound = System.Array.Find(subCategorySounds.sounds, s => s.name == soundName);
+            if (specificSound == null)
+            {
+                Debug.LogWarning("Sound " + soundName + " not found in subcategory: " + subCategory);
+                return;
+            }
+
+            // Play the specific sound using PlayOneShot
+            specificSound.source.PlayOneShot(specificSound.clip);
+        }
+    }
+
     public void Stop(Category category, string subCategory, string soundName)
     {
         // Get the sound array for the given category
@@ -135,26 +168,6 @@ public class AudioManager : MonoBehaviour
         // Stop the specific sound
         specificSound.source.Stop();
 
-    }
-    public void PlayOneShot(Category category, string soundName)
-    {
-        if (CanPlaySound)
-        {
-            Sound[] soundArray = GetSoundArray(category);
-            if (soundArray == null) return;
-
-            foreach (Sound soundCategory in soundArray)
-            {
-                MainSoundClass mainSound = Array.Find(soundCategory.sounds, s => s.name == soundName);
-                if (mainSound == null)
-                {
-                    ErrorManager.instance.PrintError("Sound " + soundName + " not found in category " + category);
-                    return;
-                }
-
-                mainSound.source.PlayOneShot(mainSound.clip);
-            }
-        }
     }
     public void PlayRandomSound(Category category, string subCategory)
     {

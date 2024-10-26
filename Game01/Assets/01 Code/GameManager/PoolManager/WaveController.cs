@@ -2,46 +2,45 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static EnemyGroups;
-using Random = UnityEngine.Random;
+using static EnemyTypes;
 
-public class WaveManager : MonoBehaviour
-{ public static WaveManager instance;
-
+public class WaveController : MonoBehaviour
+{
+    public static WaveController instance;
     public static event Action OnWaveCompleted;
 
-    [Header("Spawn Points")]
-    [SerializeField] private Transform[] _spawnPoints;
-    [Header("Waves Configuration")]
-    [SerializeField] private List<Wave> _groups = new List<Wave>();
+
+    [Header("Group Configuration")]
+    [SerializeField] private List<WaveGroups> _groups = new List<WaveGroups>();
 
     private int _totalZombies;
-    private int _totalKilled;
-    private int _tmpKilled;
-    private int _currentWave = 0;
+    private int _currentGroup = 0;
+
+    private SpawnPoints _spawn;
+    private TotalKilled _enemyKilled;
 
     private void Awake() => instance ??= this;
 
     private void Start()
     {
-        _totalKilled = 0;
-        _totalZombies = CalculateTotalZombies();
+        _spawn = GetComponent<SpawnPoints>();
+        _enemyKilled = GetComponent<TotalKilled>();
 
+        _totalZombies = CalculateTotalZombies();
         if (_groups.Count > 0)
-            StartCoroutine(SpawnWave(_currentWave));
+            StartCoroutine(SpawnGroup(_currentGroup));
     }
 
     private int CalculateTotalZombies()
     {
         int total = 0;
-        foreach (Wave wave in _groups)
-            foreach (EnemyGroups group in wave.enemyGroups)
+        foreach (WaveGroups wave in _groups)
+            foreach (EnemyTypes group in wave.enemyGroups)
                 total += group.count;
 
         return total;
     }
-
-    IEnumerator SpawnWave(int waveIndex)
+    IEnumerator SpawnGroup(int waveIndex)
     {
         if (waveIndex >= _groups.Count)
         {
@@ -49,15 +48,15 @@ public class WaveManager : MonoBehaviour
             yield break;
         }
 
-        Wave wave = _groups[waveIndex];
+        WaveGroups wave = _groups[waveIndex];
 
         // Spawn all the enemies in the group
-        foreach (EnemyGroups group in wave.enemyGroups)
+        foreach (EnemyTypes group in wave.enemyGroups)
         {
             for (int i = 0; i < group.count; i++)
             {
                 // Get a random spawn point
-                Transform spawnPoint = _spawnPoints[Random.Range(0, _spawnPoints.Length)];
+                Transform spawnPoint = _spawn.GetRandomSpawnPoint();
 
                 // Spawn the enemy of this type from the pool
                 GameObject enemy = PoolManager.instance.Pool(group.enemyType == EnemyType.Walker
@@ -75,45 +74,22 @@ public class WaveManager : MonoBehaviour
         // Wait for the delay before the next wave
         yield return new WaitForSeconds(wave._nextWaveDelay);
     }
-
-    public void ZombieKilled()
+    public void CheckAllKilled()
     {
-        _totalKilled++;
-
-        // Total zombies killed
-        PlayerPrefs.SetInt("ZombiesKilled", PlayerPrefs.GetInt("ZombiesKilled") + 1);
-        PlayerPrefs.Save();
-
+        _enemyKilled.AddKilled();
 
         // All killed?
-        if (_totalKilled >= _totalZombies)
-        {
+        if (_enemyKilled.GetTotalKilled() >= _totalZombies)
             OnWaveCompleted?.Invoke();
-            _tmpKilled = _totalKilled;
-            _totalKilled = 0;
-        }
     }
-
-    public int GetTotalKilled() => _tmpKilled;
     public int GetTotalZombies() => _totalZombies;
 }
 
 
 
 
-
-[Serializable]
-public class RandomWaveConfig
-{
-    [Header("Random Wave Settings")]
-    public int minZombies = 3;  // Minimum number of zombies per random wave
-    public int maxZombies = 15;  // Maximum number of zombies per random wave
-    public float minSpawnInterval = 0.15f;  // Minimum time between spawns in a random wave
-    public float maxSpawnInterval = 2f;  // Maximum time between spawns in a random wave
-}
-
 [System.Serializable]
-public class EnemyGroups
+public class EnemyTypes
 {
     public enum EnemyType
     {
@@ -126,9 +102,9 @@ public class EnemyGroups
 }
 
 [System.Serializable]
-public class Wave
+public class WaveGroups
 {
-    public List<EnemyGroups> enemyGroups = new List<EnemyGroups>();
+    public List<EnemyTypes> enemyGroups = new List<EnemyTypes>();
     public float _spawnDelay = 0.5f; // Spawn interval for this wave
     public float _nextWaveDelay = 5f;
 }

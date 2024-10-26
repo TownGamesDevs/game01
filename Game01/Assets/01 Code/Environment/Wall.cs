@@ -3,56 +3,53 @@ using TMPro;
 using UnityEngine;
 
 public class Wall : MonoBehaviour
-{ public static Wall instance;
+{
+    public static Wall instance;
 
-    // Sets an event to allow ALL zombies to move if the wall gets destroyed
+    // Allow ALL zombies to move if the wall gets destroyed
     public static event Action OnWallDestroyed;
 
     [SerializeField] private int _wallHP;
-    [SerializeField] private TextMeshProUGUI txt;
-    private float _currentHP;
-    private bool _isDestroyed;
+    [SerializeField] private TextMeshProUGUI[] _txt;
+    private bool _isDead;
 
     private void Awake() => instance ??= this;
 
     void Start()
     {
-        _isDestroyed = false;
-        _currentHP = _wallHP;
-        UpdateHealthText(txt, _currentHP);
+        _isDead = false;
+        PrintWallHP(_wallHP);
     }
 
-    public float GetHP() => _currentHP;
-
-    public void SetHP(float hp)
+    public void SetHP(int damage)
     {
-        AudioManager.instance.PlayRandomSound(AudioManager.Category.Other, "Wall");
-        if (hp < _currentHP)
-            _currentHP = hp;
-        else
-            _currentHP--;
+        // Exit if dead
+        if (_isDead) return;
 
-        // Update wall HP text
-        UpdateHealthText(txt, _currentHP);
-
-        // Check if wall is dead
-        if (_currentHP <= 0)
-            Die();
+        int tmp = _wallHP - damage;
+        if (tmp > 0)
+        {
+            _wallHP = tmp;
+            PrintWallHP(_wallHP);
+            return;
+        }
+        Die();
     }
 
     private void Die()
     {
-        if (!_isDestroyed)
+        // Can only die once
+        if (!_isDead)
         {
-            // Event allows ALL zombies to move
+            _isDead = true;
             OnWallDestroyed?.Invoke();
-
-            _isDestroyed = true;
             gameObject.SetActive(false);
         }
     }
 
-    public bool GetIsDestroyed() => _isDestroyed;
-    private void UpdateHealthText(TextMeshProUGUI txt, float hp) => txt.text = hp.ToString();
-    
+    private void PrintWallHP(float hp)
+    {
+        for (int i = 0; i < _txt.Length; i++)
+            _txt[i].text = hp.ToString();
+    }
 }

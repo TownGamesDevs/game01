@@ -28,35 +28,13 @@ public class WeaponsClass : MonoBehaviour
         sniper_rifle_180 = 180
     }
 
-    public enum Accuracy
-    {
-        Low,
-        Medium,
-        High
-    }
-
-    public enum BulletDamage
-    {
-        Low_1 = 1,
-        Medium_4 = 4,
-        High_10 = 10
-    }
-
-
-
-    // Constant
-    const float SELL_PERCENTAGE = 0.85f;
 
     // Variables
-    public float WeaponPrice { get; protected set; }
     public ReloadTime Reload_time { get; protected set; }
     public MagSize Mag_size { get; protected set; }
     public int Fire_rate { get; protected set; }
-    //public Accuracy Weapon_accuracy { get; protected set; }
-    //public BulletDamage Bullet_damage { get; protected set; }
 
 
-    protected float CalculateSellPrice(float price) => price > 0 ? Mathf.Round(price* SELL_PERCENTAGE) : 0;
     public virtual float GetFireRate() => (float)Fire_rate / 100;
     public virtual int GetReloadTime() => (int)Reload_time / 10;
     public int GetMagSize() => (int)Mag_size;

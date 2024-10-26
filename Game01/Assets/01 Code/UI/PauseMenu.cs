@@ -7,14 +7,14 @@ public class PauseMenu : MonoBehaviour
     private bool _isPaused = false;
     private bool _canPause = true;
 
-    private void Awake() => WaveManager.OnWaveCompleted += DisablePause;
+    private void Awake() => WaveController.OnWaveCompleted += DisablePause;
     private void Start()
     {
         pauseMenu.SetActive(false);
         _canPause = true;
         ResumeGame();
     }
-    private void OnDestroy() => WaveManager.OnWaveCompleted -= DisablePause;
+    private void OnDestroy() => WaveController.OnWaveCompleted -= DisablePause;
 
 
     private void Update()

@@ -7,16 +7,18 @@ public class EnemyFadeOut : MonoBehaviour
     public float fadeDuration = 2.0f;  // Time taken to fade out the enemy (set this in the Inspector)
 
     private SpriteRenderer _spriteRenderer; // Reference to the SpriteRenderer component
+    private ZombieHP _hp;
     private bool _isFading = false;    // To prevent multiple fades
 
-    private void Awake()
-    {
-        if (instance == null) instance = this;
+    private void Awake() => instance ??= this;
 
-        // Ensure there's a SpriteRenderer component attached
+    private void Start()
+    {
+        // Get components
         if (!TryGetComponent<SpriteRenderer>(out _spriteRenderer))
             Debug.LogError("SpriteRenderer component missing on this GameObject!");
-        
+
+        _hp = GetComponent<ZombieHP>();
     }
 
     private void OnEnable()
@@ -55,10 +57,10 @@ public class EnemyFadeOut : MonoBehaviour
         SetAlpha(0f);
 
         // Notify the WaveManager that this zombie is truly dead
-        WaveManager.instance.ZombieKilled();
+        WaveController.instance.CheckAllKilled();
 
         // Disable the GameObject after fade out
-        gameObject.SetActive(false);
+        //_hp.DisableZombie();
     }
 
 
@@ -66,8 +68,8 @@ public class EnemyFadeOut : MonoBehaviour
     
     private void SetAlpha(float alpha)
     {
-        Color color = _spriteRenderer.color;
-        color.a = alpha;
-        _spriteRenderer.color = color;
+        //Color color = _spriteRenderer.color;
+        //color.a = alpha;
+        //_spriteRenderer.color = color;
     }
 }

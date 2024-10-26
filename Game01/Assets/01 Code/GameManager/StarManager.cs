@@ -11,7 +11,6 @@ public class StarManager : MonoBehaviour
     [SerializeField] private float _frameDelay = 0f;
 
     private int _totalSpawned;  // Total enemies in the round
-    private int _killed;  // Number of enemies killed
     private Vector3[] _originalScales;  // To store the original scales of the stars
     private LevelManager _levelManager;
 
@@ -21,10 +20,8 @@ public class StarManager : MonoBehaviour
             instance = this;
         DontDestroyOnLoad(gameObject);
     }
-    private void Start()
-    {
-        _levelManager = GetComponent<LevelManager>();
-    }
+    private void Start() => _levelManager = GetComponent<LevelManager>();
+    
     public void Initialize()
     {
         // Initialize the original scales array and store the original scales of the stars
@@ -44,34 +41,34 @@ public class StarManager : MonoBehaviour
     {
         Initialize();
 
-        _killed = WaveManager.instance.GetTotalKilled();
-        _totalSpawned = WaveManager.instance.GetTotalZombies();
+        //_killed = WaveController.instance.GetTotalKilled();
+        _totalSpawned = WaveController.instance.GetTotalZombies();
 
         // Calculate how many stars to display based on enemies killed
-        int starCount = CalculateStars();
+        // int starCount = CalculateStars();
 
         // Start the coroutine to show the stars with animation
-        StartCoroutine(AnimateStars(starCount));
+        //StartCoroutine(AnimateStars(starCount));
 
-        // Unlock next level
-        if (starCount > 0 && _levelManager != null)
-            _levelManager.UnlockLevel(SceneManager.GetActiveScene().buildIndex);
+        //// Unlock next level
+        //if (starCount > 0 && _levelManager != null)
+        //    _levelManager.UnlockLevel(SceneManager.GetActiveScene().buildIndex);
     }
 
     // Calculate the number of stars based on killed enemies
-    private int CalculateStars()
-    {
-        if (_killed == _totalSpawned)
-            return 3;  // If all enemies are killed, show 3 stars
-        else if (_killed >= _totalSpawned * 0.75f)
-            return 2;  // Show 2 stars for 75% or more
-        else if (_killed >= _totalSpawned * 0.5f)
-            return 1;  // Show 1 star for 50% or more
-        else
-            return 0;  // Show no stars if less than 50%
-    }
+    //private int CalculateStars()
+    //{
+    //    if (_killed == _totalSpawned)
+    //        return 3;  // If all enemies are killed, show 3 stars
+    //    else if (_killed >= _totalSpawned * 0.75f)
+    //        return 2;  // Show 2 stars for 75% or more
+    //    else if (_killed >= _totalSpawned * 0.5f)
+    //        return 1;  // Show 1 star for 50% or more
+    //    else
+    //        return 0;  // Show no stars if less than 50%
+    //}
 
-    
+
     IEnumerator AnimateStars(int starCount)
     {
         // Coroutine to animate the stars appearing one by one
