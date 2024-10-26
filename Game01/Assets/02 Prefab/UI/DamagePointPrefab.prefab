@@ -398,6 +398,9 @@ GameObject:
   m_Component:
   - component: {fileID: 3392112923963770135}
   - component: {fileID: 8573549909466841112}
+  - component: {fileID: 6575308737314473838}
+  - component: {fileID: 3831354557818950890}
+  - component: {fileID: 1821168854758702749}
   m_Layer: 0
   m_Name: DamagePointPrefab
   m_TagString: Untagged
@@ -436,13 +439,49 @@ MonoBehaviour:
   _damageText:
   - {fileID: 4489953895913205476}
   - {fileID: 5959913892116560477}
-  _speed: 3
-  _baseSpeed: 10
-  _maxSpeed: 3
-  _minSpeed: 0.5
-  _duration: 0.1
-  _baseDuration: 0.1
   _baseFadeOutTime: 0.5
   _fadeOutTime: 0.5
   _minFadeOutTime: 0.2
   _maxFadeOutTime: 1
+--- !u!114 &6575308737314473838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7291279443434476915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5ddf7fe247b38944a11c3602a9561d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _speed: 2
+  _baseSpeed: 2
+  _maxSpeed: 5
+  _minSpeed: 0.5
+--- !u!114 &3831354557818950890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7291279443434476915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6dde96993828a24bba8e164f6973f36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _duration: 0.1
+  _baseDuration: 0.1
+--- !u!114 &1821168854758702749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7291279443434476915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a17f18b604d5f540a3bd30ac671fd08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

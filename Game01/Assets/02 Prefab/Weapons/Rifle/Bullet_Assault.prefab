@@ -177,7 +177,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d82fc635755fd443a40eff8092dd61c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 70
+  _speed: 65
   _canMove: 1
 --- !u!114 &481867049428890314
 MonoBehaviour:
@@ -204,4 +204,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5a59a351c734b549b8ffd6efc1c9821, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bulletDamage: 3
+  _minDamage: 2
+  _maxDamage: 4

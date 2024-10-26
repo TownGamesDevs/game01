@@ -6,27 +6,39 @@ public class ZombieHP : MonoBehaviour
     [SerializeField] private int _currentHP;
     [SerializeField] private TextMeshProUGUI[] _txt;
 
-    private int _actualHP;
+    const string BULLET = "Bullet";
+    private int _zombieHP;
     private bool _isDead;
+    private DamagePointsManager _dp;
 
+    private void Start()
+    {
+        _dp = GetComponent<DamagePointsManager>();
+    }
     private void OnEnable()
     {
-        _actualHP = _currentHP;
-        PrintZombieHP(_actualHP);
+        _zombieHP = _currentHP;
+        PrintZombieHP(_zombieHP);
         _isDead = false;
     }
 
-    public int GetHP() => _actualHP;
+    public int GetHP() => _zombieHP;
 
-    public void ApplyDamage(int damage)
+    public void SetZombieDamage(int damage)
     {
         if (_isDead) return;
 
-        _actualHP = damage;
-        PrintZombieHP(_actualHP);
+        if (damage < _zombieHP)
+            _zombieHP = damage;
+        else
+            _zombieHP--;
 
-        if (_actualHP <= 0)
+        if (_zombieHP <= 0)
+        {
             ZombieDie();
+            return;
+        }
+        PrintZombieHP(_zombieHP);
     }
 
     public void PrintZombieHP(int hp)
@@ -42,5 +54,21 @@ public class ZombieHP : MonoBehaviour
         _isDead = true;
         AudioManager.instance.PlayRandomSound(AudioManager.Category.Zombie, "Hurt");
         gameObject.SetActive(false); // Disable zombie
+    }
+
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag(BULLET) && collision.TryGetComponent<BulletDamage>(out BulletDamage bullet))
+        {
+            _dp.ShowDamage(bullet.GetDamage());
+
+            // Calculate damage as absolute difference
+            int damageToBullet = bullet.GetDamage() - _zombieHP;
+            int damageToZombie = _zombieHP - bullet.GetDamage();
+
+            bullet.SetBulletDamage(damageToBullet);
+            SetZombieDamage(damageToZombie);
+        }
     }
 }

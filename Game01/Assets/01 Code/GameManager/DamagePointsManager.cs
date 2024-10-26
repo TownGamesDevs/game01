@@ -4,20 +4,17 @@ public class DamagePointsManager : MonoBehaviour
 { public static DamagePointsManager instance;
 
     [SerializeField] private float _offset = 2.5f;
-
-    [SerializeField] private GameObject damagePointPrefab;  // Assign this in the Inspector
-
+    [SerializeField] private GameObject damagePointPrefab;
+    private DamageNumbers dp;
     private void Awake() => instance ??= this;
-    
-    public void ShowDamage(int bulletDamage, int zombieHP, Vector3 position)
+    public void ShowDamage(int damage)
     {
+        // Pool Object
         GameObject obj = PoolManager.instance.Pool(PoolData.Type.DamagePoints);
         if (obj == null) return;
 
-        DamagePoint dp = obj.GetComponent<DamagePoint>();
-        obj.transform.position = new Vector2(position.x, position.y + _offset);
-        int damage = Mathf.Min(zombieHP, bulletDamage);
-        dp.StartAnimation(damage);
-        //ScoreManager.instance.UpdateScore(damage);
+        DamageNumbers dp = obj.GetComponent<DamageNumbers>();
+        obj.transform.position = new Vector2(transform.position.x, transform.position.y + _offset);
+        dp.ShowDamageNumber(damage);
     }
 }

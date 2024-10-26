@@ -13,6 +13,7 @@ public class AutoShoot : MonoBehaviour
     // Components
     private Weapon _weapon;
     private WeaponRange _range;
+    private BoxCollider2D _bc;
 
 
     // Variables
@@ -36,6 +37,7 @@ public class AutoShoot : MonoBehaviour
     {
         _weapon = GetComponent<Weapon>();
         _range = GetComponent<WeaponRange>();
+        _bc = GetComponent<BoxCollider2D>();
 
 
         _timer = 0;
@@ -94,6 +96,10 @@ public class AutoShoot : MonoBehaviour
             // Saves new score
             PlayerPrefs.SetInt("TotalShots", PlayerPrefs.GetInt("TotalShots") + 1);
             PlayerPrefs.Save();
+
+            // Fixes bug where it won't detect zombies
+            _bc.enabled = false;
+            _bc.enabled = true;
         }
     }
 
@@ -120,6 +126,10 @@ public class AutoShoot : MonoBehaviour
         _ammo = _maxAmmo;
         PrintAmmo(_ammoTxt, _ammo.ToString());
         _canShoot = true;
+
+        // Fixes bug where it won't detect zombies
+        _bc.enabled = false;
+        _bc.enabled = true;
     }
     private void PrintAmmo(TextMeshProUGUI[] txt, string ammo)
     {

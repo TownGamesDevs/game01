@@ -2,33 +2,20 @@ using UnityEngine;
 
 public class BulletDamage : MonoBehaviour
 {
-    [SerializeField] private int _bulletDamage;
-    private int _actuallDamage;
+    [SerializeField] private int _minDamage, _maxDamage;
+    private int _bulletDamage;
     const string ENEMY = "Enemy";
 
     private void OnEnable()
     {
-        _actuallDamage = _bulletDamage;
+        _bulletDamage = Random.Range(_minDamage,_maxDamage);
     }
-    public int GetDamage() => _actuallDamage;
+    public int GetDamage() => _bulletDamage;
 
-    public void ApplyDamage(int damage)
+    public void SetBulletDamage(int damage)
     {
-        _actuallDamage = damage;
-        if (_actuallDamage <= 0)
+        _bulletDamage = damage;
+        if (_bulletDamage <= 0)
             gameObject.SetActive(false);
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag(ENEMY) && collision.TryGetComponent<ZombieHP>(out ZombieHP zombieHP))
-        {
-            // Calculate damage as absolute difference
-            int damageToBullet = _actuallDamage - zombieHP.GetHP();
-            int damageToZombie = zombieHP.GetHP() - _actuallDamage;
-
-            ApplyDamage(damageToBullet);
-            zombieHP.ApplyDamage(damageToZombie);
-        }
     }
 }
