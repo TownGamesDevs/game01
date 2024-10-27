@@ -4,16 +4,16 @@ using UnityEngine;
 public class ZombieHP : MonoBehaviour
 {
     [SerializeField] private int _currentHP;
+    private DamagePointsManager _damagePointsPref;
     [SerializeField] private TextMeshProUGUI[] _txt;
 
     const string BULLET = "Bullet";
     private int _zombieHP;
     private bool _isDead;
-    private DamagePointsManager _dp;
 
     private void Start()
     {
-        _dp = GetComponent<DamagePointsManager>();
+        _damagePointsPref = GetComponent<DamagePointsManager>();
     }
     private void OnEnable()
     {
@@ -61,7 +61,7 @@ public class ZombieHP : MonoBehaviour
     {
         if (collision.CompareTag(BULLET) && collision.TryGetComponent<BulletDamage>(out BulletDamage bullet))
         {
-            _dp.ShowDamage(bullet.GetDamage());
+            _damagePointsPref.ShowDamage(bullet.GetDamage());
 
             // Calculate damage as absolute difference
             int damageToBullet = bullet.GetDamage() - _zombieHP;

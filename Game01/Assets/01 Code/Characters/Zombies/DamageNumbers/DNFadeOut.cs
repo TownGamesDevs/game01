@@ -3,10 +3,10 @@ using UnityEngine;
 public class DNFadeOut : MonoBehaviour
 {
 
-    [SerializeField] private float _baseFadeOutTime = 0.5f; // Base time it takes to fade out
-    [SerializeField] private float _fadeOutTime = 0.5f;  // Time it takes to fade out
-    [SerializeField] private float _minFadeOutTime = 0.2f; // Minimum fade-out time
-    [SerializeField] private float _maxFadeOutTime = 1f; // Maximum fade-out time
+    [SerializeField] private float _baseFadeOutTime; // Base time it takes to fade out
+    [SerializeField] private float _fadeOutTime;  // Time it takes to fade out
+    [SerializeField] private float _minFadeOutTime; // Minimum fade-out time
+    [SerializeField] private float _maxFadeOutTime; // Maximum fade-out time
 
     public float CalculateFadeOut(int damage)
     {

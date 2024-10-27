@@ -3,8 +3,8 @@ using UnityEngine;
 public class DamagePointsManager : MonoBehaviour
 { public static DamagePointsManager instance;
 
-    [SerializeField] private float _offset = 2.5f;
-    [SerializeField] private GameObject damagePointPrefab;
+    [SerializeField] private float _offset;
+    [SerializeField] private Transform damagePointTransform;
     private DamageNumbers dp;
     private void Awake() => instance ??= this;
     public void ShowDamage(int damage)
@@ -13,8 +13,8 @@ public class DamagePointsManager : MonoBehaviour
         GameObject obj = PoolManager.instance.Pool(PoolData.Type.DamagePoints);
         if (obj == null) return;
 
-        DamageNumbers dp = obj.GetComponent<DamageNumbers>();
-        obj.transform.position = new Vector2(transform.position.x, transform.position.y + _offset);
+        dp = obj.GetComponent<DamageNumbers>();
+        obj.transform.position = new Vector2(transform.position.x, damagePointTransform.transform.position.y + _offset);
         dp.ShowDamageNumber(damage);
     }
 }

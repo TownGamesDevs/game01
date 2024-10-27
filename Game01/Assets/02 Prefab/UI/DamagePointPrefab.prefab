@@ -150,7 +150,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -1.36}
+  m_AnchoredPosition: {x: 0, y: -1.8}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5422041769222702066
@@ -439,10 +439,6 @@ MonoBehaviour:
   _damageText:
   - {fileID: 4489953895913205476}
   - {fileID: 5959913892116560477}
-  _baseFadeOutTime: 0.5
-  _fadeOutTime: 0.5
-  _minFadeOutTime: 0.2
-  _maxFadeOutTime: 1
 --- !u!114 &6575308737314473838
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -455,10 +451,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5ddf7fe247b38944a11c3602a9561d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 2
-  _baseSpeed: 2
-  _maxSpeed: 5
-  _minSpeed: 0.5
+  _speed: 0
+  _baseSpeed: 25
+  _maxSpeed: 4.5
+  _minSpeed: 2.5
 --- !u!114 &3831354557818950890
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -471,8 +467,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6dde96993828a24bba8e164f6973f36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _duration: 0.1
-  _baseDuration: 0.1
+  _duration: 0
+  _baseDuration: 0
 --- !u!114 &1821168854758702749
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -485,3 +481,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a17f18b604d5f540a3bd30ac671fd08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _baseFadeOutTime: 0
+  _fadeOutTime: 0
+  _minFadeOutTime: 0.5
+  _maxFadeOutTime: 0

@@ -413,8 +413,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 8788974064402138892}
   - {fileID: 8154322909338708556}
+  - {fileID: 8788974064402138892}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &6165813000756651469
@@ -557,7 +557,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af4e4c55a00e6b345874a214e29d227a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 3
+  _speed: 0
   _canMove: 1
 --- !u!114 &9030501166023116750
 MonoBehaviour:
@@ -571,7 +571,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ad1796dffb097d458b44777b33ea533, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _currentHP: 10
+  _currentHP: 100000
   _txt:
   - {fileID: 8879082242030915431}
   - {fileID: 8750403437038784755}
@@ -635,12 +635,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8169225837865231683}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1d7e6f00d1d3412459b4de5a71e94f31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _offset: 2.5
+  _offset: 0
   damagePointPrefab: {fileID: 4257337356717980200}
 --- !u!114 &734525009693318128
 MonoBehaviour:
@@ -663,6 +663,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5736076542020507053}
     m_Modifications:
+    - target: {fileID: 1821168854758702749, guid: 4c0f74988a42c8141b0cd79872130e79, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1821168854758702749, guid: 4c0f74988a42c8141b0cd79872130e79, type: 3}
+      propertyPath: _fadeOutTime
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1821168854758702749, guid: 4c0f74988a42c8141b0cd79872130e79, type: 3}
+      propertyPath: _maxFadeOutTime
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1821168854758702749, guid: 4c0f74988a42c8141b0cd79872130e79, type: 3}
+      propertyPath: _minFadeOutTime
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1821168854758702749, guid: 4c0f74988a42c8141b0cd79872130e79, type: 3}
+      propertyPath: _baseFadeOutTime
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3292821013946672029, guid: 4c0f74988a42c8141b0cd79872130e79, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -673,7 +693,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3392112923963770135, guid: 4c0f74988a42c8141b0cd79872130e79, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.56
+      value: 2.98
       objectReference: {fileID: 0}
     - target: {fileID: 3392112923963770135, guid: 4c0f74988a42c8141b0cd79872130e79, type: 3}
       propertyPath: m_LocalPosition.z
@@ -707,13 +727,49 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3831354557818950890, guid: 4c0f74988a42c8141b0cd79872130e79, type: 3}
+      propertyPath: _duration
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3831354557818950890, guid: 4c0f74988a42c8141b0cd79872130e79, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3831354557818950890, guid: 4c0f74988a42c8141b0cd79872130e79, type: 3}
+      propertyPath: _baseDuration
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4268173124034704964, guid: 4c0f74988a42c8141b0cd79872130e79, type: 3}
       propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6575308737314473838, guid: 4c0f74988a42c8141b0cd79872130e79, type: 3}
+      propertyPath: _speed
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6575308737314473838, guid: 4c0f74988a42c8141b0cd79872130e79, type: 3}
+      propertyPath: _maxSpeed
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6575308737314473838, guid: 4c0f74988a42c8141b0cd79872130e79, type: 3}
+      propertyPath: _minSpeed
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6575308737314473838, guid: 4c0f74988a42c8141b0cd79872130e79, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6575308737314473838, guid: 4c0f74988a42c8141b0cd79872130e79, type: 3}
+      propertyPath: _baseSpeed
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7291279443434476915, guid: 4c0f74988a42c8141b0cd79872130e79, type: 3}
       propertyPath: m_Name
       value: DamagePointPrefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 8573549909466841112, guid: 4c0f74988a42c8141b0cd79872130e79, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

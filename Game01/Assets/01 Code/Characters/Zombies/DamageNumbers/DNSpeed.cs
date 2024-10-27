@@ -2,10 +2,10 @@ using UnityEngine;
 
 public class DNSpeed : MonoBehaviour
 {
-    [SerializeField] private float _speed = 2f;  // Speed of the upward movement
-    [SerializeField] private float _baseSpeed = 2f; // Base speed of the upward movement
-    [SerializeField] private float _maxSpeed = 5f; // Base time it takes to fade out
-    [SerializeField] private float _minSpeed = 0.5f; // Base time it takes to fade out
+    [SerializeField] private float _speed;  // Speed of the upward movement
+    [SerializeField] private float _baseSpeed; // Base speed of the upward movement
+    [SerializeField] private float _maxSpeed; // Base time it takes to fade out
+    [SerializeField] private float _minSpeed; // Base time it takes to fade out
 
     public float GetSpeed() => _speed;
     public float GetBaseSpeed() => _baseSpeed;

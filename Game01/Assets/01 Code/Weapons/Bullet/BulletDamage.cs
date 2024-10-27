@@ -4,11 +4,10 @@ public class BulletDamage : MonoBehaviour
 {
     [SerializeField] private int _minDamage, _maxDamage;
     private int _bulletDamage;
-    const string ENEMY = "Enemy";
 
     private void OnEnable()
     {
-        _bulletDamage = Random.Range(_minDamage,_maxDamage);
+        _bulletDamage = Random.Range(_minDamage, _maxDamage + 1);
     }
     public int GetDamage() => _bulletDamage;
 
