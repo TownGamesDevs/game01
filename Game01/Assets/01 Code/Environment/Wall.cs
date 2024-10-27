@@ -3,28 +3,26 @@ using TMPro;
 using UnityEngine;
 
 public class Wall : MonoBehaviour
-{
-    public static Wall instance;
+{ public static Wall instance;
 
-    // Allow ALL zombies to move if the wall gets destroyed
     public static event Action OnWallDestroyed;
 
     [SerializeField] private int _wallHP;
     [SerializeField] private TextMeshProUGUI[] _txt;
-    private bool _isDead;
+    private bool _isDestroyed;
 
     private void Awake() => instance ??= this;
 
     void Start()
     {
-        _isDead = false;
+        _isDestroyed = false;
         PrintWallHP(_wallHP);
     }
 
     public void SetHP(int damage)
     {
         // Exit if dead
-        if (_isDead) return;
+        if (_isDestroyed) return;
 
         int tmp = _wallHP - damage;
         if (tmp > 0)
@@ -33,15 +31,14 @@ public class Wall : MonoBehaviour
             PrintWallHP(_wallHP);
             return;
         }
-        Die();
+        DestroyWall();
     }
 
-    private void Die()
+    private void DestroyWall()
     {
-        // Can only die once
-        if (!_isDead)
+        if (!_isDestroyed)
         {
-            _isDead = true;
+            _isDestroyed = true;
             OnWallDestroyed?.Invoke();
             gameObject.SetActive(false);
         }

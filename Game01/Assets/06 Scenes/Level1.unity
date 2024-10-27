@@ -596,7 +596,7 @@ GameObject:
   - component: {fileID: 168175337}
   - component: {fileID: 168175339}
   - component: {fileID: 168175338}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: Shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2219,7 +2219,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _bulletType: 0
   _reloadTime: 2
-  _magSize: 1000
+  _magSize: 30
   _fireRate: 8
 --- !u!1 &708276450
 GameObject:
@@ -6787,7 +6787,7 @@ GameObject:
   - component: {fileID: 4636151666071850966}
   - component: {fileID: 5744084426004771291}
   - component: {fileID: 5255424271718179960}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: Txt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7769,7 +7769,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de49bccb5d05164489ebb2c6929ca5f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _attackForce: 2
+  _attackForce: 0
   _attackSpeed: 0.5
 --- !u!114 &5384193365456518124
 MonoBehaviour:
@@ -7889,7 +7889,7 @@ GameObject:
   - component: {fileID: 2446019294667472837}
   - component: {fileID: 233642713960084929}
   - component: {fileID: 1924001392765387045}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: Txt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7969,11 +7969,11 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.037843704, y: 0.02611351}
+  m_Offset: {x: -0.00715065, y: 0.0064730644}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -7983,7 +7983,7 @@ BoxCollider2D:
     drawMode: 2
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.5491762, y: 11.3746395}
+  m_Size: {x: 0.5792513, y: 11.119458}
   m_EdgeRadius: 0
 --- !u!1 &6855697368175250853
 GameObject:
@@ -8192,7 +8192,7 @@ GameObject:
   - component: {fileID: 6464168748993637843}
   - component: {fileID: 940215139553781750}
   - component: {fileID: 5384193365456518124}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: Shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8357,7 +8357,7 @@ Transform:
   m_GameObject: {fileID: 4674246625245385160}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.48, y: -3.3039286, z: 0}
+  m_LocalPosition: {x: -1.8, y: -3.78, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

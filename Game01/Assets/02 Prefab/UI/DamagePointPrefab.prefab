@@ -454,7 +454,7 @@ MonoBehaviour:
   _speed: 0
   _baseSpeed: 25
   _maxSpeed: 4.5
-  _minSpeed: 2.5
+  _minSpeed: 2.3
 --- !u!114 &3831354557818950890
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -483,5 +483,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _baseFadeOutTime: 0
   _fadeOutTime: 0
-  _minFadeOutTime: 0.5
+  _minFadeOutTime: 0.4
   _maxFadeOutTime: 0
