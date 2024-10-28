@@ -26,6 +26,9 @@ public class AutoShoot : MonoBehaviour
 
     // Flags
     private bool _canShoot;
+    private bool _inRange;
+    private bool _isFireRate;
+    private bool _hasAmmo;
 
 
 
@@ -42,6 +45,8 @@ public class AutoShoot : MonoBehaviour
 
         _timer = 0;
         _canShoot = true;
+        _timer = _fireRateTime;
+
         if (_weapon != null)
         {
             _fireRateTime = _weapon.GetFireRate();
@@ -56,9 +61,15 @@ public class AutoShoot : MonoBehaviour
     void Update()
     {
         _timer += Time.deltaTime;
-        if (_canShoot && _timer >= _fireRateTime)
+        _inRange = _range.IsInRange();
+        _isFireRate = _timer >= _fireRateTime;
+        _hasAmmo = _ammo > 0;
+
+
+
+        if (_canShoot && _isFireRate)
         {
-            if (_ammo > 0 && _range.IsInRange())
+            if (_hasAmmo && _inRange)
             {
                 _timer = 0;
                 Shoot();
@@ -100,6 +111,9 @@ public class AutoShoot : MonoBehaviour
             // Fixes bug where it won't detect zombies
             _bc.enabled = false;
             _bc.enabled = true;
+
+            // Fixes bug where it won't detect zombies in range
+            _range.SetInRange(false);
         }
     }
 

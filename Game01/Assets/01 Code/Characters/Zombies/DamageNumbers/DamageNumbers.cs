@@ -16,28 +16,28 @@ public class DamageNumbers : MonoBehaviour
     private float _fadeOutTime;
     private float _timer;
 
-
-    private void Start()
-    {
-        Initialize();
-    }
-
     private void OnEnable()
     {
         Initialize();
     }
     public void Initialize()
     {
+        gameObject.SetActive(true);
         _canvasGroup = GetComponentInChildren<CanvasGroup>();
         _DN_Speed = GetComponent<DNSpeed>();
         _DN_Duration = GetComponent<DNDuration>();
         _DN_FadeOut = GetComponent<DNFadeOut>();
     }
     private void Update() => MoveUp();
-    public void ShowDamageNumber(int damage)
+    public void SetDM(int damage)
     {
-        // Exit if negative damage
-        if (damage <= 0) return;
+        // Exit if damage is zero or negative
+        if (damage <= 0)
+        {
+            Debug.LogError("DamgeNumber cannot be negative: " + damage);
+            return;
+        }
+
 
         PrintDamage(damage);
 
@@ -45,9 +45,6 @@ public class DamageNumbers : MonoBehaviour
         _speed = _DN_Speed.CalculateSpeed(damage);
         _duration = _DN_Duration.CalculateDuration(damage);
         _fadeOutTime = _DN_FadeOut.CalculateFadeOut(damage);
-
-        // Reset the alpha for new instance
-        _canvasGroup.alpha = 1f;
 
         // Start the fade and destroy process
         StartCoroutine(FadeAway());

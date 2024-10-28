@@ -29,8 +29,8 @@ public class PoolManager : MonoBehaviour
     {
         if (instance == null) instance = this;
         DontDestroyOnLoad(gameObject);
+        PoolAllObjects();
     }
-    private void Start() => PoolAllObjects();
     private void PoolAllObjects()
     {
         for (int i = 0; i < _ObjectsToPool.Length; i++)
@@ -40,10 +40,10 @@ public class PoolManager : MonoBehaviour
             bool notZero = _ObjectsToPool[i]._total > 0;
 
             if (validPref && notZero)
-                InitializePool(_ObjectsToPool[i]._list, _ObjectsToPool[i]._prefab, _ObjectsToPool[i]._total);
+                AddToList(_ObjectsToPool[i]._list, _ObjectsToPool[i]._prefab, _ObjectsToPool[i]._total);
         }
     }
-    private void InitializePool(List<GameObject> list, GameObject pref, int maxSize)
+    private void AddToList(List<GameObject> list, GameObject pref, int maxSize)
     {
         if (pref == null)
         {
@@ -58,10 +58,10 @@ public class PoolManager : MonoBehaviour
             list.Add(obj);
         }
     }
-    private GameObject PoolObject(List<GameObject> list, GameObject pref, bool canGrow)
+    private GameObject PoolFromList(List<GameObject> list, GameObject pref, bool canGrow)
     {
         for (int i = 0; i < list.Count; i++)
-            if (!list[i].activeInHierarchy && !list[i].activeSelf)
+            if (!list[i].activeSelf)
             {
                 list[i].SetActive(true);
                 return list[i];
@@ -70,6 +70,7 @@ public class PoolManager : MonoBehaviour
         if (canGrow && list.Count > 0)
         {
             GameObject obj = Instantiate(pref);
+            obj.SetActive(true);
             list.Add(obj);
             return obj;
         }
@@ -80,10 +81,12 @@ public class PoolManager : MonoBehaviour
     {
         for (int i = 0; i < _ObjectsToPool.Length; i++)
         {
+            // Conditions
             bool isName = _ObjectsToPool[i]._name == objectType;
             bool notZero = _ObjectsToPool[i]._total > 0;
+
             if (isName && notZero)
-                return PoolObject(_ObjectsToPool[i]._list, _ObjectsToPool[i]._prefab, _ObjectsToPool[i]._canGrow);
+                return PoolFromList(_ObjectsToPool[i]._list, _ObjectsToPool[i]._prefab, _ObjectsToPool[i]._canGrow);
         }
         return null;
     }

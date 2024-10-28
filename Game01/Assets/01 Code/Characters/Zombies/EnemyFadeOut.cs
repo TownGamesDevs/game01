@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 
 public class EnemyFadeOut : MonoBehaviour
-{ public static EnemyFadeOut instance;
+{ 
 
     public float fadeDuration = 2.0f;  // Time taken to fade out the enemy (set this in the Inspector)
 
@@ -10,7 +10,6 @@ public class EnemyFadeOut : MonoBehaviour
     private ZombieHP _hp;
     private bool _isFading = false;    // To prevent multiple fades
 
-    private void Awake() => instance ??= this;
 
     private void Start()
     {

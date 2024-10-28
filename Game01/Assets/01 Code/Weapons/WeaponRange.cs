@@ -17,17 +17,13 @@ public class WeaponRange : MonoBehaviour
         boxCollider.offset = new Vector2(rangeX / 2f, boxCollider.offset.y);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Enemy"))
             _enemyInRange = true;
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Enemy"))
-            _enemyInRange = false;
-    }
-
     public bool IsInRange() => _enemyInRange;
+    public void SetInRange(bool state) => _enemyInRange = state;
+
 }

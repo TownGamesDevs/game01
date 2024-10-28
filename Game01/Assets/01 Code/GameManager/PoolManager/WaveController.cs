@@ -15,7 +15,6 @@ public class WaveController : MonoBehaviour
 
     private int _totalZombies;
     private int _currentGroup = 0;
-
     private SpawnPoints _spawn;
     private TotalKilled _enemyKilled;
 
@@ -59,12 +58,16 @@ public class WaveController : MonoBehaviour
                 Transform spawnPoint = _spawn.GetRandomSpawnPoint();
 
                 // Spawn the enemy of this type from the pool
-                GameObject enemy = PoolManager.instance.Pool(group.enemyType == EnemyType.Walker
-                                                   ? PoolData.Type.Walker
-                                                   : PoolData.Type.Brute);
+                GameObject enemy = PoolManager.instance.Pool(group.enemyType == EnemyType.Walker ? PoolData.Type.Walker : PoolData.Type.Brute);
 
-                if (enemy != null)
-                    enemy.transform.position = spawnPoint.position;
+                if (enemy == null)
+                {
+                    Debug.LogError("COULDN'T POOL: " + group.enemyType);
+                    yield return null;
+                    
+                }
+
+                enemy.transform.position = spawnPoint.position;
 
                 // Use the specific spawn interval for this wave
                 yield return new WaitForSeconds(wave._spawnDelay);

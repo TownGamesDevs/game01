@@ -61,9 +61,11 @@ public class ZombieHP : MonoBehaviour
     {
         if (collision.CompareTag(BULLET) && collision.TryGetComponent<BulletDamage>(out BulletDamage bullet))
         {
-            _damagePointsPref.ShowDamage(bullet.GetDamage());
+            // Set damage to be positive
+            // If damage is 0 set it to 1
+            _damagePointsPref.ShowDamageNumbers(Mathf.Max(1,Mathf.Abs(bullet.GetDamage() - _zombieHP)));
 
-            // Calculate damage as absolute difference
+            // Calculate damage to bullet and zombie
             int damageToBullet = bullet.GetDamage() - _zombieHP;
             int damageToZombie = _zombieHP - bullet.GetDamage();
 
