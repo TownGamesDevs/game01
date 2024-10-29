@@ -25,7 +25,7 @@ public class ZombieAttack : MonoBehaviour
         _timer = 0;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (_canAttack)
         {
@@ -35,26 +35,29 @@ public class ZombieAttack : MonoBehaviour
             {
                 _timer = 0;
                 AttackWall();
-                
-                // Fixes bug where it won't detect wall
-                _collider.enabled = false;
-                _collider.enabled = true;
             }
         }
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.CompareTag("Wall"))
         {
-            _canAttack = false;
+            _canAttack = true;
             _zombieMove.SetCanMove(false);
         }
     }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        _canAttack = false;
+        _zombieMove.SetCanMove(true);
+    }
+
     public void AttackWall()
     {
-        Wall.instance.SetHP(_attackForce);
         _animator.SetAnimation(ZombieAnimations.Names.Attack);
         AudioManager.instance.PlayRandomSound(AudioManager.Category.Other, "Wall");
+        Wall.instance.SetHP(_attackForce);
     }
 
 }

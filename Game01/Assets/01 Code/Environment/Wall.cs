@@ -21,11 +21,10 @@ public class Wall : MonoBehaviour
 
     public void SetHP(int damage)
     {
-        // Exit if dead
         if (_isDestroyed) return;
 
         int tmp = _wallHP - damage;
-        if (tmp > 0)
+        if (tmp > 0 && tmp < _wallHP)
         {
             _wallHP = tmp;
             PrintWallHP(_wallHP);
