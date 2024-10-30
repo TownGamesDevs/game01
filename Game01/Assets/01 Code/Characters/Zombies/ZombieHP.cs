@@ -18,8 +18,8 @@ public class ZombieHP : MonoBehaviour
     private void OnEnable()
     {
         _zombieHP = _currentHP;
-        PrintZombieHP(_zombieHP);
         _isDead = false;
+        PrintZombieHP(_zombieHP);
     }
 
     public int GetHP() => _zombieHP;
@@ -39,6 +39,7 @@ public class ZombieHP : MonoBehaviour
             return;
         }
         PrintZombieHP(_zombieHP);
+        AudioManager.instance.PlayRandomSound(AudioManager.Category.Zombie, "BulletHit");
     }
 
     public void PrintZombieHP(int hp)

@@ -17,9 +17,9 @@ public abstract class BaseAnimator<T> : MonoBehaviour where T : System.Enum
     protected SpriteRenderer sr;
     private Sprite[] currentSprites;
     private float loopWaitTime;
-    private float timer;
+    private float _timer;
     private float secondsPerFrame;
-    private int frame;
+    private int _frame;
     private bool isValidAnim;
 
     protected virtual void Awake() => sr = GetComponent<SpriteRenderer>();
@@ -40,25 +40,25 @@ public abstract class BaseAnimator<T> : MonoBehaviour where T : System.Enum
 
     private void ResetValues()
     {
-        frame = 0;
-        timer = 0;
+        _frame = 0;
+        _timer = 0;
     }
 
     private void LoopAnimation()
     {
         if (!isValidAnim) return;
 
-        timer += Time.deltaTime;
+        _timer += Time.deltaTime;
 
-        if (timer >= secondsPerFrame && timer >= loopWaitTime)
+        if (_timer >= secondsPerFrame && _timer >= loopWaitTime)
         {
-            sr.sprite = currentSprites[frame];
-            frame++;
+            sr.sprite = currentSprites[_frame];
+            _frame++;
 
-            if (frame >= currentSprites.Length)
-                frame = 0;
+            if (_frame >= currentSprites.Length)
+                _frame = 0;
 
-            timer = 0;
+            _timer = 0;
         }
     }
 
