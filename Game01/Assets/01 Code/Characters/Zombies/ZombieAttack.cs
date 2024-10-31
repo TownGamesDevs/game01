@@ -7,7 +7,6 @@ public class ZombieAttack : MonoBehaviour
 
 
     private ZombieMove _zombieMove;
-    private BoxCollider2D _collider;
     private ZombieAnimator _animator;
     private float _timer;
     private bool _canAttack;
@@ -16,7 +15,6 @@ public class ZombieAttack : MonoBehaviour
     private void Start()
     {
         _zombieMove = GetComponent<ZombieMove>();
-        _collider = GetComponent<BoxCollider2D>();
         _animator = GetComponent<ZombieAnimator>();
     }
     private void OnEnable()

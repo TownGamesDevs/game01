@@ -3,7 +3,7 @@ using UnityEngine;
 [RequireComponent(typeof(BoxCollider2D))]
 public class WeaponRange : MonoBehaviour
 {
-    [SerializeField] private float rangeX = 2f;
+    [SerializeField] private float _range = 2f;
     [SerializeField] private BoxCollider2D boxCollider;
     private bool _enemyInRange;
 
@@ -13,8 +13,8 @@ public class WeaponRange : MonoBehaviour
     
     private void SetRange()
     {
-        boxCollider.size = new Vector2(rangeX, boxCollider.size.y);
-        boxCollider.offset = new Vector2(rangeX / 2f, boxCollider.offset.y);
+        boxCollider.size = new Vector2(_range, boxCollider.size.y);
+        boxCollider.offset = new Vector2(_range / 2f, boxCollider.offset.y);
     }
 
     private void OnTriggerStay2D(Collider2D collision)

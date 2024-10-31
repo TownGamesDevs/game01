@@ -10,7 +10,7 @@ public class ZombieHP : MonoBehaviour
     const string BULLET = "Bullet";
     private int _zombieHP;
     private bool _isDead;
-
+    private int _tmpDamage;
     private void Start()
     {
         _damagePointsPref = GetComponent<DamagePointsManager>();
@@ -54,6 +54,7 @@ public class ZombieHP : MonoBehaviour
 
         _isDead = true;
         AudioManager.instance.PlayRandomSound(AudioManager.Category.Zombie, "Hurt");
+        
         gameObject.SetActive(false); // Disable zombie
     }
 
@@ -62,13 +63,17 @@ public class ZombieHP : MonoBehaviour
     {
         if (collision.CompareTag(BULLET) && collision.TryGetComponent<BulletDamage>(out BulletDamage bullet))
         {
-            // Set damage to be positive
-            // If damage is 0 set it to 1
-            _damagePointsPref.ShowDamageNumbers(Mathf.Max(1,Mathf.Abs(bullet.GetDamage() - _zombieHP)));
-
             // Calculate damage to bullet and zombie
             int damageToBullet = bullet.GetDamage() - _zombieHP;
             int damageToZombie = _zombieHP - bullet.GetDamage();
+
+            // Damage must be positive and bigger than 0
+            _tmpDamage = Mathf.Max(1, Mathf.Abs(damageToBullet));
+            _damagePointsPref.ShowDamageNumbers(_tmpDamage);
+            ScoreManager.instance.PrintScore(_tmpDamage);
+
+
+
 
             bullet.SetBulletDamage(damageToBullet);
             SetZombieDamage(damageToZombie);

@@ -17,11 +17,11 @@ public class ScoreManager : MonoBehaviour
     private void Start()
     {
         _score = 0;
-        UpdateScore(_score);
+        PrintScore(_score);
     }
 
     public int GetScore() => _score;
-    public void UpdateScore(int score)
+    public void PrintScore(int score)
     {
         if (score <= 0) return;
 

@@ -1325,9 +1325,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _bulletSpawnPoint: {fileID: 6981411592708994537}
   _weaponRange: {fileID: 410730031}
-  _ammoTxt:
-  - {fileID: 708276452}
-  - {fileID: 1420882652}
+  _roundsPerSec: 0
 --- !u!212 &410730029
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1395,7 +1393,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 722a8ca4748e84540867898dc2470a2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rangeX: 20
+  _range: 2
   boxCollider: {fileID: 410730031}
 --- !u!61 &410730031
 BoxCollider2D:
@@ -1431,7 +1429,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 10, y: -0.2757722}
+  m_Offset: {x: 1, y: -0.2757722}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -1441,7 +1439,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 20, y: 0.34536672}
+  m_Size: {x: 2, y: 0.34536672}
   m_EdgeRadius: 0
 --- !u!114 &410730033
 MonoBehaviour:
@@ -1456,9 +1454,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bulletType: 1
-  _reloadTime: 4
-  _magSize: 10
-  _fireRate: 0.6
 --- !u!114 &410730034
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2165,6 +2160,7 @@ GameObject:
   - component: {fileID: 666388698}
   - component: {fileID: 666388695}
   - component: {fileID: 666388697}
+  - component: {fileID: 666388699}
   m_Layer: 3
   m_Name: Assault
   m_TagString: Assault
@@ -2203,9 +2199,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _bulletSpawnPoint: {fileID: 402055426725701199}
   _weaponRange: {fileID: 666388694}
-  _ammoTxt:
-  - {fileID: 1791656941}
-  - {fileID: 1521537464}
+  _roundsPerSec: 13
 --- !u!212 &666388692
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2295,7 +2289,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 10, y: -0.2757722}
+  m_Offset: {x: 7.5, y: -0.2757722}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -2305,7 +2299,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 20, y: 0.34536672}
+  m_Size: {x: 15, y: 0.34536672}
   m_EdgeRadius: 0
 --- !u!114 &666388695
 MonoBehaviour:
@@ -2319,7 +2313,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 722a8ca4748e84540867898dc2470a2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rangeX: 20
+  _range: 15
   boxCollider: {fileID: 666388694}
 --- !u!114 &666388697
 MonoBehaviour:
@@ -2367,9 +2361,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bulletType: 0
+--- !u!114 &666388699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 666388688}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40ee064be4d40b54981fc8e715195daa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxAmmo: 30
   _reloadTime: 2
-  _magSize: 30
-  _fireRate: 8
+  _ammoTxt:
+  - {fileID: 1791656941}
+  - {fileID: 1521537464}
 --- !u!1 &708276450
 GameObject:
   m_ObjectHideFlags: 0
@@ -2568,7 +2576,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _bulletSpawnPoint: {fileID: 1423815436}
   _weaponRange: {fileID: 0}
-  _ammoTxt: []
+  _roundsPerSec: 0
 --- !u!212 &728233416
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3050,7 +3058,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &917465194
 Transform:
   m_ObjectHideFlags: 0
@@ -3323,7 +3331,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _bulletSpawnPoint: {fileID: 1146654213}
   _weaponRange: {fileID: 0}
-  _ammoTxt: []
+  _roundsPerSec: 0
 --- !u!212 &958877063
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4077,7 +4085,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 1.5}
+  m_AnchoredPosition: {x: 0, y: 1.7}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1348619639
@@ -4493,9 +4501,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bulletType: 0
-  _reloadTime: 26
-  _magSize: 30
-  _fireRate: 15
 --- !u!212 &1469425481
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5012,7 +5017,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 1.5}
+  m_AnchoredPosition: {x: 0, y: 1.7}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1684710789
@@ -6315,8 +6320,8 @@ MonoBehaviour:
   _groups:
   - enemyGroups:
     - enemyType: 0
-      count: 20
-    _spawnDelay: 0.1
+      count: 25
+    _spawnDelay: 0.3
     _nextWaveDelay: 0
 --- !u!1 &2006353550
 GameObject:
@@ -6860,6 +6865,46 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4604840014936013744, guid: cdea799b43ac785469c11734838bb774, type: 3}
+      propertyPath: m_text
+      value: 'Score: 0'
+      objectReference: {fileID: 0}
+    - target: {fileID: 4604840014936013744, guid: cdea799b43ac785469c11734838bb774, type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4604840014936013744, guid: cdea799b43ac785469c11734838bb774, type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
+      objectReference: {fileID: 0}
+    - target: {fileID: 5881129029579859707, guid: cdea799b43ac785469c11734838bb774, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5881129029579859707, guid: cdea799b43ac785469c11734838bb774, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5881129029579859707, guid: cdea799b43ac785469c11734838bb774, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5881129029579859707, guid: cdea799b43ac785469c11734838bb774, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 473.69995
+      objectReference: {fileID: 0}
+    - target: {fileID: 5881129029579859707, guid: cdea799b43ac785469c11734838bb774, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6679635658834639767, guid: cdea799b43ac785469c11734838bb774, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 430.42
+      objectReference: {fileID: 0}
+    - target: {fileID: 6679635658834639767, guid: cdea799b43ac785469c11734838bb774, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 6679635658834639767, guid: cdea799b43ac785469c11734838bb774, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -6868,12 +6913,36 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6679635658834639767, guid: cdea799b43ac785469c11734838bb774, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -15.95
+      objectReference: {fileID: 0}
+    - target: {fileID: 8438729830461009082, guid: cdea799b43ac785469c11734838bb774, type: 3}
+      propertyPath: m_text
+      value: 'Score: 0'
+      objectReference: {fileID: 0}
+    - target: {fileID: 8438729830461009082, guid: cdea799b43ac785469c11734838bb774, type: 3}
+      propertyPath: m_margin.x
+      value: -33.176224
+      objectReference: {fileID: 0}
+    - target: {fileID: 8438729830461009082, guid: cdea799b43ac785469c11734838bb774, type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8438729830461009082, guid: cdea799b43ac785469c11734838bb774, type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
+      objectReference: {fileID: 0}
     - target: {fileID: 9045522854850878822, guid: cdea799b43ac785469c11734838bb774, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9045522854850878822, guid: cdea799b43ac785469c11734838bb774, type: 3}
       propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9045522854850878822, guid: cdea799b43ac785469c11734838bb774, type: 3}
+      propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
