@@ -190,8 +190,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278236224
-  m_fontColor: {r: 0.25249726, g: 0.7075472, b: 0, a: 1}
+    rgba: 4278293760
+  m_fontColor: {r: 0, g: 0.5849056, b: 0.0049568345, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -208,8 +208,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 25
-  m_fontSizeBase: 25
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -326,8 +326,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278255451
-  m_fontColor: {r: 0.35869575, g: 1, b: 0, a: 1}
+    rgba: 4278255360
+  m_fontColor: {r: 0, g: 1, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -344,8 +344,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 25
-  m_fontSizeBase: 25
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -454,7 +454,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0
   _baseSpeed: 50
-  _maxSpeed: 5
+  _maxSpeed: 4
   _minSpeed: 1
 --- !u!114 &3831354557818950890
 MonoBehaviour:
@@ -484,7 +484,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _baseFadeOutTime: 0
   _fadeOutTime: 0
-  _minFadeOutTime: 0.4
+  _minFadeOutTime: 0.5
   _maxFadeOutTime: 0
 --- !u!114 &3140940223538493989
 MonoBehaviour:

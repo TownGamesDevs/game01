@@ -177,8 +177,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4281019309
+  m_fontColor: {r: 0.6792453, g: 0.16981132, b: 0.16981132, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -313,8 +313,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281677109
-  m_fontColor: {r: 0.20754719, g: 0.20754719, b: 0.20754719, a: 1}
+    rgba: 4278193007
+  m_fontColor: {r: 0.4339623, g: 0.044672593, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -398,7 +398,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5736076542020507053
 Transform:
   m_ObjectHideFlags: 0
@@ -658,7 +658,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3392112923963770135, guid: 4c0f74988a42c8141b0cd79872130e79, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.53
+      value: 1.65
       objectReference: {fileID: 0}
     - target: {fileID: 3392112923963770135, guid: 4c0f74988a42c8141b0cd79872130e79, type: 3}
       propertyPath: m_LocalPosition.z
@@ -700,6 +700,22 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4489953895913205476, guid: 4c0f74988a42c8141b0cd79872130e79, type: 3}
+      propertyPath: m_fontSize
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4489953895913205476, guid: 4c0f74988a42c8141b0cd79872130e79, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 5959913892116560477, guid: 4c0f74988a42c8141b0cd79872130e79, type: 3}
+      propertyPath: m_fontSize
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 5959913892116560477, guid: 4c0f74988a42c8141b0cd79872130e79, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 6575308737314473838, guid: 4c0f74988a42c8141b0cd79872130e79, type: 3}
       propertyPath: _speed
       value: -80
@@ -716,6 +732,10 @@ PrefabInstance:
       propertyPath: _baseSpeed
       value: -80
       objectReference: {fileID: 0}
+    - target: {fileID: 7291279443434476915, guid: 4c0f74988a42c8141b0cd79872130e79, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 2488908585195742037, guid: 0000000000000000d000000000000000, type: 0}
     - target: {fileID: 7291279443434476915, guid: 4c0f74988a42c8141b0cd79872130e79, type: 3}
       propertyPath: m_Name
       value: DamagePointPrefab

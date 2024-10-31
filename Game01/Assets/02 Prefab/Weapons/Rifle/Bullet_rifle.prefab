@@ -205,4 +205,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _minDamage: 2
-  _maxDamage: 10
+  _maxDamage: 5

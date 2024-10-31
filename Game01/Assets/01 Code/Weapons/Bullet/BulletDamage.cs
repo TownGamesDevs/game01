@@ -7,6 +7,7 @@ public class BulletDamage : MonoBehaviour
 
     private void OnEnable()
     {
+        // Random damage
         _bulletDamage = Random.Range(_minDamage, _maxDamage + 1);
     }
     public int GetDamage() => _bulletDamage;

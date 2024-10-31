@@ -32,13 +32,8 @@ public class DamageNumbers : MonoBehaviour
     public void SetDM(int damage)
     {
         // Exit if damage is zero or negative
-        if (damage <= 0)
-        {
-            Debug.LogError("DamgeNumber cannot be negative: " + damage);
-            return;
-        }
-
-
+        if (damage <= 0) return;
+        
         PrintDamage(damage);
 
         // Set values

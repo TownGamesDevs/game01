@@ -6,7 +6,6 @@ public class Weapon : MonoBehaviour
     {
         Rifle,
         SniperRifle,
-        // Add more as needed
     }
 
     [SerializeField] private BulletType _bulletType;

@@ -69,10 +69,8 @@ public class ZombieHP : MonoBehaviour
 
             // Damage must be positive and bigger than 0
             _tmpDamage = Mathf.Max(1, Mathf.Abs(damageToBullet));
-            _damagePointsPref.ShowDamageNumbers(_tmpDamage);
             ScoreManager.instance.PrintScore(_tmpDamage);
-
-
+            _damagePointsPref.ShowDamageNumbers(damageToZombie);
 
 
             bullet.SetBulletDamage(damageToBullet);

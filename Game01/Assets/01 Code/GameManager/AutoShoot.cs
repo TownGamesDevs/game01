@@ -66,7 +66,7 @@ public class AutoShoot : MonoBehaviour
         _reload.DecreaseAmmo(); // Update ammo
 
         PlayReloadSound();
-        SaveScore();
+        //SaveScore();
 
         // Fixes bug where it won't detect zombies in range
         _range.SetInRange(false);
@@ -94,11 +94,8 @@ public class AutoShoot : MonoBehaviour
 
     private void SaveScore()
     {
-        // Saves new score
         PlayerPrefs.SetInt("TotalShots", PlayerPrefs.GetInt("TotalShots") + 1);
         PlayerPrefs.Save();
     }
-
-    
 
 }
