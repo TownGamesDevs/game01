@@ -10,7 +10,8 @@ public class PoolData
         SniperBullet,
         Brute,
         Walker,
-        DamagePoints
+        DamagePoints,
+        // Add more as needed
     }
     public Type _name;
     public GameObject _prefab;
@@ -37,9 +38,9 @@ public class PoolManager : MonoBehaviour
         {
             // Conditions
             bool validPref = _ObjectsToPool[i]._prefab != null;
-            bool notZero = _ObjectsToPool[i]._total > 0;
+            bool nonZero = _ObjectsToPool[i]._total > 0;
 
-            if (validPref && notZero)
+            if (validPref && nonZero)
                 AddToList(_ObjectsToPool[i]._list, _ObjectsToPool[i]._prefab, _ObjectsToPool[i]._total);
         }
     }
@@ -90,5 +91,4 @@ public class PoolManager : MonoBehaviour
         }
         return null;
     }
-
 }

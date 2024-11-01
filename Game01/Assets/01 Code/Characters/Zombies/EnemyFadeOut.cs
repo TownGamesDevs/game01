@@ -56,7 +56,7 @@ public class EnemyFadeOut : MonoBehaviour
         SetAlpha(0f);
 
         // Notify the WaveManager that this zombie is truly dead
-        WaveController.instance.CheckAllKilled();
+        //WaveController.instance.CheckAllKilled();
 
         // Disable the GameObject after fade out
         //_hp.DisableZombie();

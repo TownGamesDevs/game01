@@ -11,8 +11,6 @@ public class Wall : MonoBehaviour
     [SerializeField] private TextMeshProUGUI[] _txt;
     private bool _isDestroyed;
 
-    private void Awake() => instance ??= this;
-
     void Start()
     {
         _isDestroyed = false;

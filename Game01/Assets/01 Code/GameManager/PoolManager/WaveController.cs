@@ -6,17 +6,23 @@ using static EnemyTypes;
 
 public class WaveController : MonoBehaviour
 {
-    public static WaveController instance;
-    public static event Action OnWaveCompleted;
+    public static WaveController instance; public static event Action OnWaveCompleted;
 
 
     [Header("Group Configuration")]
+    [SerializeField] private int _maxOnScreen;
+    [SerializeField] private float _spawnDelay;
+    [SerializeField] private float _delayAfterKilled;
     [SerializeField] private List<WaveGroups> _groups = new List<WaveGroups>();
 
+    private int _totalSpawned;
+    private int _currentInScreen;
+    private float _timer;
     private int _totalZombies;
-    private int _currentGroup = 0;
+    private int _currentGroup;
     private SpawnPoints _spawn;
     private TotalKilled _enemyKilled;
+
 
     private void Awake() => instance ??= this;
 
@@ -24,11 +30,50 @@ public class WaveController : MonoBehaviour
     {
         _spawn = GetComponent<SpawnPoints>();
         _enemyKilled = GetComponent<TotalKilled>();
-
         _totalZombies = CalculateTotalZombies();
-        if (_groups.Count > 0)
-            StartCoroutine(SpawnGroup(_currentGroup));
     }
+
+    private void Update()
+    {
+        _timer += Time.deltaTime;
+        if (_timer >= _spawnDelay && _currentInScreen < _maxOnScreen && _totalSpawned < _totalZombies)
+        {
+            _timer = 0;
+            SpawnZombie(_currentGroup);
+        }
+    }
+    private void SpawnZombie(int waveIndex)
+    {
+        WaveGroups _wave = _groups[waveIndex];
+
+        // Spawn all the enemies in the group
+        foreach (EnemyTypes group in _wave.enemyGroups)
+        {
+            // Try spawn zombie
+            GameObject enemy = PoolManager.instance.Pool(group.enemyType == EnemyType.Walker ? PoolData.Type.Walker : PoolData.Type.Brute);
+            if (enemy == null) return;
+
+            _currentInScreen++;
+            _totalSpawned++;
+            enemy.transform.position = _spawn.GetRandomSpawnPoint();
+
+        }
+    }
+
+    public void UpdateZombiesOnScreen()
+    {
+        _currentInScreen--;
+        //if (_totalSpawned < _totalZombies)
+        //    StartCoroutine(SpawnAfterDeath(_delayAfterKilled));
+    }
+
+    IEnumerator SpawnAfterDeath(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        SpawnZombie(_currentGroup);
+    }
+
+
 
     private int CalculateTotalZombies()
     {
@@ -38,44 +83,6 @@ public class WaveController : MonoBehaviour
                 total += group.count;
 
         return total;
-    }
-    IEnumerator SpawnGroup(int waveIndex)
-    {
-        if (waveIndex >= _groups.Count)
-        {
-            Debug.Log("All waves complete!");
-            yield break;
-        }
-
-        WaveGroups wave = _groups[waveIndex];
-
-        // Spawn all the enemies in the group
-        foreach (EnemyTypes group in wave.enemyGroups)
-        {
-            for (int i = 0; i < group.count; i++)
-            {
-                // Get a random spawn point
-                Transform spawnPoint = _spawn.GetRandomSpawnPoint();
-
-                // Spawn the enemy of this type from the pool
-                GameObject enemy = PoolManager.instance.Pool(group.enemyType == EnemyType.Walker ? PoolData.Type.Walker : PoolData.Type.Brute);
-
-                if (enemy == null)
-                {
-                    Debug.LogError("COULDN'T POOL: " + group.enemyType);
-                    yield return null;
-                    
-                }
-
-                enemy.transform.position = spawnPoint.position;
-
-                // Use the specific spawn interval for this wave
-                yield return new WaitForSeconds(wave._spawnDelay);
-            }
-        }
-
-        // Wait for the delay before the next wave
-        yield return new WaitForSeconds(wave._nextWaveDelay);
     }
     public void CheckAllKilled()
     {

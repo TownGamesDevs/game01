@@ -4,16 +4,18 @@ using UnityEngine;
 public class ZombieHP : MonoBehaviour
 {
     [SerializeField] private int _currentHP;
-    private DamagePointsManager _damagePointsPref;
     [SerializeField] private TextMeshProUGUI[] _txt;
 
+    private ZombieBlood _blood;
+    private DamagePointsManager _damagePoints;
     const string BULLET = "Bullet";
     private int _zombieHP;
     private bool _isDead;
     private int _tmpDamage;
     private void Start()
     {
-        _damagePointsPref = GetComponent<DamagePointsManager>();
+        _blood = GetComponent<ZombieBlood>();
+        _damagePoints = GetComponent<DamagePointsManager>();
     }
     private void OnEnable()
     {
@@ -39,6 +41,7 @@ public class ZombieHP : MonoBehaviour
             return;
         }
         PrintZombieHP(_zombieHP);
+        _blood.ShowBlood();
         AudioManager.instance.PlayRandomSound(AudioManager.Category.Zombie, "BulletHit");
     }
 
@@ -53,8 +56,8 @@ public class ZombieHP : MonoBehaviour
         if (_isDead) return;
 
         _isDead = true;
+        WaveController.instance.UpdateZombiesOnScreen();
         AudioManager.instance.PlayRandomSound(AudioManager.Category.Zombie, "Hurt");
-        
         gameObject.SetActive(false); // Disable zombie
     }
 
@@ -70,7 +73,7 @@ public class ZombieHP : MonoBehaviour
             // Damage must be positive and bigger than 0
             _tmpDamage = Mathf.Max(1, Mathf.Abs(damageToBullet));
             ScoreManager.instance.PrintScore(_tmpDamage);
-            _damagePointsPref.ShowDamageNumbers(damageToZombie);
+            _damagePoints.ShowDamageNumbers(damageToZombie);
 
 
             bullet.SetBulletDamage(damageToBullet);

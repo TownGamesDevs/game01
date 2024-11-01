@@ -9,13 +9,13 @@ public class ReloadWeapon : MonoBehaviour
     [SerializeField] private int _reloadTime;
     [SerializeField] private TextMeshProUGUI[] _ammoTxt;
 
-    private AutoShoot _as;
+    private Shooting _as;
     private bool _isReloading;
     private int _ammo;
 
     private void Start()
     {
-        _as = GetComponent<AutoShoot>();
+        _as = GetComponent<Shooting>();
         _ammo = _maxAmmo;
         _isReloading = false;
         PrintAmmo(_ammoTxt, _ammo.ToString());

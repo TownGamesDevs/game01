@@ -3,12 +3,14 @@ using TMPro;
 using UnityEngine;
 using static Weapon;
 
-public class AutoShoot : MonoBehaviour
+public class Shooting : MonoBehaviour
 {
     // Public variables
     [SerializeField] private Transform _bulletSpawnPoint;
     [SerializeField] private BoxCollider2D _weaponRange;
     [SerializeField] private float _roundsPerSec;
+    [SerializeField] private CameraShake cameraShake;
+    [SerializeField] private float shakeDuration, shakeMagnitude;
 
     // Components
     private Weapon _weapon;
@@ -44,9 +46,21 @@ public class AutoShoot : MonoBehaviour
         else
             Debug.LogError("No weapon found in Soldier!");
     }
-    public void SetCanShoot(bool state) => _canShoot = state;
 
     void Update()
+    {
+        CanMouseShoot();
+    }
+    public void CanMouseShoot()
+    {
+        _timer += Time.deltaTime;
+        if (Input.GetMouseButton(0) && _timer >= _roundsPerSec && _canShoot)
+        {
+            _timer = 0;
+            Shoot();
+        }
+    }
+    public void CanAutoShoot()
     {
         _timer += Time.deltaTime;
 
@@ -56,7 +70,7 @@ public class AutoShoot : MonoBehaviour
             Shoot();
         }
     }
-
+    public void SetCanShoot(bool state) => _canShoot = state;
     private void Shoot()
     {
         GameObject bullet = PoolBullet();
@@ -64,15 +78,13 @@ public class AutoShoot : MonoBehaviour
 
         bullet.transform.position = _bulletSpawnPoint.position; // Set bullet position
         _reload.DecreaseAmmo(); // Update ammo
-
-        PlayReloadSound();
+        PlayBulletSound();
+        cameraShake.TriggerShake(shakeDuration, shakeMagnitude); // cam shake
         //SaveScore();
 
         // Fixes bug where it won't detect zombies in range
         _range.SetInRange(false);
     }
-
-
     private GameObject PoolBullet()
     {
         // Choose a bullet for each soldier
@@ -83,19 +95,17 @@ public class AutoShoot : MonoBehaviour
 
         return null;
     }
-
-    private void PlayReloadSound()
+    private void PlayBulletSound()
     {
         if (_bullet == BulletType.Rifle)
             AudioManager.instance.PlayRandomSound(AudioManager.Category.Weapons, "Rifle");
         else if (_bullet == BulletType.SniperRifle)
             AudioManager.instance.PlayRandomSound(AudioManager.Category.Weapons, "Sniper Rifle");
     }
-
-    private void SaveScore()
-    {
-        PlayerPrefs.SetInt("TotalShots", PlayerPrefs.GetInt("TotalShots") + 1);
-        PlayerPrefs.Save();
-    }
+    //private void SaveScore()
+    //{
+    //    PlayerPrefs.SetInt("TotalShots", PlayerPrefs.GetInt("TotalShots") + 1);
+    //    PlayerPrefs.Save();
+    //}
 
 }

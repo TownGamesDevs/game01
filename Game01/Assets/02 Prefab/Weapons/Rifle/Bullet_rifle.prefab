@@ -15,13 +15,14 @@ GameObject:
   - component: {fileID: 349526779675473178}
   - component: {fileID: 481867049428890314}
   - component: {fileID: 871878648011562942}
+  - component: {fileID: 4255106434452925015}
   m_Layer: 8
   m_Name: Bullet_rifle
   m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4345513452875288151
 Transform:
   m_ObjectHideFlags: 0
@@ -32,8 +33,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.6602921, y: -2.4145842, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -177,7 +178,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d82fc635755fd443a40eff8092dd61c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 65
+  _speed: 95
   _canMove: 1
 --- !u!114 &481867049428890314
 MonoBehaviour:
@@ -204,5 +205,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5a59a351c734b549b8ffd6efc1c9821, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _minDamage: 2
-  _maxDamage: 5
+  _minDamage: 3
+  _maxDamage: 6
+--- !u!114 &4255106434452925015
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4345513452875288146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72426f128496cfe4abb320d6331c3260, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _defaultAnimation: 0
+  animations:
+  - name: 0
+    sprites:
+    - {fileID: 213795305, guid: 01cbb1d134f91334b98700c5fd8e6323, type: 3}
+    - {fileID: -1397904810, guid: 01cbb1d134f91334b98700c5fd8e6323, type: 3}
+    - {fileID: -1090092850, guid: 01cbb1d134f91334b98700c5fd8e6323, type: 3}
+    - {fileID: -1905840568, guid: 01cbb1d134f91334b98700c5fd8e6323, type: 3}
+    FPS: 20
+    loopWaitTime: 0
