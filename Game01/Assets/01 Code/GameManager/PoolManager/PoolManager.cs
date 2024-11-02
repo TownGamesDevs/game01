@@ -11,6 +11,7 @@ public class PoolData
         Brute,
         Walker,
         DamagePoints,
+        Blood,
         // Add more as needed
     }
     public Type _name;
@@ -84,9 +85,9 @@ public class PoolManager : MonoBehaviour
         {
             // Conditions
             bool isName = _ObjectsToPool[i]._name == objectType;
-            bool notZero = _ObjectsToPool[i]._total > 0;
+            bool nonZero = _ObjectsToPool[i]._total > 0;
 
-            if (isName && notZero)
+            if (isName && nonZero)
                 return PoolFromList(_ObjectsToPool[i]._list, _ObjectsToPool[i]._prefab, _ObjectsToPool[i]._canGrow);
         }
         return null;

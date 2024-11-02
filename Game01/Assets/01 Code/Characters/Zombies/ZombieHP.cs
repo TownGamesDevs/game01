@@ -1,4 +1,5 @@
 using TMPro;
+using UnityEditor.Rendering.LookDev;
 using UnityEngine;
 
 public class ZombieHP : MonoBehaviour
@@ -11,7 +12,6 @@ public class ZombieHP : MonoBehaviour
     const string BULLET = "Bullet";
     private int _zombieHP;
     private bool _isDead;
-    private int _tmpDamage;
     private void Start()
     {
         _blood = GetComponent<ZombieBlood>();
@@ -41,6 +41,7 @@ public class ZombieHP : MonoBehaviour
             return;
         }
         PrintZombieHP(_zombieHP);
+        CameraShake.instance.TriggerShake(); // cam shake
         _blood.ShowBlood();
         AudioManager.instance.PlayRandomSound(AudioManager.Category.Zombie, "BulletHit");
     }
@@ -67,13 +68,14 @@ public class ZombieHP : MonoBehaviour
         if (collision.CompareTag(BULLET) && collision.TryGetComponent<BulletDamage>(out BulletDamage bullet))
         {
             // Calculate damage to bullet and zombie
-            int damageToBullet = bullet.GetDamage() - _zombieHP;
-            int damageToZombie = _zombieHP - bullet.GetDamage();
+            int bulletDamage = bullet.GetDamage();
+            int damageToBullet = bulletDamage - _zombieHP;
+            int damageToZombie = _zombieHP - bulletDamage;
+            int _tmpDamage = Mathf.Max(1, Mathf.Abs(damageToBullet));
 
             // Damage must be positive and bigger than 0
-            _tmpDamage = Mathf.Max(1, Mathf.Abs(damageToBullet));
-            ScoreManager.instance.PrintScore(_tmpDamage);
-            _damagePoints.ShowDamageNumbers(damageToZombie);
+            ScoreManager.instance.PrintScore(bulletDamage);
+            _damagePoints.ShowDamageNumbers(bulletDamage);
 
 
             bullet.SetBulletDamage(damageToBullet);

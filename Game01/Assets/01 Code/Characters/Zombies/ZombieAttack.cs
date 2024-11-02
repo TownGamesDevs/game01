@@ -6,7 +6,7 @@ public class ZombieAttack : MonoBehaviour
     [SerializeField] private float _attackSpeed;
 
 
-    private ZombieMove _zombieMove;
+    private ZombieFollow _move;
     private ZombieAnimator _animator;
     private float _timer;
     private bool _canAttack;
@@ -14,7 +14,7 @@ public class ZombieAttack : MonoBehaviour
 
     private void Start()
     {
-        _zombieMove = GetComponent<ZombieMove>();
+        _move = GetComponent<ZombieFollow>();
         _animator = GetComponent<ZombieAnimator>();
     }
     private void OnEnable()
@@ -23,7 +23,7 @@ public class ZombieAttack : MonoBehaviour
         _timer = 0;
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         if (_canAttack)
         {
@@ -32,30 +32,31 @@ public class ZombieAttack : MonoBehaviour
             if (_timer >= _attackSpeed)
             {
                 _timer = 0;
-                AttackWall();
+                Attack();
             }
         }
     }
-    private void OnTriggerStay2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Wall"))
+        if (collision.CompareTag("Player"))
         {
             _canAttack = true;
-            _zombieMove.SetCanMove(false);
+            _move.SetCanMove(false);
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         _canAttack = false;
-        _zombieMove.SetCanMove(true);
+        _move.SetCanMove(true);
+        _animator.SetAnimation(ZombieAnimations.Names.Walk);
     }
 
-    public void AttackWall()
+    public void Attack()
     {
         _animator.SetAnimation(ZombieAnimations.Names.Attack);
         AudioManager.instance.PlayRandomSound(AudioManager.Category.Other, "Wall");
-        Wall.instance.SetHP(_attackForce);
+        //Wall.instance.SetHP(_attackForce);
     }
 
 }

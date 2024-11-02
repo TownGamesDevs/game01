@@ -1,15 +1,23 @@
+using System.Collections;
 using UnityEngine;
 
 public class ZombieBlood : MonoBehaviour
 {
-    [SerializeField] private GameObject _bloodParticles;
-    private ParticleSystem _particleSystem;
 
-    private void Awake()
+    [SerializeField] private float _y_offset;
+    [SerializeField] private float _x_offset;
+    public void ShowBlood()
     {
-        _particleSystem = _bloodParticles.GetComponent<ParticleSystem>();
-        _particleSystem.Stop();
-    }
+        // Pool object
+        GameObject blood = PoolManager.instance.Pool(PoolData.Type.Blood);
+        if (blood == null) return;
 
-    public void ShowBlood() =>  _particleSystem.Play();
+        if (blood.TryGetComponent<ParticleSystem>(out ParticleSystem particle))
+        {
+            // Set position and activate particle system
+            blood.transform.position = new Vector2(transform.position.x + _x_offset, transform.position.y + _y_offset);
+            blood.SetActive(true);
+            particle.Play();
+        }
+    }
 }

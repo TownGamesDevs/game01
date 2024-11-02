@@ -9,8 +9,6 @@ public class Shooting : MonoBehaviour
     [SerializeField] private Transform _bulletSpawnPoint;
     [SerializeField] private BoxCollider2D _weaponRange;
     [SerializeField] private float _roundsPerSec;
-    [SerializeField] private CameraShake cameraShake;
-    [SerializeField] private float shakeDuration, shakeMagnitude;
 
     // Components
     private Weapon _weapon;
@@ -79,7 +77,6 @@ public class Shooting : MonoBehaviour
         bullet.transform.position = _bulletSpawnPoint.position; // Set bullet position
         _reload.DecreaseAmmo(); // Update ammo
         PlayBulletSound();
-        cameraShake.TriggerShake(shakeDuration, shakeMagnitude); // cam shake
         //SaveScore();
 
         // Fixes bug where it won't detect zombies in range

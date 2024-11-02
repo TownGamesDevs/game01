@@ -128,37 +128,37 @@ MonoBehaviour:
     - source: {fileID: 0}
       name: Hurt1
       clip: {fileID: 8300000, guid: 5d09dd86efd604b0e9048fd674a6fa27, type: 3}
-      volume: 0.8
+      volume: 0.5
       pitch: 1
       loop: 0
     - source: {fileID: 0}
       name: Hurt2
       clip: {fileID: 8300000, guid: c920eba22a44b4f1b8d9aa13573104cb, type: 3}
-      volume: 0.8
+      volume: 0.5
       pitch: 1
       loop: 0
     - source: {fileID: 0}
       name: Hurt3
       clip: {fileID: 8300000, guid: ce130644b119842688ff9c4d27a00507, type: 3}
-      volume: 1
+      volume: 0.5
       pitch: 1
       loop: 0
     - source: {fileID: 0}
       name: Hurt4
       clip: {fileID: 8300000, guid: 65945979d3a5648f9bd5cb5bc9c639df, type: 3}
-      volume: 1
+      volume: 0.5
       pitch: 1
       loop: 0
     - source: {fileID: 0}
       name: Hurt5
       clip: {fileID: 8300000, guid: ecd98dd11c2144910a2886d0a43e898f, type: 3}
-      volume: 1
+      volume: 0.5
       pitch: 1
       loop: 0
     - source: {fileID: 0}
       name: Hurt6
       clip: {fileID: 8300000, guid: f76353e99f5fc476ba4c14afdf7b8bda, type: 3}
-      volume: 1
+      volume: 0.5
       pitch: 1
       loop: 0
   _weapons:
@@ -167,31 +167,31 @@ MonoBehaviour:
     - source: {fileID: 0}
       name: rifle1
       clip: {fileID: 8300000, guid: 34356896518ed584bb88b755d23bd7fa, type: 3}
-      volume: 0.2
+      volume: 0.35
       pitch: 1
       loop: 0
     - source: {fileID: 0}
       name: rifle2
       clip: {fileID: 8300000, guid: 8f153ae73e0cfc74ca3407a8ca1ebf38, type: 3}
-      volume: 0.2
+      volume: 0.35
       pitch: 1
       loop: 0
     - source: {fileID: 0}
       name: rifle3
       clip: {fileID: 8300000, guid: 744da7dbf2b5cd64f9ba83d80597ec52, type: 3}
-      volume: 0.2
+      volume: 0.35
       pitch: 1
       loop: 0
     - source: {fileID: 0}
       name: rifle4
       clip: {fileID: 8300000, guid: d8cb02fc6f413444cb0189d73d57aa4a, type: 3}
-      volume: 0.2
+      volume: 0.35
       pitch: 1
       loop: 0
     - source: {fileID: 0}
       name: rifle5
       clip: {fileID: 8300000, guid: ba523e686a9e1c34491e5f1af0880178, type: 3}
-      volume: 0.2
+      volume: 0.35
       pitch: 1
       loop: 0
   - category: Sniper Rifle

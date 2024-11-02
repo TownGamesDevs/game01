@@ -452,9 +452,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5ddf7fe247b38944a11c3602a9561d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 0
-  _baseSpeed: 50
-  _maxSpeed: 4
+  _speed: 5
+  _baseSpeed: 10
+  _maxSpeed: 8
   _minSpeed: 1
 --- !u!114 &3831354557818950890
 MonoBehaviour:
@@ -468,7 +468,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6dde96993828a24bba8e164f6973f36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _duration: 0
+  _duration: 1
   _baseDuration: 0
 --- !u!114 &1821168854758702749
 MonoBehaviour:
@@ -484,7 +484,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _baseFadeOutTime: 0
   _fadeOutTime: 0
-  _minFadeOutTime: 0.5
+  _minFadeOutTime: 0.6
   _maxFadeOutTime: 0
 --- !u!114 &3140940223538493989
 MonoBehaviour:

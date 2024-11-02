@@ -1,7 +1,9 @@
+using Mono.Cecil.Cil;
 using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
-{
+{ public static PlayerMove instance;
+
     [SerializeField] private float _speed;
     private Rigidbody2D _rb;
     private bool _canWalk, _canIdle;
@@ -10,6 +12,10 @@ public class PlayerMove : MonoBehaviour
     // Track the pressed state of each direction key
     private bool _isUp, _isDown, _isLeft, _isRight;
 
+    private void Awake()
+    {
+        if (instance == null) instance = this;
+    }
     private void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
@@ -85,5 +91,10 @@ public class PlayerMove : MonoBehaviour
             _canIdle = false;
             SoldierAnimator.instance.SetAnimation(SoldierAnimations.Names.Idle);
         }
+    }
+
+    public Vector3 GetPosition()
+    {
+        return transform.position;
     }
 }
