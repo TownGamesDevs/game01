@@ -24,10 +24,8 @@ public abstract class BaseAnimator<T> : MonoBehaviour where T : System.Enum
 
     protected virtual void Awake() => sr = GetComponent<SpriteRenderer>();
 
-    private void Start()
-    {
-        SetAnimation(_defaultAnimation);
-    }
+    private void Start() => SetAnimation(_defaultAnimation);
+    
 
     private void OnEnable()
     {

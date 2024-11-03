@@ -78,6 +78,7 @@ public class Shooting : MonoBehaviour
         bullet.transform.position = _bulletSpawnPoint.position;  // Set bullet position
         _reload.DecreaseAmmo();  // Update ammo
         PlayBulletSound();
+        MuzzleFlash.instance.PlayRandomMuzzle();
     }
 
     private GameObject PoolBullet()

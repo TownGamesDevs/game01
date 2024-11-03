@@ -1,5 +1,3 @@
-using UnityEngine;
-
 [System.Serializable]
 public class SoldierAnimations
 {
@@ -24,5 +22,4 @@ public class SoldierAnimator : BaseAnimator<SoldierAnimations.Names>
     {
         SetAnimation(SoldierAnimations.Names.Idle);
     }
-
 }
