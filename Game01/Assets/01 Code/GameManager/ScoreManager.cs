@@ -6,7 +6,7 @@ public class ScoreManager : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI[] _txt;
     private int _score;
-    const string SCORE = "Score: ";
+    const string SCORE = "SCORE: ";
 
     private void Awake()
     {
@@ -33,10 +33,10 @@ public class ScoreManager : MonoBehaviour
 
 
             // Save highscore
-            if (_score > PlayerPrefs.GetInt("Highscore"))
-            {
-                PlayerPrefs.SetInt("Highscore", _score);
-            }
+            //if (_score > PlayerPrefs.GetInt("Highscore"))
+            //{
+            //    PlayerPrefs.SetInt("Highscore", _score);
+            //}
         }
     }
 }

@@ -1,5 +1,4 @@
 using TMPro;
-using UnityEditor.Rendering.LookDev;
 using UnityEngine;
 
 public class ZombieHP : MonoBehaviour
@@ -7,14 +6,14 @@ public class ZombieHP : MonoBehaviour
     [SerializeField] private int _currentHP;
     [SerializeField] private TextMeshProUGUI[] _txt;
 
-    private ZombieBlood _blood;
+    private ZombieBlood blood;
     private DamagePointsManager _damagePoints;
     const string BULLET = "Bullet";
     private int _zombieHP;
     private bool _isDead;
     private void Start()
     {
-        _blood = GetComponent<ZombieBlood>();
+        blood = GetComponent<ZombieBlood>();
         _damagePoints = GetComponent<DamagePointsManager>();
     }
     private void OnEnable()
@@ -42,13 +41,13 @@ public class ZombieHP : MonoBehaviour
         }
         PrintZombieHP(_zombieHP);
         CameraShake.instance.TriggerShake(); // cam shake
-        _blood.ShowBlood();
+        blood.ShowBlood();
         AudioManager.instance.PlayRandomSound(AudioManager.Category.Zombie, "BulletHit");
     }
 
     public void PrintZombieHP(int hp)
     {
-        foreach (var text in _txt)
+        foreach (TextMeshProUGUI text in _txt)
             text.text = hp.ToString();
     }
 
@@ -71,7 +70,6 @@ public class ZombieHP : MonoBehaviour
             int bulletDamage = bullet.GetDamage();
             int damageToBullet = bulletDamage - _zombieHP;
             int damageToZombie = _zombieHP - bulletDamage;
-            int _tmpDamage = Mathf.Max(1, Mathf.Abs(damageToBullet));
 
             // Damage must be positive and bigger than 0
             ScoreManager.instance.PrintScore(bulletDamage);

@@ -181,7 +181,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: +1
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b3c1ff39f5b4c784b86b3edd35e1ef2f, type: 2}
   m_sharedMaterial: {fileID: 8611662776413090375, guid: b3c1ff39f5b4c784b86b3edd35e1ef2f, type: 2}
@@ -317,7 +317,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: +1
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b3c1ff39f5b4c784b86b3edd35e1ef2f, type: 2}
   m_sharedMaterial: {fileID: 8611662776413090375, guid: b3c1ff39f5b4c784b86b3edd35e1ef2f, type: 2}
@@ -402,6 +402,7 @@ GameObject:
   - component: {fileID: 3831354557818950890}
   - component: {fileID: 1821168854758702749}
   - component: {fileID: 3140940223538493989}
+  - component: {fileID: 4349619872092653893}
   m_Layer: 0
   m_Name: DamagePointPrefab
   m_TagString: Untagged
@@ -420,7 +421,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.9427618, y: 0.58100444, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 6496130048171012800}
   m_Father: {fileID: 0}
@@ -452,9 +453,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5ddf7fe247b38944a11c3602a9561d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 5
-  _baseSpeed: 10
-  _maxSpeed: 8
+  _speed: 2
+  _baseSpeed: 30
+  _maxSpeed: 3
   _minSpeed: 1
 --- !u!114 &3831354557818950890
 MonoBehaviour:
@@ -484,7 +485,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _baseFadeOutTime: 0
   _fadeOutTime: 0
-  _minFadeOutTime: 0.6
+  _minFadeOutTime: 0.55
   _maxFadeOutTime: 0
 --- !u!114 &3140940223538493989
 MonoBehaviour:
@@ -498,5 +499,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0439f95faac8fc246b811bc8121f4393, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _destroyTime: 0.5
+  _destroyTime: 1
   _canDestroy: 1
+--- !u!114 &4349619872092653893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7291279443434476915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44634c1b36be1c747bf05012ae16caea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _speed: 10
+  _targetScale: 1.5

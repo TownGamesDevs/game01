@@ -1,5 +1,4 @@
 using System.Collections;
-using TMPro;
 using UnityEngine;
 using static Weapon;
 
@@ -7,37 +6,35 @@ public class Shooting : MonoBehaviour
 {
     // Public variables
     [SerializeField] private Transform _bulletSpawnPoint;
-    [SerializeField] private BoxCollider2D _weaponRange;
-    [SerializeField] private float _roundsPerSec;
+    [SerializeField] private float _initialRoundsPerSec = 10f;  // Starting rounds per second
+    [SerializeField] private float _minRoundsPerSec = 5f;       // Minimum rounds per second for faster shooting
+    [SerializeField] private float _increaseRate = 0.1f;        // Rate at which fire rate increases
 
     // Components
     private Weapon _weapon;
-    private WeaponRange _range;
     private ReloadWeapon _reload;
-
 
     // Variables
     private float _timer;
+    private float _currentRoundsPerSec;
     private BulletType _bullet;
 
     // Flags
     private bool _canShoot;
 
-
-    private void OnEnable() => WaveController.OnWaveCompleted += StopAutoShoot;
-    private void OnDestroy() => WaveController.OnWaveCompleted -= StopAutoShoot;
-    private void StopAutoShoot() => _canShoot = false;
+    private void OnEnable() => WaveController.OnWaveCompleted += StopShooting;
+    private void OnDestroy() => WaveController.OnWaveCompleted -= StopShooting;
+    private void StopShooting() => _canShoot = false;
 
     private void Start()
     {
         _weapon = GetComponent<Weapon>();
-        _range = GetComponent<WeaponRange>();
         _reload = GetComponent<ReloadWeapon>();
 
         _timer = 0;
         _canShoot = true;
-        _roundsPerSec /= 100;
-        _timer = _roundsPerSec;
+        _currentRoundsPerSec = _initialRoundsPerSec;
+        _timer = 1 / _currentRoundsPerSec;
 
         if (_weapon != null)
             _bullet = _weapon.GetBulletType();
@@ -45,46 +42,47 @@ public class Shooting : MonoBehaviour
             Debug.LogError("No weapon found in Soldier!");
     }
 
-    void Update()
+    private void Update()
     {
-        CanMouseShoot();
+        HandleShooting();
     }
-    public void CanMouseShoot()
-    {
-        _timer += Time.deltaTime;
-        if (Input.GetMouseButton(0) && _timer >= _roundsPerSec && _canShoot)
-        {
-            _timer = 0;
-            Shoot();
-        }
-    }
-    public void CanAutoShoot()
+
+    public void SetCanShoot(bool state) => _canShoot = state;
+
+    private void HandleShooting()
     {
         _timer += Time.deltaTime;
 
-        if (_canShoot && _timer >= _roundsPerSec && _range.IsInRange())
+        // Check if the fire button is held and player can shoot
+        if (Input.GetMouseButton(0) && _timer >= (1 / _currentRoundsPerSec) && _canShoot)
         {
             _timer = 0;
             Shoot();
+
+            // Increase fire rate by reducing _currentRoundsPerSec, clamping it to the minimum allowed
+            _currentRoundsPerSec = Mathf.Max(_minRoundsPerSec, _currentRoundsPerSec - _increaseRate);
+        }
+
+        // Reset fire rate if fire button is released
+        if (Input.GetMouseButtonUp(0) || !_canShoot)
+        {
+            _currentRoundsPerSec = _initialRoundsPerSec;
         }
     }
-    public void SetCanShoot(bool state) => _canShoot = state;
+
     private void Shoot()
     {
         GameObject bullet = PoolBullet();
-        if (bullet == null) return; // Exit if no bullet
+        if (bullet == null) return;  // Exit if no bullet
 
-        bullet.transform.position = _bulletSpawnPoint.position; // Set bullet position
-        _reload.DecreaseAmmo(); // Update ammo
+        bullet.transform.position = _bulletSpawnPoint.position;  // Set bullet position
+        _reload.DecreaseAmmo();  // Update ammo
         PlayBulletSound();
-        //SaveScore();
-
-        // Fixes bug where it won't detect zombies in range
-        _range.SetInRange(false);
     }
+
     private GameObject PoolBullet()
     {
-        // Choose a bullet for each soldier
+        // Choose a bullet type for each soldier
         if (_bullet == BulletType.Rifle)
             return PoolManager.instance.Pool(PoolData.Type.AssaultBullet);
         else if (_bullet == BulletType.SniperRifle)
@@ -92,6 +90,7 @@ public class Shooting : MonoBehaviour
 
         return null;
     }
+
     private void PlayBulletSound()
     {
         if (_bullet == BulletType.Rifle)
@@ -99,10 +98,4 @@ public class Shooting : MonoBehaviour
         else if (_bullet == BulletType.SniperRifle)
             AudioManager.instance.PlayRandomSound(AudioManager.Category.Weapons, "Sniper Rifle");
     }
-    //private void SaveScore()
-    //{
-    //    PlayerPrefs.SetInt("TotalShots", PlayerPrefs.GetInt("TotalShots") + 1);
-    //    PlayerPrefs.Save();
-    //}
-
 }

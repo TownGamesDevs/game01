@@ -206,7 +206,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _minDamage: 3
-  _maxDamage: 6
+  _maxDamage: 25
 --- !u!114 &4255106434452925015
 MonoBehaviour:
   m_ObjectHideFlags: 0

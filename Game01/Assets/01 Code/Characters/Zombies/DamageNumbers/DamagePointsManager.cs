@@ -7,6 +7,7 @@ public class DamagePointsManager : MonoBehaviour
     [SerializeField] private Transform _spawnPos;
     [SerializeField] private float _y_offset;
     private DamageNumbers dp;
+    private DNScale dnScaleScript;
     private GameObject _damageNum;
     private void Awake() => instance ??= this;
     public void ShowDamageNumbers(int damage)
@@ -21,7 +22,9 @@ public class DamagePointsManager : MonoBehaviour
 
         _damageNum.gameObject.SetActive(true);
         dp = _damageNum.GetComponent<DamageNumbers>();
+        dnScaleScript = _damageNum.GetComponent<DNScale>();
         _damageNum.transform.position = new Vector2(transform.position.x, _spawnPos.transform.position.y + _y_offset);
         dp.SetDM(damage);
+        //dnScaleScript.SetScaleFactor(damage);
     }
 }

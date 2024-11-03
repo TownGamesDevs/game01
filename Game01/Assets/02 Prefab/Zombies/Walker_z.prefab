@@ -526,13 +526,13 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8169225837865231683}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 5
   m_LinearDamping: 0
-  m_AngularDamping: 0.05
+  m_AngularDamping: 0
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -587,7 +587,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de49bccb5d05164489ebb2c6929ca5f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _attackForce: 3
+  _attackForce: 2
   _attackSpeed: 0.5
 --- !u!114 &1754271147334150626
 MonoBehaviour:
@@ -654,9 +654,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5cbc54237ce37840a5b8ee69647621c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  player: {fileID: 8298362443821050346, guid: 00150dd3b0a1c134d87ca78b8727c209, type: 3}
   speed: 6
-  xOffset: 1
+  xOffset: 0
   yOffset: -1
 --- !u!114 &8626081209183134272
 MonoBehaviour:
@@ -670,5 +670,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0d8ff6541f2150458ad2146c23e8ced, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _y_offset: 1.2
-  _x_offset: -0.35
+  _y_offset: 1.5
+  _x_offset: 0
