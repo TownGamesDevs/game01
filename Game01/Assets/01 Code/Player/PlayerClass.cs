@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-public class SoldierClass : MonoBehaviour
+public class PlayerClass : MonoBehaviour
 {
 	public enum BaseHP
 	{

@@ -6,9 +6,7 @@ public class Shooting : MonoBehaviour
 {
     // Public variables
     [SerializeField] private Transform _bulletSpawnPoint;
-    [SerializeField] private float _initialRoundsPerSec = 10f;  // Starting rounds per second
-    [SerializeField] private float _minRoundsPerSec = 5f;       // Minimum rounds per second for faster shooting
-    [SerializeField] private float _increaseRate = 0.1f;        // Rate at which fire rate increases
+    [SerializeField] private float _roundsPerSec;
 
     // Components
     private Weapon _weapon;
@@ -16,7 +14,6 @@ public class Shooting : MonoBehaviour
 
     // Variables
     private float _timer;
-    private float _currentRoundsPerSec;
     private BulletType _bullet;
 
     // Flags
@@ -33,8 +30,7 @@ public class Shooting : MonoBehaviour
 
         _timer = 0;
         _canShoot = true;
-        _currentRoundsPerSec = _initialRoundsPerSec;
-        _timer = 1 / _currentRoundsPerSec;
+        _timer = 1 / _roundsPerSec;
 
         if (_weapon != null)
             _bullet = _weapon.GetBulletType();
@@ -54,19 +50,10 @@ public class Shooting : MonoBehaviour
         _timer += Time.deltaTime;
 
         // Check if the fire button is held and player can shoot
-        if (Input.GetMouseButton(0) && _timer >= (1 / _currentRoundsPerSec) && _canShoot)
+        if (Input.GetMouseButton(0) && _timer >= (1 / _roundsPerSec) && _canShoot)
         {
             _timer = 0;
             Shoot();
-
-            // Increase fire rate by reducing _currentRoundsPerSec, clamping it to the minimum allowed
-            _currentRoundsPerSec = Mathf.Max(_minRoundsPerSec, _currentRoundsPerSec - _increaseRate);
-        }
-
-        // Reset fire rate if fire button is released
-        if (Input.GetMouseButtonUp(0) || !_canShoot)
-        {
-            _currentRoundsPerSec = _initialRoundsPerSec;
         }
     }
 
@@ -76,9 +63,18 @@ public class Shooting : MonoBehaviour
         if (bullet == null) return;  // Exit if no bullet
 
         bullet.transform.position = _bulletSpawnPoint.position;  // Set bullet position
+
+
+
+        // Set bullet direction
+        bullet.GetComponent<BulletMove>().ChangeDir(FlipManager.instance.GetDirection());
+
+
+
         _reload.DecreaseAmmo();  // Update ammo
         PlayBulletSound();
         MuzzleFlash.instance.PlayRandomMuzzle();
+        CameraShake.instance.TriggerShake(); // cam shake
     }
 
     private GameObject PoolBullet()

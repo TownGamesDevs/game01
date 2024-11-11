@@ -571,7 +571,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ad1796dffb097d458b44777b33ea533, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _currentHP: 30
+  _currentHP: 70
   _txt:
   - {fileID: 2359677930509275416}
   - {fileID: 3433758497342708620}
@@ -654,7 +654,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5cbc54237ce37840a5b8ee69647621c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 8298362443821050346, guid: 00150dd3b0a1c134d87ca78b8727c209, type: 3}
+  player: {fileID: 0}
   speed: 6
   xOffset: 0
   yOffset: -1

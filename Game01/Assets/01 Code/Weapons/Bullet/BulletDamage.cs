@@ -12,7 +12,7 @@ public class BulletDamage : MonoBehaviour
     }
     public int GetDamage() => _bulletDamage;
 
-    public void SetBulletDamage(int damage)
+    public void SetBulletHP(int damage)
     {
         _bulletDamage = damage;
         if (_bulletDamage <= 0)

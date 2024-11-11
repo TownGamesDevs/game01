@@ -25,7 +25,7 @@ public class ZombieHP : MonoBehaviour
 
     public int GetHP() => _zombieHP;
 
-    public void SetZombieDamage(int damage)
+    public void SetZombieHP(int damage)
     {
         if (_isDead) return;
 
@@ -40,7 +40,6 @@ public class ZombieHP : MonoBehaviour
             return;
         }
         PrintZombieHP(_zombieHP);
-        CameraShake.instance.TriggerShake(); // cam shake
         blood.ShowBlood();
         AudioManager.instance.PlayRandomSound(AudioManager.Category.Zombie, "BulletHit");
     }
@@ -67,17 +66,19 @@ public class ZombieHP : MonoBehaviour
         if (collision.CompareTag(BULLET) && collision.TryGetComponent<BulletDamage>(out BulletDamage bullet))
         {
             // Calculate damage to bullet and zombie
-            int bulletDamage = bullet.GetDamage();
+            int bulletDamage = Mathf.Min(_zombieHP, bullet.GetDamage());
             int damageToBullet = bulletDamage - _zombieHP;
             int damageToZombie = _zombieHP - bulletDamage;
 
-            // Damage must be positive and bigger than 0
+            // Display damage
             ScoreManager.instance.PrintScore(bulletDamage);
             _damagePoints.ShowDamageNumbers(bulletDamage);
 
+            // Update bullet HP
+            bullet.SetBulletHP(damageToBullet);
 
-            bullet.SetBulletDamage(damageToBullet);
-            SetZombieDamage(damageToZombie);
+            // Update zombie HP
+            SetZombieHP(damageToZombie);
         }
     }
 }
