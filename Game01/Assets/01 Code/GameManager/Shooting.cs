@@ -38,14 +38,12 @@ public class Shooting : MonoBehaviour
             Debug.LogError("No weapon found in Soldier!");
     }
 
-    private void Update()
-    {
-        HandleShooting();
-    }
+    private void Update() => CanShoot();
+    
 
     public void SetCanShoot(bool state) => _canShoot = state;
 
-    private void HandleShooting()
+    private void CanShoot()
     {
         _timer += Time.deltaTime;
 
@@ -70,9 +68,8 @@ public class Shooting : MonoBehaviour
         bullet.GetComponent<BulletMove>().ChangeDir(FlipManager.instance.GetDirection());
 
 
-
         _reload.DecreaseAmmo();  // Update ammo
-        PlayBulletSound();
+        PlaySound();
         MuzzleFlash.instance.PlayRandomMuzzle();
         CameraShake.instance.TriggerShake(); // cam shake
     }
@@ -88,11 +85,9 @@ public class Shooting : MonoBehaviour
         return null;
     }
 
-    private void PlayBulletSound()
+    private void PlaySound()
     {
         if (_bullet == BulletType.Rifle)
             AudioManager.instance.PlayRandomSound(AudioManager.Category.Weapons, "Rifle");
-        else if (_bullet == BulletType.SniperRifle)
-            AudioManager.instance.PlayRandomSound(AudioManager.Category.Weapons, "Sniper Rifle");
     }
 }

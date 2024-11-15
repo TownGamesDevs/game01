@@ -6,12 +6,12 @@ public class BulletMaxDistance : MonoBehaviour
     [SerializeField] private float _maxTime;
     private float _timer;
 
-    private void Update() =>  CheckDistance();
-    
-    public void CheckDistance()
+    private void Update() => CheckDistance();
+
+    private void CheckDistance()
     {
         _timer += Time.deltaTime;
-        if (_maxDistance - transform.position.x <= 0 || _timer >= _maxTime)
+        if (Mathf.Abs(transform.position.x) >= _maxDistance || _timer >= _maxTime)
         {
             _timer = 0;
             gameObject.SetActive(false);

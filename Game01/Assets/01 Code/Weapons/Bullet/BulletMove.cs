@@ -12,10 +12,8 @@ public class BulletMove : MonoBehaviour
     private Vector2 _dir;
 
     private void Awake() => instance ??= this;
-    private void Start()
-    {
-        _rb = GetComponent<Rigidbody2D>();
-    }
+    private void Start() => _rb = GetComponent<Rigidbody2D>();
+    
 
     void FixedUpdate() => Move();
 
@@ -23,6 +21,8 @@ public class BulletMove : MonoBehaviour
     {
         if (_canMove)
             _rb.linearVelocity = _dir * _speed;
+            //_rb.linearVelocity = Vector2.right * _speed;
+        
     }
 
     public void ChangeDir(bool isRight)

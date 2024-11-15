@@ -15,5 +15,6 @@ public class FlipManager : MonoBehaviour
             _isFacingRight = true;
     }
 
+    public void SetDirection(bool state) => _isFacingRight = state;
     public bool GetDirection() => _isFacingRight;
 }

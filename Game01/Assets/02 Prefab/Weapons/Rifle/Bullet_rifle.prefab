@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 481867049428890314}
   - component: {fileID: 871878648011562942}
   - component: {fileID: 4255106434452925015}
+  - component: {fileID: -5785470453829542072}
   m_Layer: 8
   m_Name: Bullet_rifle
   m_TagString: Bullet
@@ -165,7 +166,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 6
+  m_Constraints: 0
 --- !u!114 &349526779675473178
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -193,7 +194,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxDistance: 15
-  _maxTime: 0.5
+  _maxTime: 1
 --- !u!114 &871878648011562942
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -230,3 +231,15 @@ MonoBehaviour:
     - {fileID: -1905840568, guid: 01cbb1d134f91334b98700c5fd8e6323, type: 3}
     FPS: 20
     loopWaitTime: 0
+--- !u!114 &-5785470453829542072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4345513452875288146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41be7e69b9d665e428e7f4fdb387b8f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
