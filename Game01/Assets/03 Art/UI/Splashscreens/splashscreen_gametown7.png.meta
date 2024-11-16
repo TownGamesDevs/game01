@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 5e9e3ddc409eeb8488b0b3f090994a28
+guid: b6dc56c4b2df3d94585fa3edd3c53e2d
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7890752118823556593
-    second: splashscreen_gametown20_0
+      213: -2218931629435879668
+    second: splashscreen_gametown7_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -96,17 +96,30 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: splashscreen_gametown20_0
+      name: splashscreen_gametown7_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 764
-        height: 366
+        x: 485
+        y: 225
+        width: 1235
+        height: 430
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f0a6cd241ca6e7290800000000000000
-      internalID: -7890752118823556593
+      spriteID: c0f789e7075c431e0800000000000000
+      internalID: -2218931629435879668
       vertices: []
       indices: 
       edges: []
@@ -135,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      splashscreen_gametown20_0: -7890752118823556593
+      splashscreen_gametown7_0: -2218931629435879668
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

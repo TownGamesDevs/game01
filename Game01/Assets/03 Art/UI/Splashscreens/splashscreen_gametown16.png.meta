@@ -1,19 +1,16 @@
 fileFormatVersion: 2
-guid: 7a9141a5bf956ee418c02f78c7737efd
+guid: d8f7762586ce97a45b8d67cf4c26fcb7
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8385252844823259339
-    second: splashscreen_gametown6_0
+      213: -58746836732045475
+    second: splashscreen_gametown16_0
   - first:
-      213: -5876459810007122642
-    second: splashscreen_gametown6_1
+      213: -3000015326054649640
+    second: splashscreen_gametown16_1
   - first:
-      213: -6653924350846446628
-    second: splashscreen_gametown6_2
-  - first:
-      213: -2979883830260629114
-    second: splashscreen_gametown6_3
+      213: -2618576431453085469
+    second: splashscreen_gametown16_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -105,17 +102,30 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: splashscreen_gametown6_0
+      name: splashscreen_gametown16_0
       rect:
         serializedVersion: 2
-        x: 270
-        y: 443
-        width: 143
-        height: 268
+        x: 333
+        y: 487
+        width: 115
+        height: 228
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -124,20 +134,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 537d970f6f891ab80800000000000000
-      internalID: -8385252844823259339
+      spriteID: d5798e0301a4f2ff0800000000000000
+      internalID: -58746836732045475
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: splashscreen_gametown6_1
+      name: splashscreen_gametown16_1
       rect:
         serializedVersion: 2
-        x: 429
-        y: 443
-        width: 139
-        height: 188
+        x: 474
+        y: 487
+        width: 115
+        height: 172
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -146,20 +156,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e2d7aa700fe927ea0800000000000000
-      internalID: -5876459810007122642
+      spriteID: 8d0f8c9a4fdcd56d0800000000000000
+      internalID: -3000015326054649640
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: splashscreen_gametown6_2
+      name: splashscreen_gametown16_2
       rect:
         serializedVersion: 2
-        x: 574
-        y: 443
-        width: 231
-        height: 189
+        x: 614
+        y: 279
+        width: 1138
+        height: 527
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -168,30 +178,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: cd3d9719e0388a3a0800000000000000
-      internalID: -6653924350846446628
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: splashscreen_gametown6_3
-      rect:
-        serializedVersion: 2
-        x: 818
-        y: 218
-        width: 998
-        height: 591
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 6818269c17355a6d0800000000000000
-      internalID: -2979883830260629114
+      spriteID: 3e067020c92f8abd0800000000000000
+      internalID: -2618576431453085469
       vertices: []
       indices: 
       edges: []
@@ -210,10 +198,9 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      splashscreen_gametown6_0: -8385252844823259339
-      splashscreen_gametown6_1: -5876459810007122642
-      splashscreen_gametown6_2: -6653924350846446628
-      splashscreen_gametown6_3: -2979883830260629114
+      splashscreen_gametown16_0: -58746836732045475
+      splashscreen_gametown16_1: -3000015326054649640
+      splashscreen_gametown16_2: -2618576431453085469
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -45,8 +45,6 @@ public class WaveController : MonoBehaviour
 
     private void SpawnZombie()
     {
-        print("Spawning zombie...");
-
         GameObject zombie = PoolManager.instance.Pool(PoolData.Type.Walker);
         if (zombie == null) return;
 

@@ -1,22 +1,19 @@
 fileFormatVersion: 2
-guid: 187f8ac1ed0cbee48ba29066b86efac6
+guid: e2e2a46a1a52ea94b80ec88ec42edbad
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1954894542197381497
-    second: splashscreen_gametown18_0
+      213: -4922380034222782565
+    second: splashscreen_gametown12_0
   - first:
-      213: 1328183803902518323
-    second: splashscreen_gametown18_1
+      213: -4440223866322674893
+    second: splashscreen_gametown12_1
   - first:
-      213: 3516426203324359811
-    second: splashscreen_gametown18_2
+      213: -1424354522992579097
+    second: splashscreen_gametown12_2
   - first:
-      213: -8028829823101316764
-    second: splashscreen_gametown18_3
-  - first:
-      213: -6305841048537355839
-    second: splashscreen_gametown18_4
+      213: 4088507169661651195
+    second: splashscreen_gametown12_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -108,17 +105,30 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: splashscreen_gametown18_0
+      name: splashscreen_gametown12_0
       rect:
         serializedVersion: 2
-        x: 452
-        y: 472
-        width: 113
-        height: 132
+        x: 413
+        y: 519
+        width: 112
+        height: 222
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -127,20 +137,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 786a9f675c1ded4e0800000000000000
-      internalID: -1954894542197381497
+      spriteID: b970da2507130bbb0800000000000000
+      internalID: -4922380034222782565
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: splashscreen_gametown18_1
+      name: splashscreen_gametown12_1
       rect:
         serializedVersion: 2
-        x: 557
-        y: 470
-        width: 105
-        height: 101
+        x: 498
+        y: 519
+        width: 120
+        height: 151
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -149,20 +159,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 3346904f128ae6210800000000000000
-      internalID: 1328183803902518323
+      spriteID: 33b10ac3be72162c0800000000000000
+      internalID: -4440223866322674893
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: splashscreen_gametown18_2
+      name: splashscreen_gametown12_2
       rect:
         serializedVersion: 2
-        x: 657
-        y: 472
+        x: 635
+        y: 519
         width: 162
-        height: 96
+        height: 151
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -171,20 +181,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 3842608400bdcc030800000000000000
-      internalID: 3516426203324359811
+      spriteID: 7ed6ece9b1dab3ce0800000000000000
+      internalID: -1424354522992579097
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: splashscreen_gametown18_3
+      name: splashscreen_gametown12_3
       rect:
         serializedVersion: 2
-        x: 823
-        y: 472
-        width: 94
-        height: 98
+        x: 726
+        y: 330
+        width: 1026
+        height: 527
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -193,30 +203,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 461dbff70ddd39090800000000000000
-      internalID: -8028829823101316764
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: splashscreen_gametown18_4
-      rect:
-        serializedVersion: 2
-        x: 925
-        y: 348
-        width: 609
-        height: 365
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 1c9aad3e9f62d78a0800000000000000
-      internalID: -6305841048537355839
+      spriteID: bf80255eb9b4db830800000000000000
+      internalID: 4088507169661651195
       vertices: []
       indices: 
       edges: []
@@ -235,11 +223,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      splashscreen_gametown18_0: -1954894542197381497
-      splashscreen_gametown18_1: 1328183803902518323
-      splashscreen_gametown18_2: 3516426203324359811
-      splashscreen_gametown18_3: -8028829823101316764
-      splashscreen_gametown18_4: -6305841048537355839
+      splashscreen_gametown12_0: -4922380034222782565
+      splashscreen_gametown12_1: -4440223866322674893
+      splashscreen_gametown12_2: -1424354522992579097
+      splashscreen_gametown12_3: 4088507169661651195
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

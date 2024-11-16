@@ -28,7 +28,10 @@ public class CountdownUI : MonoBehaviour
             _canStartCountdown = true;
             KeysUI.instance.DisableGameObject();
             if (_blink != null)
+            {
+                _blink.EnableTxt();
                 _blink.enabled = false;
+            }
         }
 
         StartCountdown();
@@ -47,8 +50,9 @@ public class CountdownUI : MonoBehaviour
 
             if (_counter <= 0)
             {
+                Timer.instance.StartUpdateTime();
                 WaveController.instance.CanSpawnZombies();
-                gameObject.SetActive(false);
+                gameObject.SetActive(false);    // Die
             }
 
             _txt.text = _counter.ToString();

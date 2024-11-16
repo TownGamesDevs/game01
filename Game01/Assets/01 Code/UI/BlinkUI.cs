@@ -21,4 +21,9 @@ public class BlinkUI : MonoBehaviour
         }
     }
 
+    public void EnableTxt()
+    {
+        _UI.SetActive(true);
+    }
+
 }
