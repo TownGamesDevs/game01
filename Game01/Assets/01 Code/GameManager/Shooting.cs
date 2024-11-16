@@ -48,7 +48,7 @@ public class Shooting : MonoBehaviour
         _timer += Time.deltaTime;
 
         // Check if the fire button is held and player can shoot
-        if (Input.GetMouseButton(0) && _timer >= (1 / _roundsPerSec) && _canShoot)
+        if ((Input.GetKey(KeyCode.Space) || Input.GetMouseButton(0)) && _timer >= (1 / _roundsPerSec) && _canShoot)
         {
             _timer = 0;
             Shoot();

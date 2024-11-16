@@ -7,12 +7,16 @@ public class BulletMove : MonoBehaviour
     [SerializeField] private float _speed;
     [SerializeField] private bool _canMove;
 
-
+    private SpriteRenderer _sr;
     private Rigidbody2D _rb;
     private Vector2 _dir;
 
     private void Awake() => instance ??= this;
-    private void Start() => _rb = GetComponent<Rigidbody2D>();
+    private void Start()
+    {
+        _rb = GetComponent<Rigidbody2D>();
+        _sr = GetComponent<SpriteRenderer>();
+    }
     
 
     void FixedUpdate() => Move();
@@ -20,9 +24,7 @@ public class BulletMove : MonoBehaviour
     private void Move()
     {
         if (_canMove)
-            _rb.linearVelocity = _dir * _speed;
-            //_rb.linearVelocity = Vector2.right * _speed;
-        
+            _rb.linearVelocity = _dir * _speed;        
     }
 
     public void ChangeDir(bool isRight)
@@ -30,10 +32,15 @@ public class BulletMove : MonoBehaviour
         if (isRight)
         {
             _dir = Vector2.right;
+            if (_sr != null)
+                _sr.flipX = false;
+
         }
         else if (!isRight)
         {
             _dir = Vector2.left;
+            if (_sr != null)
+                _sr.flipX = true;
         }
     }
 }

@@ -55,7 +55,6 @@ public class ZombieHP : MonoBehaviour
         if (_isDead) return;
 
         _isDead = true;
-        WaveController.instance.UpdateZombiesOnScreen();
         AudioManager.instance.PlayRandomSound(AudioManager.Category.Zombie, "Hurt");
         gameObject.SetActive(false); // Disable zombie
     }

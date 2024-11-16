@@ -1,38 +1,40 @@
+using System;
 using TMPro;
 using UnityEngine;
 
 public class CountdownUI : MonoBehaviour
 {
-    public static CountdownUI instance;
+    [SerializeField] private TextMeshProUGUI _txt;
 
-    [SerializeField] private TextMeshProUGUI[] _txt;
-    [SerializeField] private int _countdownStart;
-
+    private int _countdownStart;
     private float _timer;
     private int _counter;
     private bool _canStartCountdown;
-    private bool _hasStarted;
+    private BlinkUI _blink;
 
-    private void Awake() => instance ??= this;
     private void Start()
     {
-        _hasStarted = false;
+        _countdownStart = 3;
         _canStartCountdown = false;
         _timer = 1;
         _counter = _countdownStart;
+        _blink = GetComponent<BlinkUI>();
     }
 
-    private void Update() => StartCountDown();
-
-    public void StartCountdown()
+    private void Update()
     {
-        if (!_hasStarted)
+        if (Input.anyKeyDown && !_canStartCountdown)
         {
-            _hasStarted = true;
             _canStartCountdown = true;
+            KeysUI.instance.DisableGameObject();
+            if (_blink != null)
+                _blink.enabled = false;
         }
+
+        StartCountdown();
     }
-    private void StartCountDown()
+
+    private void StartCountdown()
     {
         if (_canStartCountdown)
         {
@@ -44,15 +46,12 @@ public class CountdownUI : MonoBehaviour
             }
 
             if (_counter <= 0)
+            {
+                WaveController.instance.CanSpawnZombies();
                 gameObject.SetActive(false);
+            }
 
-            PrintText();
+            _txt.text = _counter.ToString();
         }
-    }
-
-    private void PrintText()
-    {
-        for (int i = 0; i < _txt.Length; i++)
-            _txt[i].text = _counter.ToString();
     }
 }

@@ -40,33 +40,8 @@ public class StarManager : MonoBehaviour
     public void DisplayStars()
     {
         Initialize();
-
-        //_killed = WaveController.instance.GetTotalKilled();
         _totalSpawned = WaveController.instance.GetTotalZombies();
-
-        // Calculate how many stars to display based on enemies killed
-        // int starCount = CalculateStars();
-
-        // Start the coroutine to show the stars with animation
-        //StartCoroutine(AnimateStars(starCount));
-
-        //// Unlock next level
-        //if (starCount > 0 && _levelManager != null)
-        //    _levelManager.UnlockLevel(SceneManager.GetActiveScene().buildIndex);
     }
-
-    // Calculate the number of stars based on killed enemies
-    //private int CalculateStars()
-    //{
-    //    if (_killed == _totalSpawned)
-    //        return 3;  // If all enemies are killed, show 3 stars
-    //    else if (_killed >= _totalSpawned * 0.75f)
-    //        return 2;  // Show 2 stars for 75% or more
-    //    else if (_killed >= _totalSpawned * 0.5f)
-    //        return 1;  // Show 1 star for 50% or more
-    //    else
-    //        return 0;  // Show no stars if less than 50%
-    //}
 
 
     IEnumerator AnimateStars(int starCount)
