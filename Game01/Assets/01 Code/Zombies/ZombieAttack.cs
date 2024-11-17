@@ -6,16 +6,16 @@ public class ZombieAttack : MonoBehaviour
     [SerializeField] private float _attackSpeed;
 
 
-    private ZombieFollow _move;
-    private ZombieAnimator _animator;
+    private ZombieFollow _follow;
+    private ZombieAnimator _anim;
     private float _timer;
     private bool _canAttack;
 
 
     private void Start()
     {
-        _move = GetComponent<ZombieFollow>();
-        _animator = GetComponent<ZombieAnimator>();
+        _follow = GetComponent<ZombieFollow>();
+        _anim = GetComponent<ZombieAnimator>();
     }
     private void OnEnable()
     {
@@ -41,22 +41,28 @@ public class ZombieAttack : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             _canAttack = true;
-            _move.SetCanMove(false);
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        _canAttack = false;
-        _timer = _attackSpeed;
-        _move.SetCanMove(true);
-        _animator.SetAnimation(ZombieAnimations.Names.Walk);
+        if (collision.CompareTag("Player"))
+        {
+            _canAttack = false;
+            _timer = _attackSpeed;
+            _anim.SetAnimation(ZombieAnimations.Names.Walk);
+        }
     }
 
     public void Attack()
     {
-        _animator.SetAnimation(ZombieAnimations.Names.Attack);
+        // Attack animation
+        _anim.SetAnimation(ZombieAnimations.Names.Attack);
+
+        // Attack sound
         AudioManager.instance.PlayRandomSound(AudioManager.Category.Zombie, "Die");
+
+        // Update player HP
         PlayerHealth.instance.SetPlayerHealth(_attackForce);
     }
 

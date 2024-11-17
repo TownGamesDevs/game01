@@ -4,7 +4,8 @@ using TMPro;
 using UnityEngine;
 
 public class ReloadWeapon : MonoBehaviour
-{
+{ public static ReloadWeapon instance;
+
     [SerializeField] private int _maxAmmo;
     [SerializeField] private int _reloadTime;
     [SerializeField] private TextMeshProUGUI[] _ammoTxt;
@@ -12,6 +13,8 @@ public class ReloadWeapon : MonoBehaviour
     private Shooting _as;
     private bool _isReloading;
     private int _ammo;
+
+    private void Awake() => instance ??= this;
 
     private void Start()
     {

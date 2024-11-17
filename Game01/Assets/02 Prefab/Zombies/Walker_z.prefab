@@ -571,7 +571,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ad1796dffb097d458b44777b33ea533, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _currentHP: 70
+  _currentHP: 100
   _txt:
   - {fileID: 2359677930509275416}
   - {fileID: 3433758497342708620}
@@ -601,7 +601,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77940e279c2214042a41494ad04ce39b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _defaultAnimation: 0
+  _defaultAnimation: 2
   animations:
   - name: 0
     sprites:
@@ -641,7 +641,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _spawnPos: {fileID: 5736076542020507053}
-  _y_offset: 2
+  _y_offset: 3
 --- !u!114 &6568757228450932047
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -654,10 +654,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5cbc54237ce37840a5b8ee69647621c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  speed: 6
-  xOffset: 0
-  yOffset: -1
+  _speed: 3
+  _xOffset: 0
+  _yOffset: 0
 --- !u!114 &8626081209183134272
 MonoBehaviour:
   m_ObjectHideFlags: 0

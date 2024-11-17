@@ -1,27 +1,36 @@
 using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
-{
-    public static PlayerMove instance;
+{ public static PlayerMove instance;
 
     [SerializeField] private float _speed;
+    [SerializeField] private float _speedWhileShooting;
 
+    private float _actualSpeed;
     private Rigidbody2D _rb;
     private bool _canWalk, _canIdle;
     private Vector2 direction;
-
-    // Track the pressed state of each direction key
     private bool _isUp, _isDown, _isLeft, _isRight;
 
     private void Awake() => instance ??= this;
 
     private void Start()
     {
+        _actualSpeed = _speed;
         _rb = GetComponent<Rigidbody2D>();
         _canWalk = true;
     }
 
-    private void Update() => Move();
+    private void Update()
+    {
+        Move();
+
+        // Set speed
+        if ((Input.GetKey(KeyCode.Space) || Input.GetMouseButton(0)) && !ReloadWeapon.instance.IsReloading())
+            SpeedWhileShooting();
+        else
+            OriginalSpeed();
+    }
     private void Move()
     {
         HandleInput();
@@ -29,13 +38,11 @@ public class PlayerMove : MonoBehaviour
 
         // Horizontal movement priority
         if (_isRight && !_isLeft)
-        {
             direction.x = 1;
-        }
+        
         if (_isLeft && !_isRight)
-        {
             direction.x = -1;
-        }
+        
 
         // Vertical movement priority
         if (_isUp && !_isDown)
@@ -47,7 +54,7 @@ public class PlayerMove : MonoBehaviour
         // Move the player in the calculated direction
         if (direction != Vector2.zero)
         {
-            _rb.linearVelocity = direction.normalized * _speed;
+            _rb.linearVelocity = direction.normalized * _actualSpeed;
             SetWalkingAnim();
         }
         else
@@ -75,7 +82,6 @@ public class PlayerMove : MonoBehaviour
             SoldierAnimator.instance.SetAnimation(SoldierAnimations.Names.Moving);
         }
     }
-
     private void SetIdleAnim()
     {
         if (_canIdle)
@@ -85,9 +91,6 @@ public class PlayerMove : MonoBehaviour
             SoldierAnimator.instance.SetAnimation(SoldierAnimations.Names.Idle);
         }
     }
-
-    public Vector3 GetPosition()
-    {
-        return transform.position;
-    }
+    public void SpeedWhileShooting() => _actualSpeed = _speedWhileShooting;
+    public void OriginalSpeed() => _actualSpeed = _speed;
 }

@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 using static Weapon;
 
@@ -39,7 +38,7 @@ public class Shooting : MonoBehaviour
     }
 
     private void Update() => CanShoot();
-    
+
 
     public void SetCanShoot(bool state) => _canShoot = state;
 
@@ -61,7 +60,6 @@ public class Shooting : MonoBehaviour
         if (bullet == null) return;  // Exit if no bullet
 
         bullet.transform.position = _bulletSpawnPoint.position;  // Set bullet position
-
 
 
         // Set bullet direction
