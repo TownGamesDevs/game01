@@ -8,7 +8,7 @@ public class CanvasManager : MonoBehaviour
     [SerializeField] private GameObject _scoreUI;
     [SerializeField] private float _waitTimeLevelCompleted;
 
-    private void Awake() => WaveController.OnWaveCompleted += WaveCompleted;
+    private void Awake() => WaveManager.OnWaveCompleted += WaveCompleted;
     
 
     private void Start() => SetGameUI();
@@ -20,7 +20,7 @@ public class CanvasManager : MonoBehaviour
         _levelCompletedUI.SetActive(false);
     }
 
-    private void OnDestroy() => WaveController.OnWaveCompleted -= WaveCompleted;
+    private void OnDestroy() => WaveManager.OnWaveCompleted -= WaveCompleted;
     
 
     private void WaveCompleted() => SetWaveCompleted(true);

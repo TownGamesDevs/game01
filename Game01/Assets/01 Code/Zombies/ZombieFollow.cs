@@ -2,10 +2,9 @@ using UnityEngine;
 
 public class ZombieFollow : MonoBehaviour
 {
-    [SerializeField] private float _minSpeed = 1f;
-    [SerializeField] private float _maxSpeed = 5f;
-    [SerializeField] private float _xOffset;
-    [SerializeField] private float _yOffset;
+    [SerializeField] private float _minSpeed;
+    [SerializeField] private float _maxSpeed;
+    [SerializeField] private float _xOffset, _yOffset;
 
     private Rigidbody2D _rb;
     private float _speed;

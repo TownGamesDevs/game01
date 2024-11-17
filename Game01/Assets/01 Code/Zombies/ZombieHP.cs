@@ -4,6 +4,7 @@ using UnityEngine;
 public class ZombieHP : MonoBehaviour
 {
     [SerializeField] private int _currentHP;
+    [SerializeField] private int _incrementBy;
     [SerializeField] private TextMeshProUGUI[] _txt;
 
     private ZombieBlood blood;
@@ -54,6 +55,7 @@ public class ZombieHP : MonoBehaviour
     {
         if (_isDead) return;
 
+        _currentHP += _incrementBy;
         _isDead = true;
         AudioManager.instance.PlayRandomSound(AudioManager.Category.Zombie, "Hurt");
         gameObject.SetActive(false); // Disable zombie

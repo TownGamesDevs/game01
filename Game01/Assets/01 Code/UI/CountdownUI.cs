@@ -51,7 +51,7 @@ public class CountdownUI : MonoBehaviour
             if (_counter <= 0)
             {
                 Timer.instance.StartUpdateTime();
-                WaveController.instance.CanSpawnZombies();
+                WaveManager.instance.CanSpawnZombies();
                 gameObject.SetActive(false);    // Die
             }
 

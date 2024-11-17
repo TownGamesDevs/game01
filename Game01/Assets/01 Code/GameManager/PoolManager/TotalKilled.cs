@@ -4,8 +4,8 @@ public class TotalKilled : MonoBehaviour
 {
     private int _killed;
 
-    private void Start() => _killed = 0;
-    public void AddKilled()
+    private void Start() => ResetTotalKilled();
+    public void IncrementTotalKilled()
     {
         _killed++;
 
@@ -14,4 +14,6 @@ public class TotalKilled : MonoBehaviour
         PlayerPrefs.Save();
     }
     public int GetTotalKilled() => _killed;
+
+    public void ResetTotalKilled() => _killed = 0;
 }

@@ -2,8 +2,8 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public class WaveController : MonoBehaviour
-{ public static WaveController instance;
+public class WaveManager : MonoBehaviour
+{ public static WaveManager instance;
     public static event Action OnWaveCompleted;
 
 
@@ -55,7 +55,7 @@ public class WaveController : MonoBehaviour
 
     public void CheckAllKilled()
     {
-        _killed.AddKilled();
+        _killed.IncrementTotalKilled();
 
         // All killed?
         if (_killed.GetTotalKilled() >= _totalZombies)

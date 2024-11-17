@@ -40,7 +40,7 @@ public class StarManager : MonoBehaviour
     public void DisplayStars()
     {
         Initialize();
-        _totalSpawned = WaveController.instance.GetTotalZombies();
+        _totalSpawned = WaveManager.instance.GetTotalZombies();
     }
 
 

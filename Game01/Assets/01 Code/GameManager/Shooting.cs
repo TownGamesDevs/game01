@@ -18,8 +18,8 @@ public class Shooting : MonoBehaviour
     // Flags
     private bool _canShoot;
 
-    private void OnEnable() => WaveController.OnWaveCompleted += StopShooting;
-    private void OnDestroy() => WaveController.OnWaveCompleted -= StopShooting;
+    private void OnEnable() => WaveManager.OnWaveCompleted += StopShooting;
+    private void OnDestroy() => WaveManager.OnWaveCompleted -= StopShooting;
     private void StopShooting() => _canShoot = false;
 
     private void Start()
