@@ -16,9 +16,9 @@ public class FlipMuzzle : MonoBehaviour
     }
 
 
-    private void Update() => FlipDirection(_fm.GetDirection());
+    private void Update() => Flip(_fm.GetDirection());
 
-    private void FlipDirection(bool faceRight)
+    private void Flip(bool faceRight)
     {
         if (_isRight != faceRight)
         {
@@ -27,11 +27,11 @@ public class FlipMuzzle : MonoBehaviour
             if (_muzzle != null)
                 _sr.flipX = faceRight;
 
-            FlipPosition();
+            FlipLocalPosition();
         }
     }
 
-    private void FlipPosition()
+    private void FlipLocalPosition()
     {
         if (_muzzle != null)
         {

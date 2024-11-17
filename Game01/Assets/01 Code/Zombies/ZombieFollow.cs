@@ -2,25 +2,23 @@ using UnityEngine;
 
 public class ZombieFollow : MonoBehaviour
 {
-    [SerializeField] private float _speed = 2f;  // Speed of the zombie
-    [SerializeField] private float _xOffset; // Offset on the X-axis
-    [SerializeField] private float _yOffset = 1f; // Offset on the Y-axis
+    [SerializeField] private float _minSpeed = 1f;
+    [SerializeField] private float _maxSpeed = 5f;
+    [SerializeField] private float _xOffset;
+    [SerializeField] private float _yOffset;
 
     private Rigidbody2D _rb;
-
+    private float _speed;
 
     private void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
+        _speed = Random.Range(_minSpeed, _maxSpeed);
     }
-    private void FixedUpdate()
-    {
-        FollowPlayer();
-    }
-
+    private void FixedUpdate() => FollowPlayer();
+    
     private void FollowPlayer()
     {
-
         Vector2 targetPosition = new(
             PlayerPosition.instance.GetPlayerPos().x + _xOffset,
             PlayerPosition.instance.GetPlayerPos().y + _yOffset

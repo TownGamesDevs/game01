@@ -1,5 +1,4 @@
 using UnityEngine;
-
 public class FlipPlayer : MonoBehaviour
 {
     [SerializeField] private GameObject _player;

@@ -195,8 +195,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 25
-  m_fontSizeBase: 25
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -331,8 +331,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 25
-  m_fontSizeBase: 25
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -394,6 +394,7 @@ GameObject:
   - component: {fileID: 4087431496348125433}
   - component: {fileID: 6568757228450932047}
   - component: {fileID: 8626081209183134272}
+  - component: {fileID: 2988829941997364241}
   m_Layer: 6
   m_Name: Walker_z
   m_TagString: Enemy
@@ -411,7 +412,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.8, y: -3.78, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.1, y: 1.1, z: 1.1}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 6529957113348171675}
@@ -587,8 +588,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de49bccb5d05164489ebb2c6929ca5f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _attackForce: 2
-  _attackSpeed: 0.5
+  _attackForce: 5
+  _attackSpeed: 0.6
 --- !u!114 &1754271147334150626
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -671,3 +672,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _y_offset: 1.5
   _x_offset: 0
+--- !u!114 &2988829941997364241
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8169225837865231683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06195aa976ce36a4984a003793502ca3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

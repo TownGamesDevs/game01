@@ -3,7 +3,7 @@ using UnityEngine;
 public class FlipManager : MonoBehaviour
 { public static FlipManager instance;
 
-    private bool _isFacingRight = true;  // Track facing direction directly
+    private bool _isFacingRight = true;
 
     private void Awake() => instance ??= this;
 
