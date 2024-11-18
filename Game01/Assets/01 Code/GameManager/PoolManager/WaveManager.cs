@@ -1,9 +1,9 @@
 using System;
-using System.Collections;
 using UnityEngine;
 
 public class WaveManager : MonoBehaviour
-{ public static WaveManager instance;
+{
+    public static WaveManager instance;
     public static event Action OnWaveCompleted;
 
 
