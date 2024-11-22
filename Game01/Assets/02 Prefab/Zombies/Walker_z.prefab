@@ -572,7 +572,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ad1796dffb097d458b44777b33ea533, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _currentHP: 100
+  _currentHP: 50
   _incrementBy: 5
   _txt:
   - {fileID: 2359677930509275416}

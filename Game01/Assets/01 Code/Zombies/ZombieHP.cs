@@ -7,14 +7,14 @@ public class ZombieHP : MonoBehaviour
     [SerializeField] private int _incrementBy;
     [SerializeField] private TextMeshProUGUI[] _txt;
 
-    private ZombieBlood blood;
+    private ZombieBlood _blood;
     private DamagePointsManager _damagePoints;
     const string BULLET = "Bullet";
     private int _zombieHP;
     private bool _isDead;
     private void Start()
     {
-        blood = GetComponent<ZombieBlood>();
+        _blood = GetComponent<ZombieBlood>();
         _damagePoints = GetComponent<DamagePointsManager>();
     }
     private void OnEnable()
@@ -41,7 +41,7 @@ public class ZombieHP : MonoBehaviour
             return;
         }
         PrintZombieHP(_zombieHP);
-        blood.ShowBlood();
+        _blood.ShowBlood();
         AudioManager.instance.PlayRandomSound(AudioManager.Category.Zombie, "BulletHit");
     }
 
@@ -55,6 +55,7 @@ public class ZombieHP : MonoBehaviour
     {
         if (_isDead) return;
 
+        TotalKilled.instance.IncrementTotalKilled();
         _currentHP += _incrementBy;
         _isDead = true;
         AudioManager.instance.PlayRandomSound(AudioManager.Category.Zombie, "Hurt");
