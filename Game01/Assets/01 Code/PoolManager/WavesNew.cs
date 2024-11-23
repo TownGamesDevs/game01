@@ -1,24 +1,21 @@
-using System;
 using UnityEngine;
 
 public class WavesNew : MonoBehaviour
 {
     public static WavesNew instance;
 
-    [SerializeField] private float _spawnTime; // Time between spawns in the wave
-    [SerializeField] private int _maxZombiesOnScreen = 6; // Maximum number of zombies allowed on screen
-    [SerializeField] private float _waitTime = 0.7f; // Maximum number of zombies allowed on screen
+    [SerializeField] private float _spawnTime; 
+    [SerializeField] private float _waitTime = 0.7f;
 
-    private TotalKilled _tk;          // Tracks killed zombies
-    private SpawnPoints _spawnPoint;  // Handles spawn positions
+    private TotalKilled _tk;          
+    private SpawnPoints _spawnPoint;  
 
-    private float _timer;             // Timer for spacing out spawns
-    private int _currentWave = 1;     // Current wave number
-    private int _zombiesToSpawn;      // Total zombies for the wave
-    private int _zombiesSpawned;      // Zombies spawned so far in the wave
-    private int _zombiesOnScreen;     // Zombies currently on screen
+    private float _timer;            
+    private int _currentWave = 1;    
+    private int _zombiesToSpawn;    
+    private int _zombiesSpawned;
 
-    private bool _waveActive = false; // Is the current wave active?
+    private bool _waveActive = false;
 
     private void Awake() => instance ??= this;
 
@@ -26,8 +23,7 @@ public class WavesNew : MonoBehaviour
     {
         _timer = 0f;
         _zombiesSpawned = 0;
-        _zombiesOnScreen = 0;
-        _zombiesToSpawn = _currentWave; // Start with 1 zombie in wave 1
+        _zombiesToSpawn = _currentWave;
 
         _spawnPoint = GetComponent<SpawnPoints>();
         _tk = GetComponent<TotalKilled>();
@@ -48,7 +44,7 @@ public class WavesNew : MonoBehaviour
     private void UpdateSpawnTimer()
     {
         // Ensure we haven't reached the maximum zombies on screen
-        if (_zombiesSpawned < _zombiesToSpawn && _zombiesOnScreen < _maxZombiesOnScreen)
+        if (_zombiesSpawned < _zombiesToSpawn)
         {
             _timer += Time.deltaTime;
             if (_timer >= _spawnTime)
@@ -78,7 +74,6 @@ public class WavesNew : MonoBehaviour
         }
 
         _zombiesSpawned++;
-        _zombiesOnScreen++;
     }
 
     private void CheckWaveCompletion()
@@ -86,24 +81,19 @@ public class WavesNew : MonoBehaviour
         // If all zombies in the wave are killed, start the next wave
         if (_tk.GetTotalKilled() >= _zombiesToSpawn)
         {
-            _waveActive = false; // End the current wave
-            _currentWave++;      // Increment wave number
-            Invoke(nameof(StartNextWave), _waitTime); // Start the next wave after a delay
+            _waveActive = false; 
+            _currentWave++;
+            IncreaseAbilities.instance.Increase();
+            Invoke(nameof(StartNextWave), _waitTime);
         }
     }
 
     public void StartNextWave()
     {
-        _zombiesToSpawn = _currentWave; // Increase zombies per wave
-        _zombiesSpawned = 0;           // Reset spawned count
-        _zombiesOnScreen = 0;          // Reset zombies on screen
-        _timer = 0f;                   // Reset the spawn timer
-        _tk.ResetTotalKilled();        // Reset the kill counter
-        _waveActive = true;            // Activate the wave
-    }
-
-    public void ZombieKilled()
-    {
-        _zombiesOnScreen = Mathf.Max(0, _zombiesOnScreen - 1); // Reduce zombie count when one is killed
+        _zombiesToSpawn = _currentWave; 
+        _zombiesSpawned = 0;            
+        _timer = 0f;                  
+        _tk.ResetTotalKilled();        
+        _waveActive = true;           
     }
 }

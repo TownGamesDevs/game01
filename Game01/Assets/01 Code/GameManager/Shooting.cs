@@ -3,6 +3,7 @@ using static Weapon;
 
 public class Shooting : MonoBehaviour
 {
+    public static Shooting instance;
     // Public variables
     [SerializeField] private Transform _bulletSpawnPoint;
     [SerializeField] private float _roundsPerSec;
@@ -17,6 +18,8 @@ public class Shooting : MonoBehaviour
 
     // Flags
     private bool _canShoot;
+
+    private void Awake() => instance ??= this;
 
     private void OnEnable() => WaveManager.OnWaveCompleted += StopShooting;
     private void OnDestroy() => WaveManager.OnWaveCompleted -= StopShooting;
@@ -41,6 +44,9 @@ public class Shooting : MonoBehaviour
 
 
     public void SetCanShoot(bool state) => _canShoot = state;
+
+    public void IncreaseRPS(float speed) => _roundsPerSec += speed;
+    
 
     private void CanShoot()
     {

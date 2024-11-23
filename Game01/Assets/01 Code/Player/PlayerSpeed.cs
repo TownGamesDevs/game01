@@ -1,7 +1,7 @@
 using UnityEngine;
 
-public class PlayerMove : MonoBehaviour
-{ public static PlayerMove instance;
+public class PlayerSpeed : MonoBehaviour
+{ public static PlayerSpeed instance;
 
     [SerializeField] private float _speed;
     [SerializeField] private float _speedWhileShooting;
@@ -93,4 +93,10 @@ public class PlayerMove : MonoBehaviour
     }
     public void SpeedWhileShooting() => _actualSpeed = _speedWhileShooting;
     public void OriginalSpeed() => _actualSpeed = _speed;
+
+    public void IncreaseSpeed(float speed )
+    {
+        _speed += speed;
+        _speedWhileShooting += speed;
+    }
 }

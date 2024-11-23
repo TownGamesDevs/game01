@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 
@@ -16,15 +17,20 @@ public class PlayerHealth : MonoBehaviour
 		int tmp = _health - damage;
 		if (tmp <= 0)
 		{
-			GameOver.instance.GameOverScreen(true);
-            return;
+			Die();
 		}
 
 		_health = tmp;
 		PrintHealth();
 	}
 
-	private void PrintHealth()
+    private void Die()
+    {
+		Timer.instance.StopTimeUpdate();
+		GameOver.instance.GameOverScreen(true);
+	}
+
+    private void PrintHealth()
 	{
 		for (int i = 0; i < _txt.Length; i++)
 			_txt[i].text = _health.ToString();

@@ -1,13 +1,13 @@
-using NUnit.Framework;
 using System.Collections;
 using TMPro;
 using UnityEngine;
 
 public class ReloadWeapon : MonoBehaviour
-{ public static ReloadWeapon instance;
+{
+    public static ReloadWeapon instance;
 
     [SerializeField] private int _maxAmmo;
-    [SerializeField] private int _reloadTime;
+    [SerializeField] private float _reloadTime;
     [SerializeField] private TextMeshProUGUI[] _ammoTxt;
 
     private Shooting _as;
@@ -69,5 +69,8 @@ public class ReloadWeapon : MonoBehaviour
         _ammo--;
         PrintAmmo(_ammoTxt, _ammo.ToString());
     }
+
+    public void DecreaseReloadTime(float speed) => _reloadTime -= speed;
+    public void IncreaseMaxAmmo(int ammo) => _maxAmmo += ammo;
 
 }
