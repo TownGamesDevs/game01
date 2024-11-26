@@ -14,18 +14,23 @@ public abstract class BaseAnimator<T> : MonoBehaviour where T : System.Enum
     [SerializeField] private T _defaultAnimation;
     [SerializeField] private AnimationData[] animations;
 
-    protected SpriteRenderer sr;
-    private Sprite[] currentSprites;
-    private float loopWaitTime;
+    protected SpriteRenderer _sr;
+    private Sprite[] _currentSprites;
+    private float _loopWaitTime;
     private float _timer;
-    private float secondsPerFrame;
+    private float _secondsPerFrame;
     private int _frame;
     private bool isValidAnim;
 
-    protected virtual void Awake() => sr = GetComponent<SpriteRenderer>();
+    protected virtual void Awake()
+    {
+        _sr = GetComponent<SpriteRenderer>();
+        if (_sr == null)
+            Debug.LogWarning("SPRITE RENDERED IS NULL...");
+    }
 
     private void Start() => SetAnimation(_defaultAnimation);
-    
+
 
     private void OnEnable()
     {
@@ -33,31 +38,46 @@ public abstract class BaseAnimator<T> : MonoBehaviour where T : System.Enum
         isValidAnim = false;
         InitializeDefaultAnimation();
     }
-
-    private void Update() => LoopAnimation();
-
     private void ResetValues()
     {
         _frame = 0;
         _timer = 0;
     }
+    private void Update() => Loop();
 
-    private void LoopAnimation()
+    private void Loop()
     {
+        // exit early
         if (!isValidAnim) return;
 
+        // update timer
         _timer += Time.deltaTime;
 
-        if (_timer >= secondsPerFrame && _timer >= loopWaitTime)
+        // conditions
+        bool secondsPerFramePassed = _timer >= _secondsPerFrame;
+        bool loopTimePassed = _timer >= _loopWaitTime;
+
+        if (secondsPerFramePassed && loopTimePassed)
         {
-            sr.sprite = currentSprites[_frame];
-            _frame++;
-
-            if (_frame >= currentSprites.Length)
-                _frame = 0;
-
             _timer = 0;
+            SetNextFrame();
         }
+    }
+
+    private void SetNextFrame()
+    {
+        if (_sr == null)
+            _sr = GetComponent<SpriteRenderer>();
+
+        // set current frame
+        _sr.sprite = _currentSprites[_frame];
+
+        // update frames
+        _frame++;
+
+        // reset animation?
+        if (_frame >= _currentSprites.Length)
+            _frame = 0;
     }
 
     public void SetAnimation(T name)
@@ -67,9 +87,9 @@ public abstract class BaseAnimator<T> : MonoBehaviour where T : System.Enum
             if (anim.name.Equals(name))
             {
                 ResetValues();
-                currentSprites = anim.sprites;
-                secondsPerFrame = 1f / anim.FPS;
-                loopWaitTime = anim.loopWaitTime;
+                _currentSprites = anim.sprites;
+                _secondsPerFrame = 1f / anim.FPS;
+                _loopWaitTime = anim.loopWaitTime;
                 isValidAnim = true;
                 return;
             }
@@ -79,6 +99,5 @@ public abstract class BaseAnimator<T> : MonoBehaviour where T : System.Enum
         Debug.LogWarning($"{GetType().Name} -> Animation {name} not found.");
     }
 
-    // This method should be overridden in the derived class to set the default animation
     protected abstract void InitializeDefaultAnimation();
 }

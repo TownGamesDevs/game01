@@ -9,11 +9,9 @@ public class ErrorManager : MonoBehaviour
     [SerializeField] private GameObject errorManagerGameObject;
 
 
-    private void Awake()
-    { if (instance == null) instance = this; }
+    private void Awake() => instance ??= this;
 
-    private void Start()
-    { errorManagerGameObject.SetActive(false); }
+    private void Start() => errorManagerGameObject.SetActive(false);
 
     public void PrintError(string txt)
     {
@@ -37,6 +35,5 @@ public class ErrorManager : MonoBehaviour
         errorManagerGameObject.SetActive(false);
         errorTxt.text = "";
     }
-
 
 }

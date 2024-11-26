@@ -15,7 +15,7 @@ public class SoundUI : MonoBehaviour
         _soundOn.SetActive(!_displaySound);
 
         _displaySound = !_displaySound;
-        AudioManager.instance.CanPlaySound = _displaySound;
+        AudioManager.instance._canPlay = _displaySound;
 
         if (!_displaySound)
             AudioManager.instance.StopAll();

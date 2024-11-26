@@ -62,7 +62,7 @@ public class ZombieAttack : MonoBehaviour
         AudioManager.instance.PlayRandomSound(AudioManager.Category.Zombie, "Die");
 
         // Update player HP
-        PlayerHealth.instance.SetPlayerHealth(_attackForce);
+        PlayerHealth.instance.TakeDamage(_attackForce);
     }
 
 }

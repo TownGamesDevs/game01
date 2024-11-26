@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class AudioManager : MonoBehaviour
@@ -14,14 +13,14 @@ public class AudioManager : MonoBehaviour
         // Add more sound categories as needed
     }
 
-    // Current sounds
+    // current sounds
     [SerializeField] private Sound[] _zombie;
     [SerializeField] private Sound[] _weapons;
     [SerializeField] private Sound[] _music;
     [SerializeField] private Sound[] _other;
 
-    public bool CanPlaySound { get; set; } = true;
-
+    public bool _canPlay { get; set; } = true;
+    const string NOT_FOUND = "No sounds found for subcategory: ";
 
     private void Awake()
     {
@@ -35,23 +34,25 @@ public class AudioManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-
-        if (_zombie.Length > 0)
-            Initialize(_zombie);
-
-        if (_weapons.Length > 0)
-            Initialize(_weapons);
-
-        if (_music.Length > 0)
-            Initialize(_music);
-
-        if (_other.Length > 0)
-            Initialize(_other);
+        InitializeAllSounds();
     }
-    private void Initialize(Sound[] soundCategories)
+
+    private void InitializeAllSounds()
     {
+        InitializeSound(_zombie);
+        InitializeSound(_weapons);
+        InitializeSound(_music);
+        InitializeSound(_other);
+        // Add more as needed
+    }
+
+
+    private void InitializeSound(Sound[] soundCategories)
+    {
+        // exit early
+        if (soundCategories.Length <= 0) return;
+
         foreach (Sound soundCategory in soundCategories)
-        {
             foreach (MainSoundClass mainSound in soundCategory.sounds)
             {
                 mainSound.source = gameObject.AddComponent<AudioSource>();
@@ -60,9 +61,9 @@ public class AudioManager : MonoBehaviour
                 mainSound.source.pitch = mainSound.pitch;
                 mainSound.source.loop = mainSound.loop;
             }
-        }
+
     }
-    private Sound[] GetSoundArray(Category category)
+    private Sound[] GetSoundArrayByCategory(Category category)
     {
         switch (category)
         {
@@ -79,42 +80,46 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    private Sound TryGetSubCategory(Category category, string subCategory)
+    {
+        Sound[] soundArray = GetSoundArrayByCategory(category);
+        Sound subCategorySounds = System.Array.Find(soundArray, s => s.category == subCategory);
 
+        if (subCategorySounds == null || subCategorySounds.sounds.Length == 0)
+        {
+            print(NOT_FOUND + subCategory);
+            return null;
+        }
+
+        return subCategorySounds;
+    }
     public void Play(Category category, string subCategory, string soundName)
     {
-        if (CanPlaySound)
+        // exit early
+        if (!_canPlay) return;
+
+        Sound subCat = TryGetSubCategory(category, subCategory);
+
+
+        // Find the specific sound by name within the subcategory
+        MainSoundClass specificSound = System.Array.Find(subCat.sounds, s => s.name == soundName);
+
+        if (specificSound == null)
         {
-            // Get the sound array for the given category
-            Sound[] soundArray = GetSoundArray(category);
-
-            // Find the subcategory in the sound array
-            Sound subCategorySounds = System.Array.Find(soundArray, s => s.category == subCategory);
-
-            if (subCategorySounds == null || subCategorySounds.sounds.Length == 0)
-            {
-                print("No sounds found for subcategory: " + subCategory);
-                return;
-            }
-
-            // Find the specific sound by name within the subcategory
-            MainSoundClass specificSound = System.Array.Find(subCategorySounds.sounds, s => s.name == soundName);
-
-            if (specificSound == null)
-            {
-                print("Sound " + soundName + " not found in subcategory: " + subCategory);
-                return;
-            }
-
-            // Play the specific sound
-            specificSound.source.Play();
+            print("Sound " + soundName + " not found in subcategory: " + subCategory);
+            return;
         }
+
+        // Play the specific sound
+        specificSound.source.Play();
+
     }
     public void PlayOneShot(Category category, string subCategory, string soundName)
     {
-        if (CanPlaySound)
+        if (_canPlay)
         {
             // Get the sound array for the given category
-            Sound[] soundArray = GetSoundArray(category);
+            Sound[] soundArray = GetSoundArrayByCategory(category);
             if (soundArray == null)
             {
                 Debug.LogWarning("No sounds found for category: " + category);
@@ -145,7 +150,7 @@ public class AudioManager : MonoBehaviour
     public void Stop(Category category, string subCategory, string soundName)
     {
         // Get the sound array for the given category
-        Sound[] soundArray = GetSoundArray(category);
+        Sound[] soundArray = GetSoundArrayByCategory(category);
 
         // Find the subcategory in the sound array
         Sound subCategorySounds = System.Array.Find(soundArray, s => s.category == subCategory);
@@ -171,10 +176,10 @@ public class AudioManager : MonoBehaviour
     }
     public void PlayRandomSound(Category category, string subCategory)
     {
-        if (CanPlaySound)
+        if (_canPlay)
         {
             // Get the sound array for the given category
-            Sound[] soundArray = GetSoundArray(category);
+            Sound[] soundArray = GetSoundArrayByCategory(category);
 
             // Find the subcategory in the sound array
             Sound subCategorySounds = System.Array.Find(soundArray, s => s.category == subCategory);

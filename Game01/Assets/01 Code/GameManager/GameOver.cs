@@ -6,7 +6,7 @@ public class GameOver : MonoBehaviour
 	[SerializeField] private GameObject _player;
 	private void Awake() => instance ??= this;
 	
-	public void GameOverScreen(bool state)
+	public void GameOverScreen()
 	{
 		_player.SetActive(false);
 		UIController.instance.ShowGameOverUI();

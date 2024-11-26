@@ -2,21 +2,19 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class PoolData
+public class PoolTypes
 {
     public enum Type
     {
-        AssaultBullet,
-        SniperBullet,
-        Brute,
+        Bullet,
         Walker,
         DamagePoints,
-        Blood,
+        BloodParticles,
         // Add more as needed
     }
     public Type _name;
     public GameObject _prefab;
-    public int _total = 1;
+    public int _totalObjects = 1;
     public bool _canGrow;
     [HideInInspector] public List<GameObject> _list = new();
 }
@@ -24,7 +22,7 @@ public class PoolData
 public class PoolManager : MonoBehaviour
 { public static PoolManager instance;
 
-    [SerializeField] private PoolData[] _ObjectsToPool;
+    [SerializeField] private PoolTypes[] _poolTypes;
 
 
     private void Awake()
@@ -35,24 +33,18 @@ public class PoolManager : MonoBehaviour
     }
     private void PoolAllObjects()
     {
-        for (int i = 0; i < _ObjectsToPool.Length; i++)
+        for (int i = 0; i < _poolTypes.Length; i++)
         {
-            // Conditions
-            bool validPref = _ObjectsToPool[i]._prefab != null;
-            bool nonZero = _ObjectsToPool[i]._total > 0;
+            // conditions
+            bool isValidPrefab = _poolTypes[i]._prefab != null;
+            bool isPositive = _poolTypes[i]._totalObjects > 0;
 
-            if (validPref && nonZero)
-                AddToList(_ObjectsToPool[i]._list, _ObjectsToPool[i]._prefab, _ObjectsToPool[i]._total);
+            if (isValidPrefab && isPositive)
+                AddToList(_poolTypes[i]._list, _poolTypes[i]._prefab, _poolTypes[i]._totalObjects);
         }
     }
     private void AddToList(List<GameObject> list, GameObject pref, int maxSize)
     {
-        if (pref == null)
-        {
-            Debug.LogError("Prefab is null in PoolManager.");
-            return;
-        }
-
         for (int i = 0; i < maxSize; i++)
         {
             GameObject obj = Instantiate(pref);
@@ -69,6 +61,8 @@ public class PoolManager : MonoBehaviour
                 return list[i];
             }
 
+
+        // Grow list
         if (canGrow && list.Count > 0)
         {
             GameObject obj = Instantiate(pref);
@@ -79,16 +73,18 @@ public class PoolManager : MonoBehaviour
 
         return null;
     }
-    public GameObject Pool(PoolData.Type objectType)
+
+
+    public GameObject Pool(PoolTypes.Type objectType)
     {
-        for (int i = 0; i < _ObjectsToPool.Length; i++)
+        for (int i = 0; i < _poolTypes.Length; i++)
         {
             // Conditions
-            bool isName = _ObjectsToPool[i]._name == objectType;
-            bool nonZero = _ObjectsToPool[i]._total > 0;
+            bool nameFound = _poolTypes[i]._name == objectType;
+            bool isPositive = _poolTypes[i]._totalObjects > 0;
 
-            if (isName && nonZero)
-                return PoolFromList(_ObjectsToPool[i]._list, _ObjectsToPool[i]._prefab, _ObjectsToPool[i]._canGrow);
+            if (nameFound && isPositive)
+                return PoolFromList(_poolTypes[i]._list, _poolTypes[i]._prefab, _poolTypes[i]._canGrow);
         }
         return null;
     }

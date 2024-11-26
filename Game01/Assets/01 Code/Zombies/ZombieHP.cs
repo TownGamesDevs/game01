@@ -73,7 +73,7 @@ public class ZombieHP : MonoBehaviour
             int damageToZombie = _zombieHP - bulletDamage;
 
             // Display damage
-            ScoreManager.instance.PrintScore(bulletDamage);
+            ScoreManager.instance.SetScore(bulletDamage);
             _damagePoints.ShowDamageNumbers(bulletDamage);
 
             // Update bullet HP

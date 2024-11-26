@@ -24,7 +24,7 @@ public class GameOverUI : MonoBehaviour
     {
         for (int i = 0; i < _timeTxt.Length; i++)
         {
-            _timeTxt[i].text = "Time: " + Timer.instance.GetTotalTime();
+            _timeTxt[i].text = "Time: " + GameTimer.instance.GetTotalTime();
         }
     }
 

@@ -838,7 +838,6 @@ GameObject:
   - component: {fileID: 6822275406278330103}
   - component: {fileID: 9112492820188386352}
   - component: {fileID: 3664808735165044639}
-  - component: {fileID: 3025336057587484415}
   - component: {fileID: 3443251525062312252}
   - component: {fileID: 148043301858575730}
   m_Layer: 3
@@ -936,19 +935,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _bulletSpawnPoint: {fileID: 6514907108199662805}
   _roundsPerSec: 11
---- !u!114 &3025336057587484415
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7535121293190559203}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f98637b68bd28a44d8d7dcc755209ace, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _bulletType: 0
 --- !u!114 &3443251525062312252
 MonoBehaviour:
   m_ObjectHideFlags: 0

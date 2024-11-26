@@ -58,7 +58,7 @@ public class WavesNew : MonoBehaviour
     private void SpawnZombie()
     {
         // Get a zombie from the pool
-        GameObject zombie = PoolManager.instance.Pool(PoolData.Type.Walker);
+        GameObject zombie = PoolManager.instance.Pool(PoolTypes.Type.Walker);
 
         // Handle potential pool failure
         if (zombie == null)
@@ -83,7 +83,7 @@ public class WavesNew : MonoBehaviour
         {
             _waveActive = false; 
             _currentWave++;
-            IncreaseAbilities.instance.Increase();
+            IncreaseAbilities.instance.IncreaseAll();
             Invoke(nameof(StartNextWave), _waitTime);
         }
     }

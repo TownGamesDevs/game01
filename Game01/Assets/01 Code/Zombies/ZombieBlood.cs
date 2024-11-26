@@ -9,7 +9,7 @@ public class ZombieBlood : MonoBehaviour
     public void ShowBlood()
     {
         // Pool object
-        GameObject blood = PoolManager.instance.Pool(PoolData.Type.Blood);
+        GameObject blood = PoolManager.instance.Pool(PoolTypes.Type.BloodParticles);
         if (blood == null) return;
 
         if (blood.TryGetComponent<ParticleSystem>(out ParticleSystem particle))

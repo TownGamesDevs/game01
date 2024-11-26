@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 71318153}
   - component: {fileID: 71318152}
   m_Layer: 5
-  m_Name: Txt
+  m_Name: CountdownTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -302,8 +302,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 187784096}
-  - component: {fileID: 187784097}
   - component: {fileID: 187784098}
+  - component: {fileID: 187784099}
   m_Layer: 0
   m_Name: Countdown
   m_TagString: Untagged
@@ -327,19 +327,6 @@ Transform:
   - {fileID: 823722001}
   m_Father: {fileID: 917465194}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &187784097
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 187784095}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa3596667f4d6d8458dbf00b44ecd3b1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _txt: {fileID: 71318152}
 --- !u!114 &187784098
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -352,8 +339,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 464c5763aedb9e14fb761686f2011cc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _UI: {fileID: 71318150}
-  _time: 0.5
+  _countdownTxt: {fileID: 71318150}
+  _blinkTime: 0.5
+--- !u!114 &187784099
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 187784095}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 014b9160ce375af4182d495c9fc07e00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _countdownTxt: {fileID: 71318152}
 --- !u!1 &263928377
 GameObject:
   m_ObjectHideFlags: 0
@@ -845,7 +845,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 553892274}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0e2d238d7ae30094d9c41da23819f5f6, type: 3}
   m_Name: 
@@ -1706,7 +1706,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 917465193}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 668e22ef5fd2b2444bd6cd879ce614b6, type: 3}
   m_Name: 
@@ -2404,6 +2404,7 @@ MonoBehaviour:
   _roundsPerSec: 0.5
   _reloadTime: 0.1
   _ammo: 1
+  _health: 2
 --- !u!1 &1314545529 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2038429786813385668, guid: 00150dd3b0a1c134d87ca78b8727c209, type: 3}
@@ -2628,7 +2629,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1490020229}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6a45433d9bc41294285b256ddb35ba44, type: 3}
   m_Name: 
@@ -3798,7 +3799,7 @@ GameObject:
   - component: {fileID: 393308558923583474}
   - component: {fileID: 5258479199496976803}
   m_Layer: 5
-  m_Name: Txt
+  m_Name: KeysTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3847,6 +3848,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 898321867}
     m_Modifications:
+    - target: {fileID: 288085685560761228, guid: 3e42b07f07f076b4e93355b29995b009, type: 3}
+      propertyPath: _hearts
+      value: 
+      objectReference: {fileID: 981309695870588048}
+    - target: {fileID: 288085685560761228, guid: 3e42b07f07f076b4e93355b29995b009, type: 3}
+      propertyPath: _heartShadow
+      value: 
+      objectReference: {fileID: 981309695870588049}
     - target: {fileID: 288085685560761228, guid: 3e42b07f07f076b4e93355b29995b009, type: 3}
       propertyPath: _targetScale
       value: 0.8
@@ -3973,6 +3982,16 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3e42b07f07f076b4e93355b29995b009, type: 3}
+--- !u!1 &981309695870588048 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5033043577498556506, guid: 3e42b07f07f076b4e93355b29995b009, type: 3}
+  m_PrefabInstance: {fileID: 981309695870588047}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &981309695870588049 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 742699801247886679, guid: 3e42b07f07f076b4e93355b29995b009, type: 3}
+  m_PrefabInstance: {fileID: 981309695870588047}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1263185236679442936
 GameObject:
   m_ObjectHideFlags: 0
@@ -5124,6 +5143,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 3443251525062312252, guid: 00150dd3b0a1c134d87ca78b8727c209, type: 3}
+      propertyPath: _defaultAnimation
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3688755418889757372, guid: 00150dd3b0a1c134d87ca78b8727c209, type: 3}
       propertyPath: m_Layer
       value: 11
@@ -5809,35 +5832,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b05c5cf66d09d3a48895c18a093a4cee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _ObjectsToPool:
+  _poolTypes:
   - _name: 0
     _prefab: {fileID: 4345513452875288146, guid: 4d6cc51a2237f9144af97c767266f0a5, type: 3}
-    _total: 1
+    _totalObjects: 15
     _canGrow: 1
     _list: []
   - _name: 1
-    _prefab: {fileID: 4345513452875288146, guid: 8513760127379144685ec03f8ffddde2, type: 3}
-    _total: 1
+    _prefab: {fileID: 8169225837865231683, guid: 820a6ffe88b2f624d8e8f2be3b8cafc4, type: 3}
+    _totalObjects: 5
     _canGrow: 1
     _list: []
   - _name: 2
-    _prefab: {fileID: 6308899942192579199, guid: 367d4ed9bd03e5d49a21a116fee2af04, type: 3}
-    _total: 0
+    _prefab: {fileID: 7291279443434476915, guid: 4c0f74988a42c8141b0cd79872130e79, type: 3}
+    _totalObjects: 10
     _canGrow: 1
     _list: []
   - _name: 3
-    _prefab: {fileID: 8169225837865231683, guid: 820a6ffe88b2f624d8e8f2be3b8cafc4, type: 3}
-    _total: 1
-    _canGrow: 1
-    _list: []
-  - _name: 4
-    _prefab: {fileID: 7291279443434476915, guid: 4c0f74988a42c8141b0cd79872130e79, type: 3}
-    _total: 1
-    _canGrow: 1
-    _list: []
-  - _name: 5
     _prefab: {fileID: 7454031810081916898, guid: 40b82c23de9d6d94897baf05f0610dff, type: 3}
-    _total: 1
+    _totalObjects: 10
     _canGrow: 1
     _list: []
 --- !u!114 &8432896293606395789

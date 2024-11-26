@@ -13,13 +13,6 @@ public class SoldierAnimations
 public class SoldierAnimator : BaseAnimator<SoldierAnimations.Names>
 {
     public static SoldierAnimator instance;
-
-    private void Start()
-    {
-        if (instance == null) instance = this;
-    }
-    protected override void InitializeDefaultAnimation()
-    {
-        SetAnimation(SoldierAnimations.Names.Idle);
-    }
+    private void Awake() => instance ??= this;
+    protected override void InitializeDefaultAnimation() => SetAnimation(SoldierAnimations.Names.Idle);
 }

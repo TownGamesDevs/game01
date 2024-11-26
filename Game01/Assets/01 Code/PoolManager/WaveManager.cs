@@ -41,11 +41,11 @@ public class WaveManager : MonoBehaviour
         }
     }
 
-    public void CanSpawnZombies() => _canSpawnZombies = true;
+    public void EnableZombieSpawn() => _canSpawnZombies = true;
 
     private void SpawnZombie()
     {
-        GameObject zombie = PoolManager.instance.Pool(PoolData.Type.Walker);
+        GameObject zombie = PoolManager.instance.Pool(PoolTypes.Type.Walker);
         if (zombie == null) return;
 
         _counter++;

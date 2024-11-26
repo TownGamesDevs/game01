@@ -23,57 +23,74 @@ public class PlayerSpeed : MonoBehaviour
 
     private void Update()
     {
-        Move();
-
-        // Set speed
-        if ((Input.GetKey(KeyCode.Space) || Input.GetMouseButton(0)) && !ReloadWeapon.instance.IsReloading())
-            SpeedWhileShooting();
-        else
-            OriginalSpeed();
+        MovePlayer();
+        ChangePlayerSpeed();
     }
-    private void Move()
+    private void MovePlayer()
     {
-        HandleInput();
-        direction = Vector2.zero;
+        CheckKeyPressed();
+        CheckHorizontalMove();
+        CheckVerticalMove();
+        CalculatePlayerDirection();
+    }
 
+    public void ChangePlayerSpeed()
+    {
+        // Conditions
+        bool isFiringWeapon = Input.GetKey(KeyCode.Space) || Input.GetMouseButton(0);
+        bool isNotReloading = !ReloadWeapon.instance.IsReloading();
+
+        if (isFiringWeapon && isNotReloading)
+            SlowDown();
+
+        else ReturnOriginalSpeed();
+    }
+
+    private void CheckHorizontalMove()
+    {
         // Horizontal movement priority
-        if (_isRight && !_isLeft)
-            direction.x = 1;
-        
-        if (_isLeft && !_isRight)
-            direction.x = -1;
-        
+        if (_isRight && !_isLeft) direction.x = 1;
 
+        if (_isLeft && !_isRight) direction.x = -1;
+    }
+
+    private void CheckVerticalMove()
+    {
         // Vertical movement priority
-        if (_isUp && !_isDown)
-            direction.y = 1;
-        else if (_isDown && !_isUp)
-            direction.y = -1;
+        if (_isUp && !_isDown) direction.y = 1;
 
+        else if (_isDown && !_isUp) direction.y = -1;
+    }
 
+    private void CalculatePlayerDirection()
+    {
         // Move the player in the calculated direction
         if (direction != Vector2.zero)
         {
             _rb.linearVelocity = direction.normalized * _actualSpeed;
-            SetWalkingAnim();
+            SetWalkAnim();
         }
+
         else
         {
             _rb.linearVelocity = Vector2.zero;
             SetIdleAnim();
         }
     }
-
-    private void HandleInput()
+    
+    
+    private void CheckKeyPressed()
     {
         // Track key pressed state for each direction
         _isUp = Input.GetKey(KeyCode.W);
         _isDown = Input.GetKey(KeyCode.S);
         _isLeft = Input.GetKey(KeyCode.A);
         _isRight = Input.GetKey(KeyCode.D);
+
+        direction = Vector2.zero;
     }
 
-    private void SetWalkingAnim()
+    private void SetWalkAnim()
     {
         if (_canWalk)
         {
@@ -91,8 +108,8 @@ public class PlayerSpeed : MonoBehaviour
             SoldierAnimator.instance.SetAnimation(SoldierAnimations.Names.Idle);
         }
     }
-    public void SpeedWhileShooting() => _actualSpeed = _speedWhileShooting;
-    public void OriginalSpeed() => _actualSpeed = _speed;
+    public void SlowDown() => _actualSpeed = _speedWhileShooting;
+    public void ReturnOriginalSpeed() => _actualSpeed = _speed;
 
     public void IncreaseSpeed(float speed )
     {

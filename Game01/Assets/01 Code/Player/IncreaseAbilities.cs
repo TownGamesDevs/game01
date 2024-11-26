@@ -8,11 +8,12 @@ public class IncreaseAbilities : MonoBehaviour
     [SerializeField] private float _roundsPerSec;
     [SerializeField] private float _reloadTime;
     [SerializeField] private int _ammo;
+    [SerializeField] private int _health;
 
     private void Awake() => instance ??= this;
 
 
-    public void Increase()
+    public void IncreaseAll()
     {
         // speed
         PlayerSpeed.instance.IncreaseSpeed(_moveSpeed);
@@ -25,6 +26,9 @@ public class IncreaseAbilities : MonoBehaviour
 
         // ammo
         ReloadWeapon.instance.IncreaseMaxAmmo(_ammo);
+
+        // hp
+        PlayerHealth.instance.IncreaseHealth(_health);
 
         // bullet damage(?)
     }

@@ -1,22 +1,29 @@
-using System;
 using UnityEngine;
 
 public class HeartAnimator : MonoBehaviour
 {
-    [SerializeField] private GameObject[] _hearts;
+    [SerializeField] private GameObject _hearts;
+    [SerializeField] private GameObject _heartShadow;
+
     [SerializeField] private float _speed;
     [SerializeField] private float _targetScale;
 
-    private bool _state;
+    private bool _canScale;
     private float _timer;
-    private Vector3 _originalScale;
+    private Vector2 _initialScale;
+    private Vector2 _targetVector;
+    private RectTransform _heart_transform;
+    private RectTransform _heartShadow_transform;
 
     private void Start()
     {
-        if (_hearts.Length > 0)
-            _originalScale = _hearts[0].transform.localScale;
-
+        _heart_transform = _hearts.GetComponent<RectTransform>();
+        _heartShadow_transform = _heartShadow.GetComponent<RectTransform>();
+        _initialScale = _hearts.transform.localScale;
+        _targetVector = new(_targetScale, _targetScale);
     }
+
+
     private void Update()
     {
         _timer += Time.deltaTime;
@@ -29,23 +36,15 @@ public class HeartAnimator : MonoBehaviour
 
     private void ChangeScale()
     {
-        if (_state)
-        {
-            _state = !_state;
-            for (int i =0;  i < _hearts.Length; i++)
-            {
-                RectTransform rectTransform = _hearts[i].GetComponent<RectTransform>();
-                rectTransform.localScale = new Vector3(_targetScale, _targetScale, _targetScale);
-            }
-        }
-        else
-        {
-            _state = !_state;
-            for (int i = 0; i < _hearts.Length; i++)
-            {
-                RectTransform rectTransform = _hearts[i].GetComponent<RectTransform>();
-                rectTransform.localScale = _originalScale;
-            }
-        }
+        if (_canScale) SetScale(_targetVector);
+        else SetScale(_initialScale);
+        _canScale = !_canScale;
+    }
+
+
+    private void SetScale(Vector2 scale)
+    {
+        _heart_transform.localScale = scale;
+        _heartShadow_transform.localScale = scale;
     }
 }

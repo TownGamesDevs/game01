@@ -13,7 +13,7 @@ public class DamagePointsManager : MonoBehaviour
     public void ShowDamageNumbers(int damage)
     {
         // Pool Object
-        _damageNum = PoolManager.instance.Pool(PoolData.Type.DamagePoints);
+        _damageNum = PoolManager.instance.Pool(PoolTypes.Type.DamagePoints);
         if (_damageNum == null)
         {
             Debug.LogError("ShowDamagePoints -> Couldn't pool DamagePoints");

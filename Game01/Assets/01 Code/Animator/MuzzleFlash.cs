@@ -4,43 +4,56 @@ public class MuzzleFlash : MonoBehaviour
     public static MuzzleFlash instance;
 
     [SerializeField] private Sprite[] _muzzleFlash;
-    [SerializeField] private float _displayTime;
+    [SerializeField] private float _maxScreenTime;
 
-    private bool _isPlaying;
+    private bool _isShowing;
     private float _timer;
-    private SpriteRenderer _sr;
+    private int _randomNum;
+    private SpriteRenderer _spriteRenderer;
 
-    private void Awake() => instance = instance != null ? instance : this;
-    private void Start()
+    private void Awake() => instance ??= this;
+    private void Start() => InitializeVariables();
+    private void InitializeVariables()
     {
-        _isPlaying = false;
-        _timer = 0;
-        if (TryGetComponent<SpriteRenderer>(out _sr)) _sr.enabled = false;
+        if (TryGetComponent<SpriteRenderer>(out _spriteRenderer))
+            DisableSpriteRenderer();
     }
 
-
-    private void Update() => HideMuzzleFlash();
-    public void PlayRandomMuzzle()
+    private void Update()
     {
-        if (_muzzleFlash == null || _sr == null) return;
-        int rnd = Random.Range(0, _muzzleFlash.Length);
-
-        _sr.enabled = true;
-        _sr.sprite = _muzzleFlash[rnd];
-        _isPlaying = true;
+        if (_isShowing)
+            HideMuzzleFlash();
     }
-
     private void HideMuzzleFlash()
     {
-        if (_isPlaying)
-        {
-            _timer += Time.deltaTime;
-            if (_timer >= _displayTime)
-            {
-                _sr.enabled = false;
-                _isPlaying = false;
-                _timer = 0f;
-            }
-        }
+        _timer += Time.deltaTime;
+        if (_timer >= _maxScreenTime)
+            DisableSpriteRenderer();
+    }
+    private void SetDefaultValues()
+    {
+        _isShowing = false;
+        _timer = 0f;
+    }
+    private void DisableSpriteRenderer()
+    {
+        _spriteRenderer.enabled = false;
+        SetDefaultValues();
+    }
+    public void ShowRandomMuzzleFlash()
+    {
+        EnableSpriteRenderer();
+        SetRandomSprite();
+    }
+    private void SetRandomSprite()
+    {
+        _randomNum = Random.Range(0, _muzzleFlash.Length);
+        _spriteRenderer.sprite = _muzzleFlash[_randomNum];
+    }
+
+    private void EnableSpriteRenderer()
+    {
+        _spriteRenderer.enabled = true;
+        _isShowing = true;
     }
 }

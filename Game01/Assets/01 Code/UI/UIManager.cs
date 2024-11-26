@@ -56,7 +56,7 @@ public class UIManager : MonoBehaviour
         _soundOn.SetActive(!_displaySound);
 
         _displaySound = !_displaySound;
-        AudioManager.instance.CanPlaySound = _displaySound;
+        AudioManager.instance._canPlay = _displaySound;
     }
     public void HideLoadingScreen()
     {
